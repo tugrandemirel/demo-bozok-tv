@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enum\User\UserTermsAcceptedEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,8 +22,11 @@ class User extends Authenticatable
     protected $fillable = [
         'uuid',
         'name',
+        'surname',
         'email',
         'password',
+        'phone',
+        'terms_accepted',
     ];
 
     /**
@@ -42,5 +46,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'terms_accepted' => UserTermsAcceptedEnum::class
     ];
 }
