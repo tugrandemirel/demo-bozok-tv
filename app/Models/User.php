@@ -26,6 +26,7 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
+        'profile',
         'terms_accepted',
     ];
 
@@ -48,4 +49,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'terms_accepted' => UserTermsAcceptedEnum::class
     ];
+
+    protected $appends = [
+        'full_name'
+    ];
+
+    public function getProfileImageAttribute()
+    {
+        $firstName = mb_substr($this->name, 0, 1);
+        $lastName = mb_substr($this->surname, 0, 1);
+
+        return !is_null($this->profile) ? $this->profile : "https://ui-avatars.com/api/?name=$firstName+$lastName&background=random&color=fff";
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->name.' '.$this->surname;
+    }
+
 }

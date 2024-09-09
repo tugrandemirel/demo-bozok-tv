@@ -21,6 +21,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('phone')->unique();
+            $table->string('profile')->nullable();
             $table->boolean('terms_accepted')->default(UserTermsAcceptedEnum::NO_ACCEPTED);
             $table->rememberToken();
             $table->timestamps();
