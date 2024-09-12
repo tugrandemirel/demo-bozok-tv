@@ -12,19 +12,18 @@ use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class Category extends Model
+class NewsletterSource extends Model
 {
     use HasFactory, SoftDeletes, HasSlug, SortableTrait;
 
     protected $fillable = [
         'uuid',
         'created_by_user_id',
-        'parent_id',
         'name',
         'slug',
+        'url',
         'order',
         'is_active',
-        'home_page',
     ];
 
     public $sortable = [

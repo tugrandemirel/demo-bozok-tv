@@ -11,6 +11,7 @@ class SeoSetting extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'uuid',
         'meta_title',
         'meta_description',
         'meta_keywords',

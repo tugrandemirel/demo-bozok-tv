@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('seo_settings', function (Blueprint $table) {
             $table->id();
+            $table->uuid();
             $table->foreignIdFor(\App\Models\User::class, 'created_by_user_id');
             $table->morphs('seoable');
             $table->string('meta_title');

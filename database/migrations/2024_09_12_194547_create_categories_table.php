@@ -16,6 +16,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->uuid();
             $table->foreignIdFor(User::class, 'created_by_user_id')->index();
             $table->unsignedBigInteger('parent_id')->index()->default(0);
             $table->string('name');

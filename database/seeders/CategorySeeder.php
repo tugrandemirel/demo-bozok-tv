@@ -44,6 +44,7 @@ class CategorySeeder extends Seeder
         foreach ($categories as $index => $category) {
             $c = Category::query()
                 ->create([
+                    'uuid' => Str::uuid(),
                     'created_by_user_id' => $user->id,
                     'name' => $category,
                     'slug' => Str::slug($category),
@@ -53,6 +54,7 @@ class CategorySeeder extends Seeder
                 ]);
 
             $c->seoSettings()->create([
+                'uuid' => Str::uuid(),
                 'meta_title' => $category,
                 'meta_description' => $category,
                 'meta_keywords' => $category,
