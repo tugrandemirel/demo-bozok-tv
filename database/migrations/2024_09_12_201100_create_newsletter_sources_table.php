@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('order')->nullable();
             $table->string('is_active')->default(NewsletterSourceIsActiveEnum::PASSIVE->value);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

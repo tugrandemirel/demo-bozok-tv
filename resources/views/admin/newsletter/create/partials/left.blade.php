@@ -41,14 +41,15 @@
 <div class="card card-custom gutter-b">
     <div class="card-body text-center">
         <div class="form-group">
-            <label for="" class="form-label label-between">
+            <label for="publication_status" class="form-label label-between">
                 Haber Durumu:
                 <i class="flaticon2-check-mark text-success"></i>
             </label>
-            <select name="" class="form-control" id="">
-                <option value="">Yayında</option>
-                <option value="">Taslakta</option>
-                <option value="">Arşiv</option>
+            <select name="publication_status" class="form-control" id="publication_status">
+                <option value="" disabled selected></option>
+                @foreach($publication_statuses as $publication_status)
+                    <option value="{{ $publication_status?->uuid ?? '' }}">{{ $publication_status?->name ?? '' }}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -56,25 +57,30 @@
 <div class="card card-custom gutter-b">
     <div class="card-body">
         <div class="form-group">
-            <label for="" class="form-label label-between">
+            <label for="category" class="form-label label-between">
                 Kategori Seçimi:
-                <button type="button" data-toggle="modal" data-target="#categoryCreateModal" title="Kategori Ekle"><i class="flaticon2-plus text-success"></i></button>
+                <button type="button" data-toggle="modal" data-target="#categoryCreateModal" title="Kategori Ekle">
+                    <i class="flaticon2-plus text-success"></i>
+                </button>
             </label>
-            <select name="" class="form-control" id="category">
-                <option value="">Asayiş</option>
-                <option value="">Sağlık</option>
-                <option value="">Spor</option>
+            <select name="category" class="form-control form-select2" id="category">
+                <option value="" disabled selected></option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->uuid ?? '' }}">{{ $category->name ?? '-' }}</option>
+                @endforeach
             </select>
         </div>
         <div class="form-group">
-            <label for="" class="form-label label-between">
+            <label for="newsletter_source" class="form-label label-between">
                 Haber Kaynağı:
-                <button type="button"  data-toggle="modal" data-target="#newsletterSourceCreateModal" title="Haber Kaynağı Ekle"><i class="flaticon2-plus text-success"></i></button>
+                <button type="button"  data-toggle="modal" data-target="#newsletterSourceCreateModal" title="Haber Kaynağı Ekle">
+                    <i class="flaticon2-plus text-success"></i>
+                </button>
             </label>
-            <select name="" class="form-control" id="">
-                <option value="">Bozok Tv</option>
-                <option value="">İHA</option>
-                <option value="">AA</option>
+            <select name="newsletter_source" class="form-control" id="newsletter_source">
+                @foreach($newsletter_sources as $newsletter_source)
+                    <option value="{{ $newsletter_source?->uuid ?? '' }}">{{ $newsletter_source?->name ?? '-' }}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -83,7 +89,7 @@
     <div class="card-body">
         <div class="form-group">
             <label for="" class="form-label">Yayın Tarihi:</label>
-            <input type="datetime-local" class="form-control" placeholder="" />
+            <input type="text" class="form-control" name="publish_date" placeholder="" />
         </div>
     </div>
 </div>

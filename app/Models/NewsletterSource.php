@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\NewsletterSource\NewsletterSourceIsActiveEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,6 +25,10 @@ class NewsletterSource extends Model
         'url',
         'order',
         'is_active',
+    ];
+
+    protected $casts = [
+        'is_active' => NewsletterSourceIsActiveEnum::class
     ];
 
     public $sortable = [
