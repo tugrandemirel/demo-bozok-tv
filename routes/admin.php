@@ -23,7 +23,7 @@ Route::middleware(['auth'])->prefix('dashboard')->as('admin.')->group(function (
         Route::get('/create', [NewsletterController::class, 'create'])->name('create');
 
         Route::prefix('category')->as('category.')->group(function () {
-            Route::get('store', [NewsletterCategoryController::class, 'store'])->name('store');
+            Route::post('store', [NewsletterCategoryController::class, 'store'])->name('store');
         });
     });
 });
