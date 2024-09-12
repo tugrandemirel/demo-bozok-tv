@@ -14,5 +14,6 @@ class SeoSetting extends Model
         'meta_title',
         'meta_description',
         'meta_keywords',
+        'created_by_user_id'
     ];
 }
