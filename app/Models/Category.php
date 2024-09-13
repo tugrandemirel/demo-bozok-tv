@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\Category\CategoryIsActiveEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,6 +26,10 @@ class Category extends Model
         'order',
         'is_active',
         'home_page',
+    ];
+
+    protected $casts = [
+        'is_active' => CategoryIsActiveEnum::class
     ];
 
     public $sortable = [

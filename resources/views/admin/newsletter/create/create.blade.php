@@ -30,5 +30,7 @@
         "resources/js/admin/ckeditor.js",
         "resources/js/admin/newsletter/create/general-setting-tab.js",
         "resources/js/admin/newsletter/create/dropzone.js",
+
+        "resources/js/admin/newsletter/create/category-store.js",
     ])
 @endpush

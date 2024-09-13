@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\IndexController;
+use App\Http\Controllers\Admin\Newsletter\NewsletterCategoryController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,5 +21,10 @@ Route::middleware(['auth'])->prefix('dashboard')->as('admin.')->group(function (
     Route::prefix('newsletters')->as('newsletters.')->group(function () {
         Route::get('/', [NewsletterController::class, 'index'])->name('index');
         Route::get('/create', [NewsletterController::class, 'create'])->name('create');
+
+        Route::prefix('category')->as('category.')->group(function () {
+            Route::get('/index', [NewsletterCategoryController::class, 'index'])->name('index');
+            Route::post('store', [NewsletterCategoryController::class, 'store'])->name('store');
+        });
     });
 });

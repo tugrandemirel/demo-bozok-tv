@@ -30,6 +30,7 @@
 <!--end::Head-->
 <!--begin::Body-->
 <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<div class="spinner" id="spinner"></div>
 <!--begin::Main-->
 <!--begin::Header Mobile-->
 <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
@@ -440,6 +441,7 @@
 <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
 <script src="{{ asset('assets/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
 <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
+<script src="{{ asset('assets/js/notification.js') }}"></script>
 <!--end::Global Theme Bundle-->
 <!--end::Page Scripts-->
 @stack('js')
