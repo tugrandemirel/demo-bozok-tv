@@ -4,7 +4,10 @@ namespace App\Http\Requests\Admin\Newsletter\Category;
 
 use App\Enum\Category\CategoryHomePageEnum;
 use App\Enum\Category\CategoryIsActiveEnum;
+use App\Helper\Response\ResponseHelper;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rules\Enum;
 
 class CategoryStoreRequest extends FormRequest
@@ -15,6 +18,11 @@ class CategoryStoreRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(ResponseHelper::validationError($validator->errors()));
     }
 
     /**
@@ -28,6 +36,15 @@ class CategoryStoreRequest extends FormRequest
             'name' => 'required|max:190|min:3',
             'home_page' => ['required', new Enum(CategoryHomePageEnum::class)],
             'is_active' => ['required', new Enum(CategoryIsActiveEnum::class)],
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'Kategori Adı',
+            'home_page' => 'Anasayfada Göster',
+            'is_active' => 'Aktiflik',
         ];
     }
 

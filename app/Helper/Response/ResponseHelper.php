@@ -4,6 +4,7 @@ namespace App\Helper\Response;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\MessageBag;
 
 class ResponseHelper
 {
@@ -29,7 +30,7 @@ class ResponseHelper
      * Hatalı bir yanıt döndürür.
      *
      * @param string $message
-     * @param array $errors
+     * @param array|string $errors
      * @param int $statusCode
      * @return JsonResponse
      */
@@ -42,20 +43,59 @@ class ResponseHelper
             'status' => false,
             'icon' => 'error',
             'message' => $message,
-            'errors' => $errors
+            'errors' => self::formatValidationErrors($errors) // Hata mesajlarını düz formatta döndür
         ], $statusCode);
     }
 
     /**
      * İstek yapısı doğrulama hataları için yanıt döndürür.
      *
-     * @param array $validationErrors
+     * @param array|string $validationErrors
      * @param int $statusCode
      * @return JsonResponse
      */
     public static function validationError($validationErrors, $statusCode = 422): JsonResponse
     {
         return self::error('Validation Error', $validationErrors, $statusCode);
+    }
+
+    /**
+     * Doğrulama hatalarını <ul><li></li></ul> yapısına dönüştürür.
+     *
+     * @param array $validationErrors
+     * @return string
+     */
+    /**
+     * Doğrulama hatalarını düz bir formatta döndürür.
+     *
+     * @param array|string $validationErrors
+     * @return array
+     */
+    private static function formatValidationErrors($validationErrors): array
+    {
+        $errors = [];
+
+        if (is_string($validationErrors)) {
+            // Tek bir string hata mesajı varsa, onu doğrudan diziye ekleyelim
+            $errors[] = $validationErrors;
+        } elseif (is_array($validationErrors)) {
+            foreach ($validationErrors as $fieldErrors) {
+                if (is_array($fieldErrors)) {
+                    foreach ($fieldErrors as $error) {
+                        $errors[] = $error;
+                    }
+                } else {
+                    $errors[] = $fieldErrors;
+                }
+            }
+        } elseif($validationErrors instanceof MessageBag) {
+            $fieldErrors = $validationErrors->toArray();
+            foreach ($fieldErrors as $error) {
+                $errors[] = $error;
+            }
+        }
+
+        return $errors;
     }
 
     /**

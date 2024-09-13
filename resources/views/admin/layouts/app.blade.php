@@ -441,6 +441,7 @@
 <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
 <script src="{{ asset('assets/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
 <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
+<script src="{{ asset('assets/js/notification.js') }}"></script>
 <!--end::Global Theme Bundle-->
 <!--end::Page Scripts-->
 @stack('js')
