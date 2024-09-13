@@ -61,7 +61,7 @@ function formatTimelineError(error) {
         <div class="timeline-badge">
             <i class="fa fa-genderless text-danger icon-xl"></i>
         </div>
-        <div class="font-weight-normal font-size-lg timeline-content text-muted pl-3">
+        <div class="font-weight-normal font-size-lg timeline-content pl-3">
             ${error}
         </div>
     </div>`;
@@ -79,7 +79,7 @@ function formatTimelineSuccess(message) {
         <div class="timeline-badge">
             <i class="fa fa-genderless text-success icon-xl"></i>
         </div>
-        <div class="font-weight-normal font-size-lg timeline-content text-muted pl-3">
+        <div class="font-weight-normal font-size-lg timeline-content pl-3">
             ${message}
         </div>
     </div>`;

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterCategoryController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterController;
+use App\Http\Controllers\Admin\Newsletter\NewsletterNewsletterSourceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,11 @@ Route::middleware(['auth'])->prefix('dashboard')->as('admin.')->group(function (
         Route::prefix('category')->as('category.')->group(function () {
             Route::get('/index', [NewsletterCategoryController::class, 'index'])->name('index');
             Route::post('store', [NewsletterCategoryController::class, 'store'])->name('store');
+        });
+
+        Route::prefix('newsletter-source')->as('newsletter-source.')->group(function () {
+            Route::get('/index', [NewsletterNewsletterSourceController::class, 'index'])->name('index');
+            Route::post('store', [NewsletterNewsletterSourceController::class, 'store'])->name('store');
         });
     });
 });
