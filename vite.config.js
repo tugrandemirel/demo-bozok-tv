@@ -11,12 +11,14 @@ export default defineConfig({
                 'resources/css/custom.css',
                 'resources/js/app.js',
 
-                "resources/js/admin/newsletter/create.js",
                 "resources/js/admin/ckeditor.js",
-                "resources/js/admin/newsletter/create/general-setting-tab.js",
                 "resources/js/admin/newsletter/create/dropzone.js",
 
-                "resources/js/admin/newsletter/create/category-store.js",
+                // NEWSLETTER
+                "resources/js/admin/newsletter/create.js",
+                "resources/js/admin/newsletter/create/general-setting-tab.js",
+                "resources/js/admin/newsletter/category-store.js",
+                "resources/js/admin/newsletter/newsletter-source-store.js",
 
             ],
 

@@ -18,6 +18,17 @@
                         <label for="url" class="form-label">Kaynak URL</label>
                         <input type="text" class="form-control" id="url" placeholder="Haber Kaynağı URL giriniz" name="url">
                     </div>
+                    <div class="form-group row justify-content-between">
+                        <label class="col-md-4 form-label">Aktiflik</label>
+                        <div class="col-md-6">
+                           <span class="switch switch-icon">
+                                <label>
+                                     <input type="checkbox" name="is_active"/>
+                                     <span></span>
+                                </label>
+                           </span>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">

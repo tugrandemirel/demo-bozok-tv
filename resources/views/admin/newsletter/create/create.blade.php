@@ -7,14 +7,16 @@
 @endpush
 @section('content')
     <div class="card-flush pt-5">
-        <div class="row">
-            <div class="col-md-2">
-               @include('admin.newsletter.create.partials.left')
+        <form id="newslettersFormStore">
+            <div class="row">
+                <div class="col-md-2">
+                   @include('admin.newsletter.create.partials.left')
+                </div>
+                <div class="col-md-10">
+                    @include('admin.newsletter.create.partials.right')
+                </div>
             </div>
-            <div class="col-md-10">
-                @include('admin.newsletter.create.partials.right')
-            </div>
-        </div>
+        </form>
     </div>
     @include('admin.newsletter.create.modals.newsletter-source.category-create-modal')
     @include('admin.newsletter.create.modals.newsletter-source.newsletter-source-create-modal')
@@ -31,6 +33,7 @@
         "resources/js/admin/newsletter/create/general-setting-tab.js",
         "resources/js/admin/newsletter/create/dropzone.js",
 
-        "resources/js/admin/newsletter/create/category-store.js",
+        "resources/js/admin/newsletter/category-store.js",
+        "resources/js/admin/newsletter/newsletter-source-store.js",
     ])
 @endpush
