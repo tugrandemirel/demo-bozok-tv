@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helper\Response;
+namespace App\Helpers\Response;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
@@ -38,7 +38,6 @@ class ResponseHelper
     {
         // Hata loglama
         Log::error($message, ['errors' => $errors]);
-
         return response()->json([
             'status' => false,
             'icon' => 'error',

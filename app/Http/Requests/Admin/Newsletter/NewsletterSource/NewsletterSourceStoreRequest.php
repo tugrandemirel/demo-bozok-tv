@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Admin\Newsletter\NewsletterSource;
 
 use App\Enum\NewsletterSource\NewsletterSourceIsActiveEnum;
-use App\Helper\Response\ResponseHelper;
+use App\Helpers\Response\ResponseHelper;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;

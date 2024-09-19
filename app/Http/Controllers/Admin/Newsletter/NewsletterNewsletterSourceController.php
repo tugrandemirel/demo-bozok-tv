@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Newsletter;
 
 use App\Enum\NewsletterSource\NewsletterSourceIsActiveEnum;
-use App\Helper\Response\ResponseHelper;
+use App\Helpers\Response\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Newsletter\NewsletterSource\NewsletterSourceStoreRequest;
 use App\Models\NewsletterSource;
