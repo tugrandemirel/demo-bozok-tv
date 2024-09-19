@@ -15,4 +15,19 @@ class NewsletterPublicationStatus extends Model
         'name',
         'code',
     ];
+
+    public function scopeOnTheAir($query)
+    {
+        return $query->where('code', 'on-the-air')->first();
+    }
+
+    public function scopeArchive($query)
+    {
+        return $query->where('code', 'archive')->first();
+    }
+
+    public function scopeDraft($query)
+    {
+        return $query->where('code', 'draft')->first();
+    }
 }

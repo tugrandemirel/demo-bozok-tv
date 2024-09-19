@@ -197,6 +197,8 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Spatie\EloquentSortable\EloquentSortableServiceProvider::class,
+//        Intervention\Image\ImageServiceProvider::class,
+
     ],
 
     /*
@@ -212,6 +214,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+//        'Image' => Intervention\Image\Facades\Image::class,
     ])->toArray(),
 
 ];

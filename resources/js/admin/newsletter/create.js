@@ -1,9 +1,16 @@
 $(document).ready(function() {
 
-    let inputElem = $('#tagify')[0] // the 'input' element which will be transformed into a Tagify component
+    let inputElem = $('#meta_tag')[0] // the 'input' element which will be transformed into a Tagify component
     let tagify = new Tagify(inputElem)
-    $('select').select2({
+    $('.select2').select2({
         placeholder: 'Seçim Yapınız',
+    });
+
+    $('.tags').select2({
+        tags: true,
+        width: '100%',
+        placeholder: 'Seçim Yapınız',
+        tokenSeparators: [','],
     });
 
     var cover_image = new KTImageInput('cover_image');
@@ -70,6 +77,38 @@ $(document).ready(function() {
             confirmButtonClass: 'btn btn-primary font-weight-bold'
         });
     });
+
+    var five_cuff_image = new KTImageInput('five_cuff_image');
+
+    five_cuff_image.on('cancel', function(imageInput) {
+        swal.fire({
+            title: 'Resim yükleme iptal edildi',
+            icon: 'success',
+            buttonsStyling: false,
+            confirmButtonText: 'Tamam!',
+            confirmButtonClass: 'btn btn-primary font-weight-bold'
+        });
+    });
+
+    five_cuff_image.on('change', function(imageInput) {
+        swal.fire({
+            title: 'Resim Başarılı bir şekilde değiştirildi.',
+            icon: 'success',
+            buttonsStyling: false,
+            confirmButtonText: 'Tamam!',
+            confirmButtonClass: 'btn btn-primary font-weight-bold'
+        });
+    });
+
+    five_cuff_image.on('remove', function(imageInput) {
+        swal.fire({
+            title: 'Resim başarılı bir şekilde kaldırıldı.',
+            type: 'error',
+            buttonsStyling: false,
+            confirmButtonText: 'Tamam!',
+            confirmButtonClass: 'btn btn-primary font-weight-bold'
+        });
+    });
 })
 $(function() {
 
@@ -82,6 +121,7 @@ $(function() {
         maxYear: parseInt(moment().format('YYYY'),10),
         startDate: moment().startOf('hour'),
         endDate: moment().startOf('hour').add(32, 'hour'),
+        autoUpdateInput: false, // Otomatik olarak input alanını güncellemeyi kapatır
         locale: {
             format: 'DD/MM/YYYY HH:mm', // Tarih formatı
             applyLabel: 'Uygula', // Uygula butonunun etiketi
@@ -97,5 +137,13 @@ $(function() {
         timePicker24Hour: true, // 24 saatlik formatı etkinleştirir
         minDate: moment().startOf('day'), // Bugünden önceki tarihleri engeller
         maxDate: moment().add(1, 'years').endOf('day'), // İsteğe bağlı olarak, max tarihi de belirleyebilirsiniz
+    });
+    $('input[name="publish_date"]').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('DD/MM/YYYY HH:mm'));
+    });
+
+// İptal butonuna basıldığında input'u temizler
+    $('input[name="publish_date"]').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
     });
 });

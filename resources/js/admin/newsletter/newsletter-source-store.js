@@ -1,4 +1,4 @@
-var btn = KTUtil.getById("newsletterSourceCreateModalButton");
+let btn = KTUtil.getById("newsletterSourceCreateModalButton");
 
 KTUtil.addEvent(btn, "click", function () {
     btn.disabled = true;
@@ -10,13 +10,29 @@ KTUtil.addEvent(btn, "click", function () {
 
         let url = "/admin/dashboard/newsletters/newsletter-source/store"
 
+        let cover_image = $('#cover_image')[0].files[0]; // Seçilen dosyayı al
+
+        if (cover_image) {
+            form_data.append('cover_image', cover_image); // Dosyayı FormData'ya ekle
+        }
+        let inside_image = $('#inside_image')[0].files[0]; // Seçilen dosyayı al
+
+        if (inside_image) {
+            form_data.append('inside_image', inside_image); // Dosyayı FormData'ya ekle
+        }
+
+        let five_cuff_image = $('#five_cuff_image')[0].files[0]; // Seçilen dosyayı al
+        if (five_cuff_image) {
+            form_data.append('five_cuff_image', five_cuff_image); // Dosyayı FormData'ya ekle
+        }
+
         axios.post(url, form_data)
             .then(function (response) {
                 if (response.status === 200) {
                     $('#newsletterSourceCreateModal').modal('hide');
                     form[0].reset();
                     success(response)
-                    updateNewsletterSource()
+                    // updateNewsletterSource()
                 }
             })
             .catch(function (errors) {

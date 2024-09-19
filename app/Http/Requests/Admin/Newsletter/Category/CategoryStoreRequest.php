@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin\Newsletter\Category;
 
 use App\Enum\Category\CategoryHomePageEnum;
 use App\Enum\Category\CategoryIsActiveEnum;
-use App\Helper\Response\ResponseHelper;
+use App\Helpers\Response\ResponseHelper;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;

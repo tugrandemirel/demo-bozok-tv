@@ -5,13 +5,17 @@ function error(response) {
 
     // Hata mesajlarını oluştur
     let errorMessage = '';
-    if (errors && Array.isArray(errors)) {
-        errors.forEach(error => {
-            errorMessage += formatTimelineError(error); // Hata mesajlarını timeline formatında oluştur
+    if (errors && typeof errors === 'object') {
+        // errors bir nesne ise, anahtarları üzerinde döngü yaparak her bir hatayı topla
+        Object.keys(errors).forEach(key => {
+            errors[key].forEach(error => {
+                errorMessage += formatTimelineError(error); // Hata mesajlarını timeline formatında oluştur
+            });
         });
     } else {
+        let { message } = data;
         // Eğer errors tanımlı değilse veya dizi değilse varsayılan bir hata mesajı ekle
-        errorMessage = formatTimelineError('Bilinmeyen bir hata oluştu.');
+        errorMessage = formatTimelineError(message);
     }
 
     // SweetAlert2 ile hata mesajını göster

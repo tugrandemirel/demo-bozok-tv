@@ -12,13 +12,13 @@ export default defineConfig({
                 'resources/js/app.js',
 
                 "resources/js/admin/ckeditor.js",
-                "resources/js/admin/newsletter/create/dropzone.js",
 
                 // NEWSLETTER
                 "resources/js/admin/newsletter/create.js",
                 "resources/js/admin/newsletter/create/general-setting-tab.js",
                 "resources/js/admin/newsletter/category-store.js",
                 "resources/js/admin/newsletter/newsletter-source-store.js",
+                "resources/js/admin/newsletter/create/store.js",
 
             ],
 

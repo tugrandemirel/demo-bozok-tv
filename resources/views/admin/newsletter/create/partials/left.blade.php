@@ -45,7 +45,7 @@
                 Haber Durumu:
                 <i class="flaticon2-check-mark text-success"></i>
             </label>
-            <select name="publication_status" class="form-control" id="publication_status">
+            <select name="publication_status" class="form-control select2" id="publication_status">
                 <option value="" disabled selected></option>
                 @foreach($publication_statuses as $publication_status)
                     <option value="{{ $publication_status?->uuid ?? '' }}">{{ $publication_status?->name ?? '' }}</option>
@@ -63,7 +63,7 @@
                     <i class="flaticon2-plus text-success"></i>
                 </button>
             </label>
-            <select name="category" class="form-control form-select2" id="category">
+            <select name="category" class="form-control select2" id="category">
                 <option value="" disabled selected></option>
                 @foreach($categories as $category)
                     <option value="{{ $category->uuid ?? '' }}">{{ $category->name ?? '-' }}</option>
@@ -77,7 +77,7 @@
                     <i class="flaticon2-plus text-success"></i>
                 </button>
             </label>
-            <select name="newsletter_source" class="form-control" id="newsletter_source">
+            <select name="newsletter_source" class="form-control select2" id="newsletter_source">
                 @foreach($newsletter_sources as $newsletter_source)
                     <option value="{{ $newsletter_source?->uuid ?? '' }}">{{ $newsletter_source?->name ?? '-' }}</option>
                 @endforeach
