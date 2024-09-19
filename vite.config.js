@@ -19,6 +19,7 @@ export default defineConfig({
                 "resources/js/admin/newsletter/category-store.js",
                 "resources/js/admin/newsletter/newsletter-source-store.js",
                 "resources/js/admin/newsletter/create/store.js",
+                "resources/js/admin/newsletter/fetch-newsletters-datatable.js"
 
             ],
 

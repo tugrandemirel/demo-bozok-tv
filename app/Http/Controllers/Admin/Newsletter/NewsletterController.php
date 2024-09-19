@@ -8,12 +8,14 @@ use App\Enum\NewsletterSource\NewsletterSourceIsActiveEnum;
 use App\Helper\ImageHelper;
 use App\Helpers\Response\ResponseHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Newsletter\NewsletterFilterRequest;
 use App\Http\Requests\Admin\Newsletter\NewsletterStoreRequest;
 use App\Models\Category;
 use App\Models\Newsletter;
 use App\Models\NewsletterPublicationStatus;
 use App\Models\NewsletterSource;
 use App\Models\Tag;
+use App\Service\Newsletter\NewsletterService;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -26,9 +28,18 @@ use Illuminate\Support\Str;
 class NewsletterController extends Controller
 {
     private const PATH = 'admin.newsletter.';
+    protected $newsletterService;
 
-    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function __construct(NewsletterService $newsletterService)
     {
+        $this->newsletterService = $newsletterService;
+    }
+
+    public function index(NewsletterFilterRequest $request)
+    {
+        if ($request->ajax()) {
+            return $this->newsletterService->getAllDataForDatatable($request);
+        }
         return view(self::PATH.'index');
     }
 

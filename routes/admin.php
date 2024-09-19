@@ -21,7 +21,7 @@ Route::middleware(['auth'])->prefix('dashboard')->as('admin.')->group(function (
     Route::get('/', [IndexController::class, 'index'])->name('index');
 
     Route::prefix('newsletters')->as('newsletters.')->group(function () {
-        Route::get('/', [NewsletterController::class, 'index'])->name('index');
+        Route::any('/', [NewsletterController::class, 'index'])->name('index');
         Route::get('/create', [NewsletterController::class, 'create'])->name('create');
         Route::post('/store', [NewsletterController::class, 'store'])->name('store');
 
