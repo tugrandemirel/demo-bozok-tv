@@ -34,8 +34,69 @@
                 <!--end::Button-->
             </div>
         </div>
+
+        <div class="card-body">
+            <!--begin: Search Form-->
+            <!--begin::Search Form-->
+            <div class="mb-7">
+                <div class="row align-items-center">
+                    <div class="col-lg-9 col-xl-8">
+                        <div class="row align-items-center">
+                            <div class="col-md-4 my-2 my-md-0">
+                                <div class="input-icon">
+                                    <input type="text" class="form-control" placeholder="Search..." id="" />
+                                    <span>
+																	<i class="flaticon2-search-1 text-muted"></i>
+																</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 my-2 my-md-0">
+                                <div class="d-flex align-items-center">
+                                    <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
+                                    <select class="form-control" id="">
+                                        <option value="">All</option>
+                                        <option value="1">Pending</option>
+                                        <option value="2">Delivered</option>
+                                        <option value="3">Canceled</option>
+                                        <option value="4">Success</option>
+                                        <option value="5">Info</option>
+                                        <option value="6">Danger</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
+                        <a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
+                    </div>
+                </div>
+            </div>
+            <!--end::Search Form-->
+            <!--end: Search Form-->
+            <!--begin: Datatable-->
+            <div class="table-responsive">
+                <table id="newsletters_datatable" class="table align-middle table-row-dashed fs-6 gy-5">
+                    <thead>
+                    <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                            <th>Başlık</th>
+                            <th>Kategori</th>
+                            <th>Etiket</th>
+                            <th>Durum</th>
+                            <th>Yayınlanma Tarihi</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 fw-semibold">
+                    </tbody>
+                </table>
+            </div>
+            <!--end: Datatable-->
+        </div>
     </div>
 @endsection
 @push('js')
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    @vite([
+        "resources/js/admin/newsletter/fetch-newsletters-datatable.js"
+    ])
 @endpush
