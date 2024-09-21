@@ -24,7 +24,6 @@ return new class extends Migration
             $table->foreignIdFor(NewsletterPublicationStatus::class);
             $table->foreignIdFor(User::class, 'created_by_user_id');
             $table->string('title');
-            $table->string('slug');
             $table->text('spot');
             $table->text('content');
             $table->boolean('is_main_headline')->default(NewsletterGeneralEnum::OFF->value);
