@@ -46,7 +46,7 @@
                         <span class="menu-text">Dashboard</span>
                     </a>
                 </li>
-                <li class="menu-item menu-item-{{ $newsletter ?? '' }}" aria-haspopup="true">
+                <li class="menu-item menu-item-{{ $newsletterToggle ?? '' }}" aria-haspopup="true">
                     <a href="{{ route('admin.newsletters.index') }}" class="menu-link">
                                             <span class="svg-icon menu-icon">
                                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->

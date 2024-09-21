@@ -2,9 +2,6 @@ $(document).ready(function() {
 
     let inputElem = $('#meta_tag')[0] // the 'input' element which will be transformed into a Tagify component
     let tagify = new Tagify(inputElem)
-    $('.select2').select2({
-        placeholder: 'Seçim Yapınız',
-    });
 
     $('.tags').select2({
         tags: true,
