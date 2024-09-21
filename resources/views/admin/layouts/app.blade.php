@@ -78,7 +78,7 @@
             @include('admin.layouts.header')
             <!--end::Header-->
             <!--begin::Content-->
-            <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+            <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
                 <!--begin::Entry-->
                 <div class="d-flex flex-column-fluid">
                     <!--begin::Container-->
@@ -432,6 +432,7 @@
         },
         "font-family": "Poppins"
     };
+
 </script>
 <!--end::Scrolltop-->
 <!--begin::Global Theme Bundle(used by all pages)-->
@@ -439,6 +440,11 @@
 <script src="{{ asset('assets/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
 <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
 <script src="{{ asset('assets/js/notification.js') }}"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 <!--end::Global Theme Bundle-->
 <!--end::Page Scripts-->
 @stack('js')

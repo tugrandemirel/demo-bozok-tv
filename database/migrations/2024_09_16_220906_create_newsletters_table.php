@@ -1,6 +1,10 @@
 <?php
 
 use App\Enum\Newsletter\NewsletterGeneralEnum;
+use App\Models\Category;
+use App\Models\NewsletterPublicationStatus;
+use App\Models\NewsletterSource;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,11 +19,12 @@ return new class extends Migration
         Schema::create('newsletters', function (Blueprint $table) {
             $table->id();
             $table->uuid();
-            $table->foreignIdFor(\App\Models\Category::class);
-            $table->foreignIdFor(\App\Models\NewsletterSource::class);
-            $table->foreignIdFor(\App\Models\NewsletterPublicationStatus::class);
-            $table->foreignIdFor(\App\Models\User::class, 'created_by_user_id');
+            $table->foreignIdFor(Category::class);
+            $table->foreignIdFor(NewsletterSource::class);
+            $table->foreignIdFor(NewsletterPublicationStatus::class);
+            $table->foreignIdFor(User::class, 'created_by_user_id');
             $table->string('title');
+            $table->string('slug');
             $table->text('spot');
             $table->text('content');
             $table->boolean('is_main_headline')->default(NewsletterGeneralEnum::OFF->value);

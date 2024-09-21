@@ -156,4 +156,12 @@ class NewsletterController extends Controller
         }
 
     }
+
+    public function show($newsletter_uuid)
+    {
+        $publication_statuses = NewsletterPublicationStatus::query()
+            ->get();
+
+        return view(self::PATH.'show.show', compact('publication_statuses'));
+    }
 }

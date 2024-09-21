@@ -23,3 +23,9 @@
     display: flex;
     justify-content: space-between;
 }
+.text-hover-danger:hover {
+    color: #F64E60!important;
+}
+.text-hover-warning:hover {
+    color: #FFA800!important;
+}
