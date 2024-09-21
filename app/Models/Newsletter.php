@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Enum\Newsletter\NewsletterGeneralEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -34,6 +36,17 @@ class Newsletter extends Model
         'publish_date',
     ];
 
+    protected $casts = [
+        'is_main_headline' => NewsletterGeneralEnum::class,
+        'is_five_cuff' => NewsletterGeneralEnum::class,
+        'is_outstanding' => NewsletterGeneralEnum::class,
+        'is_last_minute' => NewsletterGeneralEnum::class,
+        'is_today_headline' => NewsletterGeneralEnum::class,
+        'is_special_news' => NewsletterGeneralEnum::class,
+        'is_street_interview' => NewsletterGeneralEnum::class,
+        'is_seo' => NewsletterGeneralEnum::class,
+    ];
+
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
@@ -46,9 +59,9 @@ class Newsletter extends Model
         return $this->morphMany(MorphImage::class, 'imageable');
     }
 
-    public function seoSettings(): MorphMany
+    public function seoSetting(): MorphOne
     {
-        return $this->morphMany(MorphImage::class, 'seoable');
+        return $this->morphOne(MorphImage::class, 'seoable');
     }
 
     public function newsletterTags()

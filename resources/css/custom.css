@@ -29,3 +29,15 @@
 .text-hover-warning:hover {
     color: #FFA800!important;
 }
+.border-left-danger {
+    border-left: 3px solid #F64E60!important;
+}
+.border-left-warning {
+    border-left: 3px solid #FFA800!important;
+}
+.border-left-info {
+    border-left: 3px solid #8950FC!important;
+}
+.border-left-success {
+    border-left: 3px solid #1BC5BD!important;
+}

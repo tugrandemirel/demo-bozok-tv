@@ -4,10 +4,13 @@ namespace App\Http\Requests\Admin\Newsletter;
 
 use App\Enum\Newsletter\NewsletterGeneralEnum;
 use App\Helpers\Custom\CustomHelper;
+use App\Helpers\Response\ResponseHelper;
 use App\Models\Category;
 use App\Models\NewsletterPublicationStatus;
 use App\Models\NewsletterSource;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rules\Enum;
 
 class NewsletterStoreRequest extends FormRequest
@@ -18,6 +21,11 @@ class NewsletterStoreRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(ResponseHelper::validationError($validator->errors()));
     }
 
     /**

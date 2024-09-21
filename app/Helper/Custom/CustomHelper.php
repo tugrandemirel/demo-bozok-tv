@@ -16,4 +16,37 @@ class CustomHelper
 
         return $record ? $record->id : null;
     }
+
+    public static function getNewsletterPublicationStatusLabelColor($status)
+    {
+        $colors = [
+            'archive' => 'info',
+            'on-the-air' => 'success',
+            'draft' => 'warning',
+            'removed' => 'danger',
+        ];
+
+        return $colors[$status];
+    }
+
+    public static function getNewsletterPublicationStatusLabelText($status)
+    {
+        $colors = [
+            'archive' => 'Arşiv',
+            'on-the-air' => 'Yayında',
+            'draft' => 'Taslak',
+            'removed' => 'Yayından Kaldırılmış',
+        ];
+
+        return $colors[$status];
+    }
+
+    public static function getImageTypeName($type)
+    {
+        return match ($type) {
+            'COVER' => 'KAPAK',
+            'INSIDE' => 'İÇ KAPAK',
+            'FEATURED' => 'BEŞLİ MANŞET'
+        };
+    }
 }

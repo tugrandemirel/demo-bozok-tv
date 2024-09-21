@@ -25,10 +25,15 @@ Route::middleware(['auth'])->prefix('dashboard')->as('admin.')->group(function (
         Route::get('/create', [NewsletterController::class, 'create'])->name('create');
         Route::post('/store', [NewsletterController::class, 'store'])->name('store');
         Route::get('/show/{newsletter_uuid}', [NewsletterController::class, 'show'])->name('show');
+        Route::get('/edit/{newsletter_uuid}', [NewsletterController::class, 'edit'])->name('edit');
 
         Route::prefix('category')->as('category.')->group(function () {
             Route::get('/index', [NewsletterCategoryController::class, 'index'])->name('index');
             Route::post('store', [NewsletterCategoryController::class, 'store'])->name('store');
+        });
+
+        Route::prefix('publication-status')->as('publication-status.')->group(function () {
+            Route::post('/change-status', [NewsletterController::class, 'changePublicationStatus'])->name('changePublicationStatus');
         });
 
         Route::prefix('newsletter-source')->as('newsletter-source.')->group(function () {
