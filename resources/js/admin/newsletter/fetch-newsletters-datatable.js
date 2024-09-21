@@ -1,3 +1,7 @@
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+
 "use strict"
 let NewslettersDatatablesDataSourceAjaxServer = function () {
 
@@ -83,27 +87,43 @@ let NewslettersDatatablesDataSourceAjaxServer = function () {
                     data: "title",
                     class: "min-w-150px",
                     render: function (data, type, row) {
+                        let image = ``
+                        if (!row?.image_cover?.path) {
+                            image = `<div class="symbol symbol-50 flex-shrink-0">
+                                        <a class="nav nav-pills nav-danger nav-link active" data-toggle="pill" href="#tab_forms_widget_4">
+                                            <span class="nav-icon py-2 w-auto text-danger" >
+                                                <span class="svg-icon svg-icon-3x"><!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Media/Equalizer.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+
+                            <defs></defs>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24"></rect>
+                                <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5"></rect>
+                                <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5"></rect>
+                                <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5"></rect>
+                                <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5"></rect>
+                            </g>
+                        </svg><!--end::Svg Icon--></span>                    </span>
+                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">
+                                            </span>
+                                        </a>
+                                    </div>`
+
+                        } else {
+                            image = `<div class="symbol symbol-50 flex-shrink-0">
+                                        <img src="/storage/${row?.image_cover?.path ?? ''}" alt="photo">
+                                    </div>`
+                        }
                         return `
-                        <div class="d-flex flex-column flex-grow-1">
-                           <span class="text-dark-75 mb-1 font-size-lg"><i class="fa fa-fill-drip text-primary"></i> ${row.title}</span>
-                        </div>
+                                <div class="d-flex align-items-center">
+                                    ${image}
+                                    <div class="ml-3">
+                                        <span class="text-dark-75 font-weight-bold  text-hover-primary line-height-sm d-block pb-2">${row?.title}</span>
+                                        <a href="#" class="text-muted text-hover-primary">${row?.category_name}</a>
+                                    </div>
+                                </div
                         `
                     },
                     searchable: false,
-
-                },
-                {
-                    data: "category_name",
-                    class: "min-w-150px",
-                    render: function (data, type, row) {
-                        return `
-                        <div class="d-flex flex-column flex-grow-1">
-                           <span class="text-dark-75 mb-1 font-size-lg"><i class="fa fa-fill-drip text-primary"></i> ${row.category_name}</span>
-                        </div>
-                        `
-                    },
-                    searchable: false,
-
                 },
                 {
                     data: "tag_name",
@@ -111,7 +131,7 @@ let NewslettersDatatablesDataSourceAjaxServer = function () {
                     render: function (data, type, row) {
                         return `
                         <div class="d-flex flex-column flex-grow-1">
-                           <span class="text-dark-75 mb-1 font-size-lg"><i class="fa fa-fill-drip text-primary"></i> ${row.tag_name}</span>
+                           <span class="text-dark-75 mb-1 font-size-lg">${row.tag_count}</span>
                         </div>
                         `
                     },
@@ -124,26 +144,25 @@ let NewslettersDatatablesDataSourceAjaxServer = function () {
                     render: function (data, type, row) {
                         let html;
                         if (row.status_code === 'on-the-air') {
-                            html = `<a href="#" class="btn btn-icon btn-light-success pulse pulse-success mr-5" data-bs-toggle="tooltip" data-bs-placement="right" title="Yayında">
-                                <i class="flaticon2-protected"></i>
-                                <span class="pulse-ring"></span>
-                            </a>`
+                            html = `
+                                <span style="width: 120px;"><span class="label label-success label-dot mr-2"></span><span class="font-weight-bold text-success">${row?.status_name}</span></span>`
                         } else if (row.status_code === 'draft') {
                             html = `
-                                <a href="#" class="btn btn-icon btn-light-danger pulse pulse-danger mr-5" data-bs-toggle="tooltip" data-bs-placement="right" title="Taslak">
-                                    <i class="flaticon2-information"></i>
-                                    <span class="pulse-ring"></span>
-                                </a>
+                                <span style="width: 120px;">
+                                    <span class="label label-warning label-dot mr-2"></span>
+                                    <span class="font-weight-bold text-warning">${row?.status_name}</span>
+                                </span>
                             `
                         } else if (row.status_code === 'archive') {
                             html = `
-                                <a href="#" class="btn btn-icon btn-light-warning pulse pulse-warning mr-5" data-bs-toggle="tooltip" data-bs-placement="right" title="Arşiv">
-                                    <i class="flaticon2-gear"></i>
-                                    <span class="pulse-ring"></span>
-                                </a>
+
+                                <span style="width: 120px;"><span class="label label-info label-dot mr-2"></span><span class="font-weight-bold text-info">${row?.status_name}</span></span>
+
                             `
-                        } else {
-                            html = '-'
+                        } else if (row.status_code === 'removed'){
+                            html = `
+                                <span style="width: 120px;"><span class="label label-danger label-dot mr-2"></span><span class="font-weight-bold text-danger">${row?.status_name}</span></span>
+                            `
                         }
                         return html
                     },
@@ -173,12 +192,11 @@ let NewslettersDatatablesDataSourceAjaxServer = function () {
                 },
                 {
                     data: null,
-                    class: "min-w-100px",
+                    class: "min-w-100px gap-5",
                     render: function (data, type, row) {
                         return `
-                        <div class="d-flex justify-content-center">
-                          <a href="javascript:void(0)" class="btn btn-sm btn-outline-primary font-weight-bold btn_fuel_receipt_detail" data-value="${row.uuid}"><i class="fas fa-search-plus icon-md"></i>Detayları Göster</a>
-                        </div>
+                            <a href="javascript:void(0)" class="btn btn-sm btn-outline-primary font-weight-bold" data-toggle="tooltip" title="Detaylar" data-value="${row.uuid}"><i class="flaticon2-document"></i></a>
+
                           `;
                     },
                     searchable: false,

@@ -28,6 +28,10 @@ class NewsletterPublicationStatusSeeder extends Seeder
                 'name' => 'Arşiv',
                 'code' => 'archive',
             ],
+            [
+                'name' => 'Yayından Kaldır',
+                'code' => 'removed',
+            ],
         ];
 
 
