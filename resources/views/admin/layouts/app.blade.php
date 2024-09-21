@@ -79,9 +79,6 @@
             <!--end::Header-->
             <!--begin::Content-->
             <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-                <!--begin::Subheader-->
-                                    @include('admin.layouts.subheader')
-                <!--end::Subheader-->
                 <!--begin::Entry-->
                 <div class="d-flex flex-column-fluid">
                     <!--begin::Container-->
