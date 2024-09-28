@@ -16,11 +16,13 @@ export default defineConfig({
 
                 // NEWSLETTER
                 "resources/js/admin/newsletter/create.js",
-                "resources/js/admin/newsletter/create/general-setting-tab.js",
+                "resources/js/admin/newsletter/general-setting-tab.js",
                 "resources/js/admin/newsletter/category-store.js",
                 "resources/js/admin/newsletter/newsletter-source-store.js",
                 "resources/js/admin/newsletter/create/store.js",
                 "resources/js/admin/newsletter/fetch-newsletters-datatable.js",
+                "resources/js/admin/newsletter/edit.js",
+                "resources/js/admin/newsletter/update.js",
 
                 "resources/js/admin/newsletter/show/publication-status.js",
 
@@ -30,9 +32,4 @@ export default defineConfig({
         }),
         ckeditor5({ theme: require.resolve('@ckeditor/ckeditor5-theme-lark') }),
     ],
-    resolve: {
-        alias: {
-            '@tagify': path.resolve(__dirname, 'node_modules/@yaireo/tagify/dist/tagify.esm.js'),
-        },
-    },
 });

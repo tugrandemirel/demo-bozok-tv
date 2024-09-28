@@ -129,6 +129,7 @@ let NewslettersDatatablesDataSourceAjaxServer = function () {
                     data: "tag_name",
                     class: "min-w-150px",
                     render: function (data, type, row) {
+                        console.log(row)
                         return `
                         <div class="d-flex flex-column flex-grow-1">
                            <span class="text-dark-75 mb-1 font-size-lg">${row.tag_count}</span>
@@ -177,9 +178,10 @@ let NewslettersDatatablesDataSourceAjaxServer = function () {
                         let publish_date = row.publish_date;
 
                         moment.locale("tr");
-
-                        let publish_date_format = moment(publish_date);
-                        publish_date = publish_date_format.format("Do MMM YYYY");
+                        if (publish_date) {
+                            let publish_date_format = moment(publish_date);
+                            publish_date = publish_date_format.format("Do MMM YYYY");
+                        }
 
                         return `
                         <div class="d-flex flex-column flex-grow-1">

@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers\Admin\Newsletter;
 
-use App\Enum\Category\CategoryIsActiveEnum;
 use App\Enum\Newsletter\NewsletterGeneralEnum;
-use App\Enum\NewsletterSource\NewsletterSourceIsActiveEnum;
 use App\Helper\ImageHelper;
 use App\Helpers\Response\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Newsletter\NewsletterFilterRequest;
 use App\Http\Requests\Admin\Newsletter\NewsletterPublicationStatusChangeRequest;
 use App\Http\Requests\Admin\Newsletter\NewsletterStoreRequest;
-use App\Models\Category;
+use App\Http\Requests\Admin\Newsletter\NewsletterUpdateRequest;
 use App\Models\MorphImage;
 use App\Models\Newsletter;
 use App\Models\NewsletterPublicationStatus;
-use App\Models\NewsletterSource;
 use App\Models\SeoSetting;
 use App\Models\Tag;
 use App\Service\Newsletter\NewsletterService;
@@ -40,31 +37,19 @@ class NewsletterController extends Controller
         if ($request->ajax()) {
             return $this->newsletterService->getAllDataForDatatable($request);
         }
-        return view(self::PATH.'index');
+        return view(self::PATH . 'index');
     }
 
     public function create()
     {
-        /** @var Category $categories */
-        $categories = Category::query()
-            ->select('uuid', 'name')
-            ->where('is_active', CategoryIsActiveEnum::ACTIVE)
-            ->orderBy('order')
-            ->get();
 
         /** @var NewsletterPublicationStatus $publication_status */
         $publication_statuses = NewsletterPublicationStatus::query()
             ->select('uuid', 'name')
             ->get();
 
-        /** @var NewsletterSource $newsletter_sources */
-        $newsletter_sources = NewsletterSource::query()
-            ->select('uuid', 'name')
-            ->where('is_active', NewsletterSourceIsActiveEnum::ACTIVE)
-            ->orderBy('order')
-            ->get();
 
-        return view('admin.newsletter.create.create', compact('categories', 'publication_statuses', 'newsletter_sources'));
+        return view('admin.newsletter.create.create', compact('publication_statuses'));
     }
 
     public function store(NewsletterStoreRequest $request): JsonResponse
@@ -111,7 +96,7 @@ class NewsletterController extends Controller
 
                 $newsletter->newsletterTags()
                     ->create([
-                       'tag_id' => $create_tag?->id
+                        'tag_id' => $create_tag?->id
                     ]);
             }
 
@@ -119,8 +104,6 @@ class NewsletterController extends Controller
             if ($cover_image) {
                 $cover_image_create = ImageHelper::uploadImage($cover_image, $newsletter->id);
                 $cover_image_create['image_type'] = 'COVER';
-//                $cover_image_create['imageable_id'] = $newsletter->id;
-//                $cover_image_create['imageable_type'] = Newsletter::class;
 
                 $newsletter->images()->create($cover_image_create);
             }
@@ -128,8 +111,6 @@ class NewsletterController extends Controller
             if ($inside_image) {
                 $inside_image_create = ImageHelper::uploadImage($inside_image, $newsletter->id);
                 $inside_image_create['image_type'] = 'INSIDE';
-//                $inside_image_create['imageable_id'] = $newsletter->id;
-//                $inside_image_create['imageable_type'] = Newsletter::class;
 
                 $newsletter->images()->create($inside_image_create);
             }
@@ -140,8 +121,6 @@ class NewsletterController extends Controller
                 } else {
                     $five_cuff_image_create = ImageHelper::uploadImage($five_cuff_image, $newsletter->id);
                     $five_cuff_image_create['image_type'] = 'FEATURED';
-//                    $five_cuff_image_create['imageable_id'] = $newsletter->id;
-//                    $five_cuff_image_create['imageable_type'] = Newsletter::class;
 
                     $newsletter->images()->create($five_cuff_image_create);
                 }
@@ -162,11 +141,6 @@ class NewsletterController extends Controller
         try {
             /** @var NewsletterPublicationStatus $publication_statuses */
             $publication_statuses = NewsletterPublicationStatus::query()
-                ->get();
-
-            /** @var Category $categories */
-            $categories = Category::query()
-                ->where('is_active', CategoryIsActiveEnum::ACTIVE)
                 ->get();
 
             /** @var Newsletter $newsletter */
@@ -197,14 +171,11 @@ class NewsletterController extends Controller
                 ->where('newsletters.id', $newsletter->id)
                 ->select('tags.*') // Tag bilgilerini seçiyoruz
                 ->get();
-
             $newsletter['tags'] = $tags;
 
 
-
-            return view(self::PATH.'show.show', compact('publication_statuses', 'newsletter', 'categories'));
+            return view(self::PATH . 'show.show', compact('publication_statuses', 'newsletter'));
         } catch (\Exception $exception) {
-            dd($exception->getMessage());
             Log::error('NewsletterController show methodunda bir hata ile karşılaşıldı: ', ['errors' => $exception->getMessage()]);
             abort(404);
         }
@@ -212,7 +183,160 @@ class NewsletterController extends Controller
 
     public function edit(string $newsletter_uuid)
     {
+        try {
+            /** @var NewsletterPublicationStatus $publication_statuses */
+            $publication_statuses = NewsletterPublicationStatus::query()
+                ->get();
 
+            /** @var Newsletter $newsletter */
+            $newsletter = Newsletter::query()
+                ->select('newsletters.*', 'newsletter_publication_statuses.code')
+                ->join('newsletter_publication_statuses', 'newsletter_publication_statuses.id', '=', 'newsletters.newsletter_publication_status_id')
+                ->where('newsletters.uuid', $newsletter_uuid)
+                ->first();
+
+
+            /** @var MorphImage $cover_image */
+            $cover_image = MorphImage::query()
+                ->select('path', 'image_ext')
+                ->where('imageable_id', $newsletter->id)
+                ->cover()
+                ->first();
+
+            /** @var MorphImage $featured_image */
+            $featured_image = MorphImage::query()
+                ->where('imageable_id', $newsletter->id)
+                ->featured()
+                ->first();
+
+            /** @var MorphImage $inside_image */
+            $inside_image = MorphImage::query()
+                ->where('imageable_id', $newsletter->id)
+                ->inside()
+                ->first();
+
+            /** @var SeoSetting $seo */
+            $seo = SeoSetting::query()
+                ->where('seoable_id', $newsletter->id)
+                ->where('seoable_type', Newsletter::class)
+                ->first();
+            $newsletter['seo'] = $seo;
+
+            /** @var Tag $tags */
+            $tags = DB::table('newsletters')
+                ->join('newsletter_tags', 'newsletters.id', '=', 'newsletter_tags.newsletter_id')
+                ->join('tags', 'newsletter_tags.tag_id', '=', 'tags.id')
+                ->where('newsletters.id', $newsletter->id)
+                ->select('tags.*') // Tag bilgilerini seçiyoruz
+                ->get();
+            $newsletter['tags'] = $tags;
+
+
+            return view(self::PATH . 'edit.edit', compact('cover_image', 'inside_image', 'featured_image', 'publication_statuses', 'newsletter'));
+        } catch (\Exception $exception) {
+            dd($exception->getMessage());
+            Log::error('NewsletterController show methodunda bir hata ile karşılaşıldı: ', ['errors' => $exception->getMessage()]);
+            abort(404);
+        }
+    }
+
+    public function update(NewsletterUpdateRequest $request)
+    {
+        $attributes = collect($request->validated());
+        $attributes->put('publish_date', !is_null($attributes->get('publish_date')) ? Carbon::createFromFormat('d/m/Y H:i', $attributes->get('publish_date'))->toDateTimeString() : null);
+        $newsletter_id = $attributes->get('newsletter_id');
+        $attributes->forget('newsletter_id');
+
+        $attributes->forget('seo');
+        $seo = $attributes->get('seo');
+        $seo['created_by_user_id'] = auth()->id();
+        $seo['uuid'] = Str::uuid();
+
+        $tags = $attributes->get('tags');
+        $attributes->forget('tags');
+
+        $cover_image = $attributes->get('cover_image');
+        $attributes->forget('cover_image');
+
+        $inside_image = $attributes->get('inside_image');
+        $attributes->forget('inside_image');
+
+        $five_cuff_image = $attributes->get('five_cuff_image');
+        $attributes->forget('five_cuff_image');
+
+        DB::beginTransaction();
+        try {
+
+            /** @var Newsletter $newsletter */
+            $newsletter = Newsletter::query()
+                ->where('id', $newsletter_id)
+                ->first();
+
+            $newsletter->update($attributes->toArray());
+
+            if ($cover_image) {
+                $cover_image_exists = MorphImage::cover()
+                    ->where('imageable_id', $newsletter?->id)
+                    ->first();
+
+                if (!is_null($cover_image_exists)) {
+                    $cover_image_update = ImageHelper::updateImage($cover_image, $cover_image_exists?->path);
+                    $cover_image_exists->update($cover_image_update);
+                } else {
+                    $cover_image_create = ImageHelper::uploadImage($cover_image);
+
+                    $cover_image_create['image_type'] = 'COVER';
+                    $newsletter->images()->create($cover_image_create);
+                }
+            }
+
+            if ($inside_image) {
+                $inside_image_exists = MorphImage::inside()
+                    ->where('imageable_id', $newsletter?->id)
+                    ->first();
+
+                if (!is_null($inside_image_exists)) {
+                    $inside_image_update = ImageHelper::updateImage($inside_image, $inside_image_exists?->path);
+                    $inside_image_exists->update($inside_image_update);
+                } else {
+                    $inside_image_create = ImageHelper::uploadImage($inside_image);
+                    $inside_image_create['image_type'] = 'INSIDE';
+
+                    $newsletter->images()->create($inside_image_create);
+                }
+            }
+
+            if ($attributes->get('is_five_cuff') === NewsletterGeneralEnum::ON->value) {
+                if (!is_null($five_cuff_image)) {
+                    $featured_image_exists = MorphImage::featured()
+                        ->where('imageable_id', $newsletter?->id)
+                        ->first();
+                    if (!is_null($featured_image_exists)) {
+                        $featured_image_update = ImageHelper::updateImage($five_cuff_image, $featured_image_exists->path);
+                        $featured_image_exists->update($featured_image_update);
+                    } else {
+                        $featured_image_create = ImageHelper::uploadImage($five_cuff_image);
+                        $featured_image_create['image_type'] = 'FEATURED';
+
+                        $newsletter->images()->create($featured_image_create);
+                    }
+                }
+            } else {
+                $featured_image_exists = MorphImage::featured()
+                    ->where('imageable_id', $newsletter?->id)
+                    ->first();
+                if ($featured_image_exists) {
+                    ImageHelper::deleteImage($featured_image_exists?->path);
+                }
+            }
+
+            DB::commit();
+            return ResponseHelper::success('Haber güncelleme işlemi başarılı bir şekilde gerçekleştirildi.');
+        } catch (\Throwable $exception) {
+            DB::rollBack();
+            dd($exception->getMessage());
+            return ResponseHelper::error('Bir hata oluştu', [$exception->getMessage()]);
+        }
     }
 
     public function changePublicationStatus(NewsletterPublicationStatusChangeRequest $request): JsonResponse

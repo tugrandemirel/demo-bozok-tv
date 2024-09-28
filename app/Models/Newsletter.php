@@ -45,6 +45,7 @@ class Newsletter extends Model
         'is_special_news' => NewsletterGeneralEnum::class,
         'is_street_interview' => NewsletterGeneralEnum::class,
         'is_seo' => NewsletterGeneralEnum::class,
+        'publish_date' => 'datetime'
     ];
 
     public function getSlugOptions() : SlugOptions

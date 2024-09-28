@@ -26,6 +26,7 @@ Route::middleware(['auth'])->prefix('dashboard')->as('admin.')->group(function (
         Route::post('/store', [NewsletterController::class, 'store'])->name('store');
         Route::get('/show/{newsletter_uuid}', [NewsletterController::class, 'show'])->name('show');
         Route::get('/edit/{newsletter_uuid}', [NewsletterController::class, 'edit'])->name('edit');
+        Route::post('/update/', [NewsletterController::class, 'update'])->name('update');
 
         Route::prefix('category')->as('category.')->group(function () {
             Route::get('/index', [NewsletterCategoryController::class, 'index'])->name('index');
