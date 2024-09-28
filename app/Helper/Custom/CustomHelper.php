@@ -2,6 +2,7 @@
 
 namespace App\Helpers\Custom;
 
+use App\Enum\Gallery\GalleryTypeEnum;
 use App\Enum\MorphImage\MorphImageImageTypeEnum;
 
 class CustomHelper
@@ -50,6 +51,15 @@ class CustomHelper
             MorphImageImageTypeEnum::INSIDE => 'İÇ KAPAK',
             MorphImageImageTypeEnum::FEATURED => 'BEŞLİ MANŞET',
             default => 'Bilinmeyen Tür',
+        };
+    }
+
+    public static function getGalleryTypeName(GalleryTypeEnum $enum)
+    {
+        return match ($enum) {
+            GalleryTypeEnum::IMAGE => 'Resim Galeri',
+            GalleryTypeEnum::VIDEO => 'Video Galeri',
+
         };
     }
 }

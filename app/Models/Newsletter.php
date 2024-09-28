@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 class Newsletter extends Model
 {
-    use HasFactory, SoftDeletes, HasSlug;
+    use HasFactory, SoftDeletes, HasSlug, SortableTrait;
 
     protected $fillable = [
         'uuid',
@@ -34,6 +35,7 @@ class Newsletter extends Model
         'is_street_interview',
         'is_seo',
         'publish_date',
+        'order',
     ];
 
     protected $casts = [
@@ -46,6 +48,11 @@ class Newsletter extends Model
         'is_street_interview' => NewsletterGeneralEnum::class,
         'is_seo' => NewsletterGeneralEnum::class,
         'publish_date' => 'datetime'
+    ];
+
+    public $sortable = [
+        'order_column_name' => 'order',
+        'sort_when_creating' => true,
     ];
 
     public function getSlugOptions() : SlugOptions

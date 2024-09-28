@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static  cover()
  * @method static  inside()
  * @method static  featured()
+ * @method static  gallery()
  */
 class MorphImage extends Model
 {
@@ -60,5 +61,10 @@ class MorphImage extends Model
     {
         return $query->where('image_type', MorphImageImageTypeEnum::FEATURED)
             ->where('imageable_type', Newsletter::class);
+    }
+
+    public function scopeGallery($query)
+    {
+        return $query->where('imageable_type', Gallery::class);
     }
 }

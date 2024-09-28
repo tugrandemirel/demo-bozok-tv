@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\Gallery\GalleryController;
 use App\Http\Controllers\Admin\IndexController;
-use App\Http\Controllers\Admin\Newsleter\NewsletterTagController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterCategoryController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterNewsletterSourceController;
+use App\Http\Controllers\Admin\Newsletter\NewsletterTagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,5 +47,12 @@ Route::middleware(['auth'])->prefix('dashboard')->as('admin.')->group(function (
             Route::get('/index', [NewsletterTagController::class, 'index'])->name('index');
             Route::post('store', [NewsletterTagController::class, 'store'])->name('store');
         });
+    });
+
+    Route::prefix('galleries')->as('gallery.')->group(function (){
+        Route::get('/', [GalleryController::class, 'index'])->name('index');
+        Route::post('/store', [GalleryController::class, 'store'])->name('store');
+        Route::get('/edit/{gallery_uuid}', [GalleryController::class, 'edit'])->name('edit');
+        Route::post('/update', [GalleryController::class, 'update'])->name('update');
     });
 });
