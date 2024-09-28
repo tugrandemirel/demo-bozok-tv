@@ -210,7 +210,7 @@ let NewslettersDatatablesDataSourceAjaxServer = function () {
                                         </span>
                                     </a>
 
-                             <a href="/admin/dashboard/newsletters/show/${row.uuid}" class="btn btn-icon btn-light btn-sm" data-toggle="tooltip" title="Düzenle" data-placement="left" data-original-title="Düzenle">
+                             <a href="/admin/dashboard/newsletters/edit/${row.uuid}" class="btn btn-icon btn-light btn-sm" data-toggle="tooltip" title="Düzenle" data-placement="left" data-original-title="Düzenle">
                                         <span class="svg-icon svg-icon-md svg-icon-primary">
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <defs></defs>
