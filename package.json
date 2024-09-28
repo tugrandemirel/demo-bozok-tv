@@ -17,7 +17,6 @@
     },
     "dependencies": {
         "@ckeditor/ckeditor5-build-classic": "^43.1.0",
-        "@yaireo/tagify": "^4.31.3",
         "ckeditor5": "^43.1.0"
     }
 }

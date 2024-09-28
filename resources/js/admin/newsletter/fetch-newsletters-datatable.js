@@ -129,6 +129,7 @@ let NewslettersDatatablesDataSourceAjaxServer = function () {
                     data: "tag_name",
                     class: "min-w-150px",
                     render: function (data, type, row) {
+                        console.log(row)
                         return `
                         <div class="d-flex flex-column flex-grow-1">
                            <span class="text-dark-75 mb-1 font-size-lg">${row.tag_count}</span>
@@ -177,9 +178,10 @@ let NewslettersDatatablesDataSourceAjaxServer = function () {
                         let publish_date = row.publish_date;
 
                         moment.locale("tr");
-
-                        let publish_date_format = moment(publish_date);
-                        publish_date = publish_date_format.format("Do MMM YYYY");
+                        if (publish_date) {
+                            let publish_date_format = moment(publish_date);
+                            publish_date = publish_date_format.format("Do MMM YYYY");
+                        }
 
                         return `
                         <div class="d-flex flex-column flex-grow-1">
@@ -208,7 +210,7 @@ let NewslettersDatatablesDataSourceAjaxServer = function () {
                                         </span>
                                     </a>
 
-                             <a href="/admin/dashboard/newsletters/show/${row.uuid}" class="btn btn-icon btn-light btn-sm" data-toggle="tooltip" title="Düzenle" data-placement="left" data-original-title="Düzenle">
+                             <a href="/admin/dashboard/newsletters/edit/${row.uuid}" class="btn btn-icon btn-light btn-sm" data-toggle="tooltip" title="Düzenle" data-placement="left" data-original-title="Düzenle">
                                         <span class="svg-icon svg-icon-md svg-icon-primary">
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <defs></defs>

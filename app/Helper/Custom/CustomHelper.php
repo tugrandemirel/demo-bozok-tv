@@ -2,6 +2,8 @@
 
 namespace App\Helpers\Custom;
 
+use App\Enum\MorphImage\MorphImageImageTypeEnum;
+
 class CustomHelper
 {
     public static function getIdByUuid($modelClass, $uuid)
@@ -41,12 +43,13 @@ class CustomHelper
         return $colors[$status];
     }
 
-    public static function getImageTypeName($type)
+    public static function getImageTypeName(MorphImageImageTypeEnum $type)
     {
         return match ($type) {
-            'COVER' => 'KAPAK',
-            'INSIDE' => 'İÇ KAPAK',
-            'FEATURED' => 'BEŞLİ MANŞET'
+            MorphImageImageTypeEnum::COVER => 'KAPAK',
+            MorphImageImageTypeEnum::INSIDE => 'İÇ KAPAK',
+            MorphImageImageTypeEnum::FEATURED => 'BEŞLİ MANŞET',
+            default => 'Bilinmeyen Tür',
         };
     }
 }

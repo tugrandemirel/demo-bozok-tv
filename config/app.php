@@ -197,7 +197,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Spatie\EloquentSortable\EloquentSortableServiceProvider::class,
-//        Intervention\Image\ImageServiceProvider::class,
+        \App\Providers\ViewComposerProvider::class,
 
     ],
 

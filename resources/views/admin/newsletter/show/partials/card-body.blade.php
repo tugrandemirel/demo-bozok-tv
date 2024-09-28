@@ -1,6 +1,6 @@
 @isset($newsletter)
-    @if($newsletter->images)
     <div class="row mb-17">
+        @if(!$newsletter->images->isEmpty())
         <div class="col-xxl-4 mb-11 mb-xxl-0">
             <!--begin::Image-->
             <div class="card card-custom card-stretch">
@@ -10,13 +10,13 @@
             </div>
             <!--end::Image-->
         </div>
-        <div class="col-xxl-8 pl-xxl-11">
+        @endif
+        <div class="col-xxl-{{ (!$newsletter->images->isEmpty()) ? '8' : '12' }} pl-xxl-11">
             <div class="line-height-xl">
                 {{ $newsletter->spot }}
             </div>
         </div>
     </div>
-    @endif
     <div class="row">
         <div class="col-md-8">
            <div class="row">

@@ -9,9 +9,9 @@ use Carbon\Carbon;
 class ImageHelper
 {
     // Resim Yükleme
-    public static function uploadImage($image, $userId)
+    public static function uploadImage($image)
     {
-        $folderPath = self::generateImagePath($userId);
+        $folderPath = self::generateImagePath();
         $fileName = self::generateImageName($image);
 
         // Resmi belirlenen klasöre kaydet
@@ -22,15 +22,15 @@ class ImageHelper
     }
 
     // Resim Güncelleme
-    public static function updateImage($image, $oldImagePath, $userId)
+    public static function updateImage($image, ?string $oldImagePath)
     {
         // Eski resmi sil
-        if (Storage::disk('public')->exists($oldImagePath)) {
+        if ($oldImagePath  && Storage::disk('public')->exists($oldImagePath)) {
             Storage::disk('public')->delete($oldImagePath);
         }
 
         // Yeni resmi yükle ve bilgilerini döndür
-        return self::uploadImage($image, $userId);
+        return self::uploadImage($image);
     }
 
     // Resim Silme
@@ -54,6 +54,7 @@ class ImageHelper
 
         // Görselin genişlik ve yüksekliğini almak için yol kullanılıyor
         $absolutePath = Storage::disk('public')->path($path);
+
         list($width, $height) = getimagesize($absolutePath);
 
         return [
@@ -65,22 +66,21 @@ class ImageHelper
             'width' => $width,
             'height' => $height,
             'mime_type' => $mimeType,
-            'image_type' => null // Başlangıçta boş olabilir, isteğe göre güncellenir
         ];
     }
 
     // Klasör yapısını oluşturma (Yıl/Ay/Gün/Saat/ID)
-    private static function generateImagePath($userId)
+    private static function generateImagePath()
     {
         $now = Carbon::now();
-        return $now->year . '/' . $now->month . '/' . $now->day . '/' . $now->hour . '/' . $userId;
+        return $now->year . '/' . $now->month . '/' . $now->day . '/' . $now->hour;
     }
 
     // Benzersiz resim ismi oluşturma
     private static function generateImageName($image)
     {
-        $extension = $image->getClientOriginalExtension();
-        $fileName = Str::uuid()->toString() . '.' . $extension; // Benzersiz isim üret
-        return $fileName;
+        $image_extension = $image->getClientOriginalExtension();
+        // Benzersiz isim üret
+        return str_replace('.', '-', bcrypt(Str::uuid()->toString())). '.' .$image_extension;
     }
 }

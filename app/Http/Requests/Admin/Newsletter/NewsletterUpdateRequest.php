@@ -6,6 +6,7 @@ use App\Enum\Newsletter\NewsletterGeneralEnum;
 use App\Helpers\Custom\CustomHelper;
 use App\Helpers\Response\ResponseHelper;
 use App\Models\Category;
+use App\Models\Newsletter;
 use App\Models\NewsletterPublicationStatus;
 use App\Models\NewsletterSource;
 use Illuminate\Contracts\Validation\Validator;
@@ -13,7 +14,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rules\Enum;
 
-class NewsletterStoreRequest extends FormRequest
+class NewsletterUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -39,7 +40,7 @@ class NewsletterStoreRequest extends FormRequest
             'title' => 'required|max:191',
             'spot' => 'required|max:500',
             'content' => 'required|min:30',
-            "cover_image" => "required|mimes:jpg,jpeg,png",
+            "cover_image" => "nullable|mimes:jpg,jpeg,png",
             "inside_image" => "nullable|mimes:jpg,jpeg,png",
             "newsletter_publication_status_id" => "required|exists:newsletter_publication_statuses,id",
             "category_id" => "required|exists:categories,id",
@@ -52,16 +53,23 @@ class NewsletterStoreRequest extends FormRequest
             'is_today_headline' => ['required', new Enum(NewsletterGeneralEnum::class)],
             'is_special_news' => ['required', new Enum(NewsletterGeneralEnum::class)],
             'is_street_interview' => ['required', new Enum(NewsletterGeneralEnum::class)],
-            'five_cuff_image' => ['sometimes', 'required_if:is_five_cuff,' . NewsletterGeneralEnum::ON->value, 'mimes:jpg,jpeg,png'],
+            'five_cuff_image' => [
+                'sometimes',
+                'nullable', // Bu alan zorunlu değil
+                'required_if:is_five_cuff,' . NewsletterGeneralEnum::ON->value, // Eğer is_five_cuff ON ise gerekli
+                'mimes:jpg,jpeg,png'
+            ],
             'tags' => 'required|array',
             'is_seo' => 'nullable',
             'seo' => ['sometimes', 'required_if:is_seo,' . NewsletterGeneralEnum::ON->value, 'array'],
+            'newsletter_id' => 'required|exists:newsletters,id'
         ];
     }
 
     protected function prepareForValidation(): void
     {
         $this->merge([
+            'newsletter_id' => CustomHelper::getIdByUuid(Newsletter::class, $this->input('newsletter_uuid')),
             'newsletter_publication_status_id' => CustomHelper::getIdByUuid(NewsletterPublicationStatus::class, $this->get('publication_status')),
             'category_id' => CustomHelper::getIdByUuid(Category::class, $this->get('category')),
             'newsletter_source_id' => CustomHelper::getIdByUuid(NewsletterSource::class, $this->get('newsletter_source')),
@@ -88,6 +96,7 @@ class NewsletterStoreRequest extends FormRequest
             "category_id" => "Kategori",
             "newsletter_source_id" => "Haber Kaynağı",
             "publish_date" => "Yayın Tarihi",
+            "five_cuff_image" => "Beşli Manşet",
             'tags' => 'Etiket',
             'is_seo' => 'Seo Otomatik',
             'seo' => 'Seo',
