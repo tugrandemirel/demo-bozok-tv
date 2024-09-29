@@ -19,6 +19,13 @@ return new class extends Migration
             $table->string('meta_title');
             $table->string('meta_description');
             $table->string('meta_keywords');
+            $table->string('canonical_url')->nullable(); // Canonical URL
+            $table->string('og_title')->nullable(); // Open Graph başlığı
+            $table->string('og_description')->nullable(); // Open Graph açıklaması
+            $table->string('og_image')->nullable(); // Open Graph resmi
+            $table->string('twitter_title')->nullable(); // Twitter başlığı
+            $table->string('twitter_description')->nullable(); // Twitter açıklaması
+            $table->string('twitter_image')->nullable(); // Twitter resmi
             $table->timestamps();
             $table->softDeletes();
         });

@@ -22,6 +22,8 @@ $(document).on('input', '#meta_description', function() {
     }
 });
 
+
+
 $(document).on('input', '#meta_title', function() {
     let title = $(this);
     let character_count = title.next().find('.character_count'); // Bir sonraki sibling olan p içindeki karakter sayısını al
@@ -47,4 +49,22 @@ $(document).on('input', '#meta_tag', function() {
         character_count.removeClass('text-danger');
     }
 });
-
+$(document).ready(function () {
+    if ($('#is_seo').is(':checked')) {
+        $('#meta_title').prop('disabled', true);
+        $('#meta_tag').prop('disabled', true);
+        $('#meta_description').prop('disabled', true);
+    }
+})
+$(document).on('change', '#is_seo', function () {
+    let input = $(this);
+    if (input.is(':checked')) {
+        $('#meta_title').prop('disabled', true);
+        $('#meta_tag').prop('disabled', true);
+        $('#meta_description').prop('disabled', true);
+    } else {
+        $('#meta_title').prop('disabled', false);
+        $('#meta_tag').prop('disabled', false);
+        $('#meta_description').prop('disabled', false);
+    }
+})

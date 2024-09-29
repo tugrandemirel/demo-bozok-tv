@@ -10,6 +10,7 @@ use App\Http\Requests\Admin\Gallery\GalleryUpdateRequest;
 use App\Models\Gallery;
 use App\Models\MorphImage;
 use App\Service\Gallery\GalleryService;
+use App\Service\Seo\SeoService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -21,11 +22,13 @@ use Illuminate\Support\Str;
 class GalleryController extends Controller
 {
     protected GalleryService $gallery_service;
+    protected SeoService $seo_service;
 
     private const PATH = 'admin.gallery.';
-    public function __construct(GalleryService $gallery_service)
+    public function __construct(GalleryService $gallery_service, SeoService $seo_service)
     {
         $this->gallery_service = $gallery_service;
+        $this->seo_service = $seo_service;
     }
 
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
@@ -39,19 +42,23 @@ class GalleryController extends Controller
         $attributes = collect($request->validated());
         $attributes->put('created_by_user_id', auth()->id());
         $attributes->put('uuid', Str::uuid());
+        $attributes->put('order', Gallery::query()->max('order') + 1);
+
         $file = $attributes->get('file');
         $attributes->forget('file');
-        $attributes->put('order', Gallery::max('order') + 1);
+
         DB::beginTransaction();
         try {
-
+            /** @var Gallery $gallery_create */
             $gallery_create = Gallery::query()
                 ->create($attributes->toArray());
+
             if ($file) {
                 $gallery_main_file =  ImageHelper::uploadImage($file);
 
                 $gallery_create->image()->create($gallery_main_file);
             }
+            $this->seo_service->generateSeoData($gallery_create);
 
             DB::commit();
             return ResponseHelper::success('Galeri ekleme işlemi başarılı bir şekilde gerçekleştirildi.');
@@ -108,6 +115,7 @@ class GalleryController extends Controller
                     $gallery->image()->create($gallery_image_create);
                 }
             }
+            $this->seo_service->generateSeoData($gallery);
 
             DB::commit();
             return ResponseHelper::success('Galeri ekleme işlemi başarılı bir şekilde gerçekleştirildi.');
