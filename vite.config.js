@@ -26,6 +26,11 @@ export default defineConfig({
 
                 "resources/js/admin/newsletter/show/publication-status.js",
 
+                // GALLERY
+                "resources/js/admin/gallery/index.js",
+                "resources/js/admin/gallery/store.js",
+                "resources/js/admin/gallery/edit.js",
+                "resources/js/admin/gallery/update.js",
             ],
 
             refresh: true,

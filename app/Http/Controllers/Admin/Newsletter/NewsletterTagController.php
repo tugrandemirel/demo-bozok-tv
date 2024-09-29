@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Newsleter;
+namespace App\Http\Controllers\Admin\Newsletter;
 
 use App\Helpers\Response\ResponseHelper;
 use App\Http\Controllers\Controller;

@@ -333,7 +333,6 @@ class NewsletterController extends Controller
             DB::commit();
             return ResponseHelper::success('Haber güncelleme işlemi başarılı bir şekilde gerçekleştirildi.');
         } catch (\Throwable $exception) {
-            DB::rollBack();
             dd($exception->getMessage());
             return ResponseHelper::error('Bir hata oluştu', [$exception->getMessage()]);
         }
