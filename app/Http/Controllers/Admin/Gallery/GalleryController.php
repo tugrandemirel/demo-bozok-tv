@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Gallery;
 
+use App\Enum\Gallery\GalleryTypeEnum;
 use App\Helper\ImageHelper;
 use App\Helpers\Response\ResponseHelper;
 use App\Http\Controllers\Controller;
@@ -71,8 +72,9 @@ class GalleryController extends Controller
     public function edit(string $gallery_uuid): JsonResponse
     {
         try {
+            /** @var Gallery $gallery */
             $gallery = Gallery::query()
-                ->select('galleries.title', 'galleries.description', 'galleries.is_active', 'galleries.type', 'galleries.uuid as gallery_uuid', )
+                ->select('galleries.title', 'galleries.description', 'galleries.is_active', 'galleries.type', 'galleries.uuid as gallery_uuid')
                 ->addSelect('morph_images.path')
                 ->join('morph_images', 'morph_images.imageable_id', '=', 'galleries.id')
                 ->where('galleries.uuid', $gallery_uuid)
@@ -132,8 +134,14 @@ class GalleryController extends Controller
             $gallery = Gallery::query()
                 ->where('uuid', $gallery_uuid)
                 ->first();
-
-            return view(self::PATH . 'show', compact('gallery'));
+            if ($gallery->type === GalleryTypeEnum::IMAGE) {
+                return view(self::PATH . 'image.', compact('gallery'));
+            } else if ($gallery->type === GalleryTypeEnum::VIDEO) {
+                return view(self::PATH . 'video.index', compact('gallery'));
+            } else {
+                Log::error('GalleryController ımage type null geldi.');
+                abort(404);
+            }
         } catch (\Exception $exception) {
             Log::error('GalleryController show methodunda bir hata ile karşılaşıldı: ', ['errors' => $exception->getMessage()]);
             abort(404);

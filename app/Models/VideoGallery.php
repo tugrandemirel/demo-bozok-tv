@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Models;
+
+use App\Enum\Gallery\VideoGallery\VideoGalleryIsActiveEnum;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\EloquentSortable\SortableTrait;
+
+class VideoGallery extends Model
+{
+    use HasFactory, SoftDeletes, SortableTrait;
+
+    protected $fillable = [
+        'created_by_user_id',
+        'gallery_id',
+        'video_url',
+        'caption',
+        'order',
+        'is_active',
+    ];
+
+    protected $casts = [
+        'is_active' => VideoGalleryIsActiveEnum::class
+    ];
+
+    public $sortable = [
+        'order_column_name' => 'order',
+        'sort_when_creating' => true,
+    ];
+
+
+}

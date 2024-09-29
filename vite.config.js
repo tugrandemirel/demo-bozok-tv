@@ -31,6 +31,9 @@ export default defineConfig({
                 "resources/js/admin/gallery/store.js",
                 "resources/js/admin/gallery/edit.js",
                 "resources/js/admin/gallery/update.js",
+
+                "resources/js/admin/gallery/video-gallery/video-preview.js",
+                "resources/js/admin/gallery/video-gallery/store.js",
             ],
 
             refresh: true,
