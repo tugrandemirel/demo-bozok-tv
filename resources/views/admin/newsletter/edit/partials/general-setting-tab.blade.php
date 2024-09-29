@@ -116,7 +116,7 @@
             <div class="">
                    <span class="switch switch-icon">
                         <label>
-                             <input type="checkbox"  name="is_seo" @checked($newsletter?->is_seo === \App\Enum\Newsletter\NewsletterGeneralEnum::ON)/>
+                             <input type="checkbox"  name="is_seo" @checked($newsletter?->is_seo === \App\Enum\Newsletter\NewsletterGeneralEnum::ON) id="is_seo"/>
                              <span></span>
                         </label>
                    </span>
@@ -129,7 +129,7 @@
         </div>
         <div class="form-group">
             <label class="form-label">SEO Meta Tag:</label>
-            <input type="text" class="tagify form-control" name="seo[meta_tag]" value="{{ $newsletter->seo?->meta_keywords }}" id="kt_tagify_1">
+            <input type="text" class="tagify form-control" name="seo[meta_keywords]" value="{{ $newsletter->seo?->meta_keywords }}" id="meta_tag">
             <p class="form-text text-muted">En fazla 110 karakter giriniz.(<span class="character_count"> Kalan karakter sayısı: 110</span>)</p>
         </div>
         <div class="form-group">

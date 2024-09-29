@@ -41,7 +41,7 @@
 
         <!--begin::Row-->
         <div class="row">
-            @foreach($galleries as $gallery)
+            @forelse($galleries as $gallery)
             <div class="col-xl-4 col-sm-12">
                 <div class="card card-custom gutter-b">
                     <!--begin::Body-->
@@ -181,7 +181,9 @@
                     <!--end::Body-->
                 </div>
             </div>
-            @endforeach
+            @empty
+                @include('admin.not-founded')
+            @endforelse
         </div>
         <!--end::Row-->
     @include('admin.gallery.modals.gallery-create-modal')

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enum\NewsletterSource\NewsletterSourceIsActiveEnum;
 use App\Models\NewsletterSource;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -42,7 +43,8 @@ class NewsletterSourceSeeder extends Seeder
                     'slug' => Str::slug($source['name']),
                     'url' => $source['url'],
                     'order' => $index + 1,
-                'created_by_user_id' => $user->id,
+                    'is_active' => NewsletterSourceIsActiveEnum::ACTIVE,
+                    'created_by_user_id' => $user->id,
                 ]);
 
             $newsletterSource->seoSettings()->create([

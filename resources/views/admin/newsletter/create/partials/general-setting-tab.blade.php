@@ -113,7 +113,7 @@
             <div class="">
                    <span class="switch switch-icon">
                         <label>
-                             <input type="checkbox"  name="is_seo"/>
+                             <input type="checkbox"  name="is_seo" id="is_seo"/>
                              <span></span>
                         </label>
                    </span>
@@ -126,7 +126,7 @@
         </div>
         <div class="form-group">
             <label class="form-label">SEO Meta Tag:</label>
-            <input type="text" class="form-control" name="seo[meta_tag]" id="meta_tag">
+            <input type="text" class="form-control" name="seo[meta_keywords]" id="meta_tag">
             <p class="form-text text-muted">En fazla 110 karakter giriniz.(<span class="character_count"> Kalan karakter sayısı: 110</span>)</p>
         </div>
         <div class="form-group">

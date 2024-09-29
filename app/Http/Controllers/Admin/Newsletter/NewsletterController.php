@@ -16,7 +16,11 @@ use App\Models\NewsletterPublicationStatus;
 use App\Models\SeoSetting;
 use App\Models\Tag;
 use App\Service\Newsletter\NewsletterService;
+use App\Service\Seo\SeoService;
 use Carbon\Carbon;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -25,11 +29,12 @@ use Illuminate\Support\Str;
 class NewsletterController extends Controller
 {
     private const PATH = 'admin.newsletter.';
-    protected $newsletterService;
-
-    public function __construct(NewsletterService $newsletterService)
+    protected NewsletterService $newsletterService;
+    protected SeoService $seo_service;
+    public function __construct(NewsletterService $newsletterService, SeoService $seo_service)
     {
         $this->newsletterService = $newsletterService;
+        $this->seo_service = $seo_service;
     }
 
     public function index(NewsletterFilterRequest $request)
@@ -40,14 +45,12 @@ class NewsletterController extends Controller
         return view(self::PATH . 'index');
     }
 
-    public function create()
+    public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-
         /** @var NewsletterPublicationStatus $publication_status */
         $publication_statuses = NewsletterPublicationStatus::query()
             ->select('uuid', 'name')
             ->get();
-
 
         return view('admin.newsletter.create.create', compact('publication_statuses'));
     }
@@ -58,9 +61,10 @@ class NewsletterController extends Controller
         $attributes->put('created_by_user_id', auth()->id());
         $attributes->put('uuid', Str::uuid());
         $attributes->put('publish_date', !is_null($attributes->get('publish_date')) ? Carbon::createFromFormat('d/m/Y H:i', $attributes->get('publish_date'))->toDateTimeString() : null);
+        $attributes->put('order', Newsletter::query()->max('order') + 1);
 
-        $attributes->forget('seo');
         $seo = $attributes->get('seo');
+        $attributes->forget('seo');
         $seo['created_by_user_id'] = auth()->id();
         $seo['uuid'] = Str::uuid();
 
@@ -81,9 +85,6 @@ class NewsletterController extends Controller
             $newsletter = Newsletter::query()
                 ->create($attributes->toArray());
 
-            $seo['seoable_id'] = $newsletter->id;
-            $seo['seoable_type'] = Newsletter::class;
-
             foreach ($tags as $tag) {
                 /** @var Tag $create_tag */
                 $create_tag = Tag::query()
@@ -102,14 +103,14 @@ class NewsletterController extends Controller
 
 
             if ($cover_image) {
-                $cover_image_create = ImageHelper::uploadImage($cover_image, $newsletter->id);
+                $cover_image_create = ImageHelper::uploadImage($cover_image);
                 $cover_image_create['image_type'] = 'COVER';
 
                 $newsletter->images()->create($cover_image_create);
             }
 
             if ($inside_image) {
-                $inside_image_create = ImageHelper::uploadImage($inside_image, $newsletter->id);
+                $inside_image_create = ImageHelper::uploadImage($inside_image);
                 $inside_image_create['image_type'] = 'INSIDE';
 
                 $newsletter->images()->create($inside_image_create);
@@ -119,18 +120,29 @@ class NewsletterController extends Controller
                 if (!$five_cuff_image) {
                     return ResponseHelper::error('Lütfen Beşli Manşet görselini ekleyiniz.');
                 } else {
-                    $five_cuff_image_create = ImageHelper::uploadImage($five_cuff_image, $newsletter->id);
+                    $five_cuff_image_create = ImageHelper::uploadImage($five_cuff_image);
                     $five_cuff_image_create['image_type'] = 'FEATURED';
 
                     $newsletter->images()->create($five_cuff_image_create);
                 }
             }
 
+            if ($attributes->get('is_seo') === NewsletterGeneralEnum::ON->value ) {
+                $this->seo_service->generateSeoData($newsletter);
+            } else {
+                $seo['uuid'] = Str::uuid();
+                $seo['seoable_id'] = $newsletter->id;
+                $seo['seoable_type'] = Newsletter::class;
+
+                SeoSetting::query()
+                    ->create($seo);
+            }
             DB::commit();
 
             return ResponseHelper::success('Haber kaydetme işlemi başarılı bir şekilde gerçekleştirildi.');
         } catch (\Throwable $exception) {
             DB::rollBack();
+            dd($exception->getMessage());
             return ResponseHelper::error('Bir hata oluştu', [$exception->getMessage()]);
         }
 
@@ -327,6 +339,23 @@ class NewsletterController extends Controller
                     ->first();
                 if ($featured_image_exists) {
                     ImageHelper::deleteImage($featured_image_exists?->path);
+                }
+            }
+
+            if ($attributes->get('is_seo') === NewsletterGeneralEnum::ON->value ) {
+                $this->seo_service->generateSeoData($newsletter);
+            } else {
+                $seo_setting_is_exists = SeoSetting::newsletter()
+                    ->where('seoable_id', $newsletter?->id)
+                    ->first();
+                if ($seo_setting_is_exists) {
+                    $seo_setting_is_exists->update($seo);
+                } else {
+                    $seo['uuid'] = Str::uuid();
+                    $seo['seoable_id'] = $newsletter->id;
+                    $seo['seoable_type'] = Newsletter::class;
+                    SeoSetting::query()
+                        ->create($seo);
                 }
             }
 
