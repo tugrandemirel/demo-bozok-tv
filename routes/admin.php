@@ -54,5 +54,6 @@ Route::middleware(['auth'])->prefix('dashboard')->as('admin.')->group(function (
         Route::post('/store', [GalleryController::class, 'store'])->name('store');
         Route::get('/edit/{gallery_uuid}', [GalleryController::class, 'edit'])->name('edit');
         Route::post('/update', [GalleryController::class, 'update'])->name('update');
+        Route::get('show/{gallery_uuid}', [GalleryController::class, 'show'])->name('show');
     });
 });

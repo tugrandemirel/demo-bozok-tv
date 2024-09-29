@@ -15,11 +15,14 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class GalleryController extends Controller
 {
     protected GalleryService $gallery_service;
+
+    private const PATH = 'admin.gallery.';
     public function __construct(GalleryService $gallery_service)
     {
         $this->gallery_service = $gallery_service;
@@ -28,7 +31,7 @@ class GalleryController extends Controller
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $galleries = $this->gallery_service->getAllData();
-        return view('admin.gallery.index', compact('galleries'));
+        return view(self::PATH.'index', compact('galleries'));
     }
 
     public function store(GalleryStoreRequest $request): JsonResponse
@@ -58,7 +61,7 @@ class GalleryController extends Controller
         }
     }
 
-    public function edit(string $gallery_uuid)
+    public function edit(string $gallery_uuid): JsonResponse
     {
         try {
             $gallery = Gallery::query()
@@ -74,7 +77,7 @@ class GalleryController extends Controller
         }
     }
 
-    public function update(GalleryUpdateRequest $request)
+    public function update(GalleryUpdateRequest $request): JsonResponse
     {
         $attributes = collect($request->validated());
 
@@ -111,6 +114,21 @@ class GalleryController extends Controller
         } catch (\Throwable $exception) {
             DB::rollBack();
             return ResponseHelper::error('Bir hata oluştu', [$exception->getMessage()]);
+        }
+    }
+
+    public function show($gallery_uuid)
+    {
+        try {
+            /** @var Gallery $gallery */
+            $gallery = Gallery::query()
+                ->where('uuid', $gallery_uuid)
+                ->first();
+
+            return view(self::PATH . 'show', compact('gallery'));
+        } catch (\Exception $exception) {
+            Log::error('GalleryController show methodunda bir hata ile karşılaşıldı: ', ['errors' => $exception->getMessage()]);
+            abort(404);
         }
     }
 }

@@ -113,7 +113,7 @@
                                             </a>
                                         </li>
                                         <li class="navi-item">
-                                            <a href="#" class="navi-link text-hover-warning">
+                                            <a href="{{ route('admin.gallery.show', ['gallery_uuid' => $gallery->gallery_uuid]) }}" class="navi-link text-hover-warning">
                                                  <span class="svg-icon svg-icon-md svg-icon-warning mr-2">
                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                     <defs></defs>
