@@ -16,7 +16,7 @@ class ImageHelper
 
         // Resmi belirlenen klasöre kaydet
         $path = $image->storeAs($folderPath, $fileName, 'public');
-
+//dd($folderPath, $fileName, $path);
         // Görsel bilgilerini al ve array olarak döndür
         return self::getImageData($image, $path);
     }
@@ -80,7 +80,7 @@ class ImageHelper
     private static function generateImageName($image)
     {
         $image_extension = $image->getClientOriginalExtension();
-        // Benzersiz isim üret
-        return str_replace('.', '-', bcrypt(Str::uuid()->toString())). '.' .$image_extension;
+        $hashed_name = str_replace(['/', '.'], '-', hash('sha256', Str::uuid()->toString()));
+        return $hashed_name . '.' . $image_extension;
     }
 }

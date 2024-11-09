@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'Video Galeri')
+@section('title', 'Resim Galeri')
 @push('css') @endpush
 @section('content')
     <div class="subheader py-2 py-lg-6  subheader-solid " id="kt_subheader">
@@ -17,11 +17,11 @@
                     </svg>
                    </span>
                 </a>
-                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Video Galerisi</h5>
+                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Resim Galerisi</h5>
                 <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
 
-                <a href="#" data-toggle="modal" data-target="#videoGalleryCreateModal" class="btn btn-light-primary font-weight-bolder btn-sm">
-                    Video Oluştur
+                <a href="#" data-toggle="modal" data-target="#imageGalleryCreateModal" class="btn btn-light-primary font-weight-bolder btn-sm">
+                    Resim Oluştur
                 </a>
             </div>
             <div class="dropdown dropdown-inline my-2 my-lg-0" data-toggle="tooltip" title="" data-placement="left" data-original-title="Hızlı Erişim Menüsü">
@@ -43,7 +43,7 @@
                              <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="" data-original-title="Click to learn more..."></i>
                          </li>--}}
                         <li class="navi-separator mb-3 opacity-70"></li>
-                       {{-- <li class="navi-item mb-3">
+                        {{--<li class="navi-item mb-3">
                             <a href="#" class="navi-link" data-toggle="modal" data-target="#videoGalleryStatusModal">
                                 <span class="svg-icon svg-icon-md svg-icon-primary mr-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -70,7 +70,7 @@
     <div class="d-flex flex-column-fluid">
         <div class="container">
             <div class="row">
-                @foreach($gallery->videos as $video_gallery)
+                @foreach($gallery->images as $image_gallery)
                 <div class="col-xl-3 col-sm-12">
                     <div class="card card-custom gutter-b">
                         <!--begin::Body-->
@@ -78,47 +78,32 @@
                             <!--begin::Top-->
                             <div class="d-flex align-items-center">
                                 <!--begin::Symbol-->
-                                <div class="symbol symbol-45 symbol-light mr-5">
+                                <div class="symbol symbol-40 symbol-light-{{ $image_gallery->is_active === \App\Enum\Gallery\GalleryImage\GalleryImageEnum::ACTIVE ? 'success' : 'danger' }} mr-5">
                                     <span class="symbol-label">
-                                        <span class="svg-icon svg-icon-{{ $video_gallery->is_active === \App\Enum\Gallery\VideoGallery\VideoGalleryIsActiveEnum::ACTIVE ? 'primary' : 'danger' }} svg-icon-2x">
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <title>Stockholm-icons / Devices / Video-camera</title>
-                                                <desc>Created with Sketch.</desc>
-                                                <defs/>
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="0" y="0" width="24" height="24"/>
-                                                    <rect fill="#000000" x="2" y="6" width="13" height="12" rx="2"/>
-                                                    <path d="M22,8.4142119 L22,15.5857848 C22,16.1380695 21.5522847,16.5857848 21,16.5857848 C20.7347833,16.5857848 20.4804293,16.4804278 20.2928929,16.2928912 L16.7071064,12.7071013 C16.3165823,12.3165768 16.3165826,11.6834118 16.7071071,11.2928877 L20.2928936,7.70710477 C20.683418,7.31658067 21.316583,7.31658098 21.7071071,7.70710546 C21.8946433,7.89464181 22,8.14899558 22,8.4142119 Z" fill="#000000" opacity="0.3"/>
-                                                </g>
-                                            </svg><!--end::Svg Icon-->
-                                        </span>
+                                        <img src="{{ asset('assets/media/svg/avatars/047-girl-25.svg') }}" class="h-75 align-self-end" alt="">
                                     </span>
                                 </div>
                                 <!--end::Symbol-->
                                 <!--begin::Info-->
                                 <div class="d-flex flex-column flex-grow-1">
-                                    <a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder"></a>
+                                    <span class="text-muted font-weight-bold">{{ \Carbon\Carbon::parse($image_gallery->created_at)->translatedFormat('d M Y H:i') }}</span>
                                 </div>
                                 <!--end::Info-->
-                                <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="" data-placement="left" data-original-title="Quick actions">
+                                <!--begin::Dropdown-->
+                                <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="" data-placement="left" data-original-title="İşlemler">
                                     <a href="#" class="btn btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="ki ki-bold-more-hor"></i>
                                     </a>
                                     <div class="dropdown-menu p-0 m-0 dropdown-menu-md dropdown-menu-right">
                                         <!--begin::Navigation-->
                                         <ul class="navi navi-hover">
-                                            {{--<li class="navi-footer py-4">
-                                                <a class="btn-clean w-100 font-weight-bold btn-sm single-video-status-modal" data-uuid="{{ $video_gallery->uuid }}" href="#">
-                                                    Durum
-                                                </a>
-                                            </li>--}}
                                             <li class="navi-footer py-4">
-                                                <a class="btn-clean w-100 font-weight-bold btn-sm single-video-update-modal" data-uuid="{{ $video_gallery->uuid }}" href="#">
+                                                <a class="btn-clean w-100 font-weight-bold btn-sm single-image-update-modal" data-uuid="{{ $image_gallery->uuid }}" href="#">
                                                     Düzenle
                                                 </a>
                                             </li>
-                                           {{-- <li class="navi-footer py-4">
-                                                <a class="btn-clean w-100 font-weight-bold btn-sm single-video-delete" data-uuid="{{ $video_gallery->uuid }}" href="#">
+                                            {{--<li class="navi-footer py-4">
+                                                <a class="btn-clean w-100 font-weight-bold btn-sm single-image-delete-modal" data-uuid="{{ $image_gallery->uuid }}" href="#">
                                                     Sil
                                                 </a>
                                             </li>--}}
@@ -126,42 +111,22 @@
                                         <!--end::Navigation-->
                                     </div>
                                 </div>
+                                <!--end::Dropdown-->
                             </div>
                             <!--end::Top-->
-
                             <!--begin::Bottom-->
-                            <div class="pt-3">
+                            <div class="pt-4">
+                                <!--begin::Image-->
+                                <div class="bgi-no-repeat bgi-size-cover rounded min-h-265px" style="background-image: url({{ \Illuminate\Support\Facades\Storage::url($image_gallery->path) }})"></div>
+                                <!--end::Image-->
                                 <!--begin::Text-->
-                                <p class="text-dark-75 font-size-lg font-weight-normal pt-5 mb-7">
-                                    {{ $video_gallery->caption ?? 'AÇIKLAMA BULUNAMADI' }}
-                                </p>
+                                <p class="text-dark-75 font-size-lg font-weight-normal pt-5 mb-2">{{ $image_gallery->alt_text }}</p>
                                 <!--end::Text-->
-
-                                <!--begin::Video-->
-                                <div class="embed-responsive embed-responsive-16by9">
-                                    <iframe class="embed-responsive-item rounded" src="https://www.youtube.com/embed/{{ $video_gallery->embed }}" allowfullscreen=""></iframe>
-                                </div>
-                                <!--end::Video-->
-
-                                <!--begin::Action-->
-                               {{-- <a href="#" class="btn btn-hover-text-primary btn-hover-icon-primary btn-sm btn-text-dark-50 bg-hover-light-primary rounded font-weight-bolder font-size-sm p-2 mt-7">
-                                    <span class="svg-icon svg-icon-md svg-icon-dark-25 pr-2"><!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Communication/Group-chat.svg-->
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                            <title>Stockholm-icons / Communication / Group-chat</title>
-                                            <desc>Created with Sketch.</desc>
-                                            <defs></defs>
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24"></rect>
-                                                <path d="M16,15.6315789 L16,12 C16,10.3431458 14.6568542,9 13,9 L6.16183229,9 L6.16183229,5.52631579 C6.16183229,4.13107011 7.29290239,3 8.68814808,3 L20.4776218,3 C21.8728674,3 23.0039375,4.13107011 23.0039375,5.52631579 L23.0039375,13.1052632 L23.0206157,17.786793 C23.0215995,18.0629336 22.7985408,18.2875874 22.5224001,18.2885711 C22.3891754,18.2890457 22.2612702,18.2363324 22.1670655,18.1421277 L19.6565168,15.6315789 L16,15.6315789 Z" fill="#000000"></path>
-                                                <path d="M1.98505595,18 L1.98505595,13 C1.98505595,11.8954305 2.88048645,11 3.98505595,11 L11.9850559,11 C13.0896254,11 13.9850559,11.8954305 13.9850559,13 L13.9850559,18 C13.9850559,19.1045695 13.0896254,20 11.9850559,20 L4.10078614,20 L2.85693427,21.1905292 C2.65744295,21.3814685 2.34093638,21.3745358 2.14999706,21.1750444 C2.06092565,21.0819836 2.01120804,20.958136 2.01120804,20.8293182 L2.01120804,18.32426 C1.99400175,18.2187196 1.98505595,18.1104045 1.98505595,18 Z M6.5,14 C6.22385763,14 6,14.2238576 6,14.5 C6,14.7761424 6.22385763,15 6.5,15 L11.5,15 C11.7761424,15 12,14.7761424 12,14.5 C12,14.2238576 11.7761424,14 11.5,14 L6.5,14 Z M9.5,16 C9.22385763,16 9,16.2238576 9,16.5 C9,16.7761424 9.22385763,17 9.5,17 L11.5,17 C11.7761424,17 12,16.7761424 12,16.5 C12,16.2238576 11.7761424,16 11.5,16 L9.5,16 Z" fill="#000000" opacity="0.3"></path>
-                                            </g>
-                                        </svg><!--end::Svg Icon-->
-                                    </span>
-                                    268 Comments
-                                </a>--}}
-                                <!--end::Action-->
                             </div>
                             <!--end::Bottom-->
+                            <!--begin::Separator-->
+                            <div class="separator separator-solid mt-2 mb-4"></div>
+                            <!--end::Separator-->
                         </div>
                         <!--end::Body-->
                     </div>
@@ -170,17 +135,16 @@
             </div>
         </div>
     </div>
-    @include('admin.gallery.video.modals.status-modal')
-    @include('admin.gallery.video.modals.video-status-modal')
-    @include('admin.gallery.video.modals.update-video-gallery-modal')
-    @include('admin.gallery.video.modals.create-video-gallery-modal')
+    @include('admin.gallery.image.modals.status-modal')
+    @include('admin.gallery.image.modals.image-status-modal')
+    @include('admin.gallery.image.modals.update-image-gallery-modal')
+    @include('admin.gallery.image.modals.create-image-gallery-modal')
 @endsection
 @push('js')
     @vite([
-        "resources/js/select2.js",
-        "resources/js/admin/gallery/video-gallery/video-preview.js",
-        "resources/js/admin/gallery/video-gallery/store.js",
-        "resources/js/admin/gallery/video-gallery/single-video-status-update-modal.js",
-        "resources/js/admin/gallery/video-gallery/update.js",
+        "resources/js/admin/image/store.js",
+        "resources/js/admin/image/index.js",
+        "resources/js/admin/image/edit.js",
+        "resources/js/admin/image/update.js",
     ])
 @endpush

@@ -32,7 +32,7 @@ class VideoGalleryController extends Controller
                 ->where('type', GalleryTypeEnum::VIDEO)
                 ->first();
 
-            $gallery->videoGalleries()
+            $gallery->videos()
                 ->create($attributes->toArray());
 
             DB::commit();
