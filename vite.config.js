@@ -36,6 +36,11 @@ export default defineConfig({
                 "resources/js/admin/gallery/video-gallery/store.js",
                 "resources/js/admin/gallery/video-gallery/single-video-status-update-modal.js",
                 "resources/js/admin/gallery/video-gallery/update.js",
+
+                "resources/js/admin/image/store.js",
+                "resources/js/admin/image/index.js",
+                "resources/js/admin/image/edit.js",
+                "resources/js/admin/image/update.js",
             ],
 
             refresh: true,

@@ -54,7 +54,12 @@ class Gallery extends Model
         return $this->morphOne(MorphImage::class, 'imageable');
     }
 
-    public function videoGalleries(): HasMany
+    public function images(): HasMany
+    {
+        return $this->hasMany(GalleryImage::class);
+    }
+
+    public function videos(): HasMany
     {
         return $this->hasMany(VideoGallery::class);
     }

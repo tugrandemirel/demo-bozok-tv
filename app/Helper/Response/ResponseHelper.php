@@ -42,7 +42,7 @@ class ResponseHelper
             'status' => false,
             'icon' => 'error',
             'message' => $message,
-            'errors' => self::formatValidationErrors($errors) // Hata mesajlarını düz formatta döndür
+            'errors' => count($errors) > 0 ? self::formatValidationErrors($errors) : [] // Hata mesajlarını düz formatta döndür
         ], $statusCode);
     }
 

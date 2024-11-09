@@ -137,12 +137,11 @@ class GalleryController extends Controller
                 ->where('uuid', $gallery_uuid)
                 ->first();
 
-
             if ($gallery->type === GalleryTypeEnum::IMAGE) {
-                $gallery = $gallery->load('videoGalleries');
+                $gallery = $gallery->load('images');
                 $gallery_view = self::PATH . 'image.index';
             } else if ($gallery->type === GalleryTypeEnum::VIDEO) {
-                $gallery = $gallery->load('videoGalleries');
+                $gallery = $gallery->load('videos');
                 $gallery_view = self::PATH . 'video.index';
             } else {
                 Log::error('GalleryController ımage type null geldi.');
