@@ -62,4 +62,17 @@ class CustomHelper
 
         };
     }
+
+
+    public static function getEmbed($url)
+    {
+        $embed = '';
+        if ($url) {
+            $embed = explode('?v=', $url)[1];
+            if (!$embed) {
+                return '';
+            }
+        }
+        return $embed;
+    }
 }

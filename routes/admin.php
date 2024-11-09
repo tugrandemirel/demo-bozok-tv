@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Gallery\GalleryController;
+use App\Http\Controllers\Admin\Gallery\VideoGalleryController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterCategoryController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterController;
@@ -55,5 +56,11 @@ Route::middleware(['auth'])->prefix('dashboard')->as('admin.')->group(function (
         Route::get('/edit/{gallery_uuid}', [GalleryController::class, 'edit'])->name('edit');
         Route::post('/update', [GalleryController::class, 'update'])->name('update');
         Route::get('show/{gallery_uuid}', [GalleryController::class, 'show'])->name('show');
+
+        Route::prefix('video')->as('video.')->group(function () {
+            Route::post('/store', [VideoGalleryController::class, 'store'])->name('store');
+            Route::get('/edit/{video_uuid}', [VideoGalleryController::class, 'edit'])->name('edit');
+            Route::post('/update/', [VideoGalleryController::class, 'update'])->name('update');
+        });
     });
 });

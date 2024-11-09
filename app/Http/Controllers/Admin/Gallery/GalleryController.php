@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Gallery;
 
+use App\Enum\Gallery\GalleryTypeEnum;
 use App\Helper\ImageHelper;
 use App\Helpers\Response\ResponseHelper;
 use App\Http\Controllers\Controller;
@@ -9,6 +10,8 @@ use App\Http\Requests\Admin\Gallery\GalleryStoreRequest;
 use App\Http\Requests\Admin\Gallery\GalleryUpdateRequest;
 use App\Models\Gallery;
 use App\Models\MorphImage;
+use App\Models\Newsletter;
+use App\Models\NewsletterPublicationStatus;
 use App\Service\Gallery\GalleryService;
 use App\Service\Seo\SeoService;
 use Illuminate\Contracts\View\Factory;
@@ -71,8 +74,9 @@ class GalleryController extends Controller
     public function edit(string $gallery_uuid): JsonResponse
     {
         try {
+            /** @var Gallery $gallery */
             $gallery = Gallery::query()
-                ->select('galleries.title', 'galleries.description', 'galleries.is_active', 'galleries.type', 'galleries.uuid as gallery_uuid', )
+                ->select('galleries.title', 'galleries.description', 'galleries.is_active', 'galleries.type', 'galleries.uuid as gallery_uuid')
                 ->addSelect('morph_images.path')
                 ->join('morph_images', 'morph_images.imageable_id', '=', 'galleries.id')
                 ->where('galleries.uuid', $gallery_uuid)
@@ -133,7 +137,20 @@ class GalleryController extends Controller
                 ->where('uuid', $gallery_uuid)
                 ->first();
 
-            return view(self::PATH . 'show', compact('gallery'));
+
+            if ($gallery->type === GalleryTypeEnum::IMAGE) {
+                $gallery = $gallery->load('videoGalleries');
+                $gallery_view = self::PATH . 'image.index';
+            } else if ($gallery->type === GalleryTypeEnum::VIDEO) {
+                $gallery = $gallery->load('videoGalleries');
+                $gallery_view = self::PATH . 'video.index';
+            } else {
+                Log::error('GalleryController ımage type null geldi.');
+                abort(404);
+            }
+
+            return view($gallery_view, compact('gallery'));
+
         } catch (\Exception $exception) {
             Log::error('GalleryController show methodunda bir hata ile karşılaşıldı: ', ['errors' => $exception->getMessage()]);
             abort(404);

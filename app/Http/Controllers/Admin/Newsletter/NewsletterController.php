@@ -142,7 +142,6 @@ class NewsletterController extends Controller
             return ResponseHelper::success('Haber kaydetme işlemi başarılı bir şekilde gerçekleştirildi.');
         } catch (\Throwable $exception) {
             DB::rollBack();
-            dd($exception->getMessage());
             return ResponseHelper::error('Bir hata oluştu', [$exception->getMessage()]);
         }
 
@@ -246,7 +245,6 @@ class NewsletterController extends Controller
 
             return view(self::PATH . 'edit.edit', compact('cover_image', 'inside_image', 'featured_image', 'publication_statuses', 'newsletter'));
         } catch (\Exception $exception) {
-            dd($exception->getMessage());
             Log::error('NewsletterController show methodunda bir hata ile karşılaşıldı: ', ['errors' => $exception->getMessage()]);
             abort(404);
         }
@@ -362,7 +360,6 @@ class NewsletterController extends Controller
             DB::commit();
             return ResponseHelper::success('Haber güncelleme işlemi başarılı bir şekilde gerçekleştirildi.');
         } catch (\Throwable $exception) {
-            dd($exception->getMessage());
             return ResponseHelper::error('Bir hata oluştu', [$exception->getMessage()]);
         }
     }
