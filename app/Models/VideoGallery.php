@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enum\Gallery\VideoGallery\VideoGalleryIsActiveEnum;
+use App\Helpers\Custom\CustomHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,6 +14,7 @@ class VideoGallery extends Model
     use HasFactory, SoftDeletes, SortableTrait;
 
     protected $fillable = [
+        'uuid',
         'created_by_user_id',
         'gallery_id',
         'video_url',
@@ -30,5 +32,12 @@ class VideoGallery extends Model
         'sort_when_creating' => true,
     ];
 
+    protected $appends = [
+        'embed'
+    ];
 
+    public function getEmbedAttribute()
+    {
+        return CustomHelper::getEmbed($this->video_url);
+    }
 }

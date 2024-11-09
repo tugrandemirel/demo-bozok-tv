@@ -39,7 +39,7 @@ class VideoGalleryStoreRequest extends FormRequest
         ];
     }
 
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'video_url' => 'Video Url',
@@ -49,7 +49,7 @@ class VideoGalleryStoreRequest extends FormRequest
         ];
     }
 
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $this->merge([
             'is_active' => $this->input('is_active') === 'on' ? VideoGalleryIsActiveEnum::ACTIVE->value : VideoGalleryIsActiveEnum::INACTIVE->value

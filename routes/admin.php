@@ -59,6 +59,8 @@ Route::middleware(['auth'])->prefix('dashboard')->as('admin.')->group(function (
 
         Route::prefix('video')->as('video.')->group(function () {
             Route::post('/store', [VideoGalleryController::class, 'store'])->name('store');
+            Route::get('/edit/{video_uuid}', [VideoGalleryController::class, 'edit'])->name('edit');
+            Route::post('/update/', [VideoGalleryController::class, 'update'])->name('update');
         });
     });
 });

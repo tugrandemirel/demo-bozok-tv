@@ -10,6 +10,8 @@ use App\Http\Requests\Admin\Gallery\GalleryStoreRequest;
 use App\Http\Requests\Admin\Gallery\GalleryUpdateRequest;
 use App\Models\Gallery;
 use App\Models\MorphImage;
+use App\Models\Newsletter;
+use App\Models\NewsletterPublicationStatus;
 use App\Service\Gallery\GalleryService;
 use App\Service\Seo\SeoService;
 use Illuminate\Contracts\View\Factory;
@@ -134,14 +136,21 @@ class GalleryController extends Controller
             $gallery = Gallery::query()
                 ->where('uuid', $gallery_uuid)
                 ->first();
+
+
             if ($gallery->type === GalleryTypeEnum::IMAGE) {
-                return view(self::PATH . 'image.', compact('gallery'));
+                $gallery = $gallery->load('videoGalleries');
+                $gallery_view = self::PATH . 'image.index';
             } else if ($gallery->type === GalleryTypeEnum::VIDEO) {
-                return view(self::PATH . 'video.index', compact('gallery'));
+                $gallery = $gallery->load('videoGalleries');
+                $gallery_view = self::PATH . 'video.index';
             } else {
                 Log::error('GalleryController ımage type null geldi.');
                 abort(404);
             }
+
+            return view($gallery_view, compact('gallery'));
+
         } catch (\Exception $exception) {
             Log::error('GalleryController show methodunda bir hata ile karşılaşıldı: ', ['errors' => $exception->getMessage()]);
             abort(404);

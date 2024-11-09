@@ -11,6 +11,7 @@ $(document).on('click', '#videoGalleryCreateModalButton', function() {
             success(response)
             form[0].reset()
             modal.modal('toggle')
+            window.location.reload()
         })
         .catch(function (response) {
             error(response)

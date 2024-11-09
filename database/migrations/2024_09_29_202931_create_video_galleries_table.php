@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('video_galleries', function (Blueprint $table) {
             $table->id();
+            $table->uuid();
             $table->unsignedBigInteger('created_by_user_id');
             $table->unsignedBigInteger('gallery_id');
             $table->string('video_url');

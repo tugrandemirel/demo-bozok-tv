@@ -34,6 +34,8 @@ export default defineConfig({
 
                 "resources/js/admin/gallery/video-gallery/video-preview.js",
                 "resources/js/admin/gallery/video-gallery/store.js",
+                "resources/js/admin/gallery/video-gallery/single-video-status-update-modal.js",
+                "resources/js/admin/gallery/video-gallery/update.js",
             ],
 
             refresh: true,
