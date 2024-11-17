@@ -81,6 +81,24 @@
                         <span class="menu-text">Galeri</span>
                     </a>
                 </li>
+                <li class="menu-item menu-item-{{ $postsToggle ?? '' }}" aria-haspopup="true">
+                    <a href="{{ route('admin.posts.index') }}" class="menu-link">
+                            <span class="svg-icon menu-icon">
+                                <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                   <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <polygon points="0 0 24 0 24 24 0 24"/>
+                                        <rect fill="#000000" opacity="0.3" x="2" y="4" width="20" height="16" rx="2"/>
+                                        <polygon fill="#000000" opacity="0.3" points="4 20 10.5 11 17 20"/>
+                                        <polygon fill="#000000" points="11 20 15.5 14 20 20"/>
+                                        <circle fill="#000000" opacity="0.3" cx="18.5" cy="8.5" r="1.5"/>
+                                    </g>
+                                </svg>
+                                <!--end::Svg Icon-->
+                            </span>
+                        <span class="menu-text">Köşe Yazıları</span>
+                    </a>
+                </li>
                 @endif
                 @if(auth()->user()->hasRole('Author'))
                     <li class="menu-item menu-item-{{ $postsToggle ?? '' }}" aria-haspopup="true">

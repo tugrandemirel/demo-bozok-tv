@@ -36,4 +36,26 @@ class AuthorPostService
             return ResponseHelper::error('Bir hata oluştu', [$exception->getMessage()]);
         }
     }
+    public function getAllDataForDatatableWithAdmin(\App\Http\Requests\Admin\Posts\PostFilterRequest $request): JsonResponse
+    {
+        try {
+            $posts = Post::query()
+                ->select('posts.created_at', 'posts.title as post_title', 'posts.uuid as post_uuid', 'posts.order as post_order_no')
+                ->addSelect('post_statuses.name as post_status_name', 'post_statuses.code as post_status_code')
+                ->addSelect('morph_images.image_name', 'morph_images.path as image_path', 'morph_images.image_type')
+                ->join('users', 'users.id', '=', 'posts.user_id')
+                ->join('morph_images', function ($join) {
+                    $join->on('morph_images.imageable_id', '=', 'posts.id')
+                        ->where('morph_images.imageable_type',  Post::class);
+                })
+                ->join('post_statuses', 'post_statuses.id', '=', 'posts.post_status_id')
+                ->orderByDesc('posts.order');
+
+            // DataTables çıktısını JSON olarak döndür
+            return DataTables::of($posts)->toJson();
+
+        } catch (\Exception $exception) {
+            return ResponseHelper::error('Bir hata oluştu', [$exception->getMessage()]);
+        }
+    }
 }
