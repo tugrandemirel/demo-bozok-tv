@@ -67,4 +67,9 @@ class MorphImage extends Model
     {
         return $query->where('imageable_type', Gallery::class);
     }
+
+    public function imageable()
+    {
+        return $this->morphTo();
+    }
 }

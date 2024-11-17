@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -16,7 +17,7 @@ use Spatie\Sluggable\SlugOptions;
 /**
  * @method static videoGalleries()
  */
-class Gallery extends Model
+class Gallery extends Model implements Sortable
 {
     use HasFactory, SoftDeletes, HasSlug, SortableTrait;
 

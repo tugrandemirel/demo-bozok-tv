@@ -61,7 +61,6 @@ class NewsletterController extends Controller
         $attributes->put('created_by_user_id', auth()->id());
         $attributes->put('uuid', Str::uuid());
         $attributes->put('publish_date', !is_null($attributes->get('publish_date')) ? Carbon::createFromFormat('d/m/Y H:i', $attributes->get('publish_date'))->toDateTimeString() : null);
-        $attributes->put('order', Newsletter::query()->max('order') + 1);
 
         $seo = $attributes->get('seo');
         $attributes->forget('seo');
