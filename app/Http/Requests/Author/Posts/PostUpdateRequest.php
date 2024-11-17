@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\Author\Posts;
 
+use App\Helpers\Response\ResponseHelper;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class PostUpdateRequest extends FormRequest
 {
@@ -11,7 +14,12 @@ class PostUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(ResponseHelper::validationError($validator->errors()));
     }
 
     /**
@@ -22,7 +30,19 @@ class PostUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => "required|max:160|string",
+            "file" => "nullable|mimes:jpg,jpeg,png",
+            "content" => "required|string",
+            "post_uuid" => "required|exists:posts,uuid"
+        ];
+    }
+    public function attributes()
+    {
+        return [
+            "post_uuid" => "Köşe Yazısı benzersiz kimliği",
+            "title" => "Başlık",
+            "file" => "Kapak Görseli",
+            "content" => "Köşe yazısı içeriği",
         ];
     }
 }

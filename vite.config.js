@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import ckeditor5 from '@ckeditor/vite-plugin-ckeditor5';
 
 export default defineConfig({
     plugins: [
@@ -11,7 +10,6 @@ export default defineConfig({
                 'resources/js/app.js',
                 "resources/js/select2.js",
                 "resources/js/summernote.js",
-                "resources/js/admin/ckeditor.js",
                 "resources/css/custom-summernote.css",
 
                 // NEWSLETTER
@@ -47,10 +45,12 @@ export default defineConfig({
                 // AUTHOR
 
                 "resources/js/author/posts/fetch-posts-datatable.js",
+                "resources/js/author/posts/update.js",
+                "resources/js/author/posts/store.js",
+                "resources/js/author/posts/image-upload.js",
             ],
 
             refresh: true,
         }),
-        ckeditor5({ theme: require.resolve('@ckeditor/ckeditor5-theme-lark') }),
     ],
 });

@@ -7,6 +7,8 @@ use App\Helpers\Response\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Author\Posts\PostFilterRequest;
 use App\Http\Requests\Author\Posts\PostStoreRequest;
+use App\Http\Requests\Author\Posts\PostUpdateRequest;
+use App\Models\Post;
 use App\Models\PostStatus;
 use App\Service\Posts\AuthorPostService;
 use App\Service\Seo\SeoService;
@@ -14,7 +16,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use function Pest\Laravel\post;
 
 class PostController extends Controller
 {
@@ -87,7 +88,7 @@ class PostController extends Controller
             DB::commit();
             return ResponseHelper::success('Köşe Yazısı ekleme işlemi başarılı bir şekilde gerçekleştirildi.');
         } catch (\Exception $exception) {
-            DB::rollBack();dd($exception->getMessage());
+            DB::rollBack();
             return ResponseHelper::error('Bir hata oluştu', [$exception->getMessage()]);
         }
     }
@@ -95,7 +96,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $post_uuid)
     {
         //
     }
@@ -103,17 +104,74 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $post_uuid)
     {
-        //
+        try {
+            $user = auth()->user();
+
+            $post = Post::query()
+                ->select('posts.created_at', 'posts.title as post_title', 'posts.uuid as post_uuid', 'posts.content as post_content')
+                ->addSelect('morph_images.image_name', 'morph_images.path as image_path', 'morph_images.image_type')
+                ->join('users', 'users.id', '=', 'posts.user_id')
+                ->join('morph_images', function ($join) {
+                    $join->on('morph_images.imageable_id', '=', 'posts.id')
+                        ->where('morph_images.imageable_type',  Post::class);
+                })
+                ->where("posts.user_id", $user->id)
+                ->where("posts.uuid", $post_uuid)
+                ->first();
+            return view(self::PATH.'edit', compact('post'));
+        } catch (\Exception $exception) {
+            abort(404);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PostUpdateRequest $request): JsonResponse
     {
-        //
+        $attributes = collect($request->validated());
+
+        $file = $attributes->get('file');
+        $attributes->forget('file');
+        $post_uuid = $attributes->get('post_uuid');
+        $attributes->forget('post_uuid');
+        DB::beginTransaction();
+        try {
+            $pending = PostStatus::query()
+                ->select('id')
+                ->pending()
+                ->first();
+
+            $attributes->put('post_status_id', $pending->id);
+
+            $user = auth()->user();
+            $post =  Post::query()
+                ->whereRelation('user', 'id', '=', $user->id)
+                ->where('uuid', $post_uuid)
+                ->first();
+
+            if ($file) {
+                $post_image = $post->image;
+
+
+                $image = ImageHelper::updateImage($file, $post_image->path);
+                $image['alt_text'] = $post->title;
+                $image['created_by_user_id'] = $user->id;
+                $image['is_active'] = $attributes->get('is_active');
+
+                $post_image->update($image);
+            }
+            $post->update($attributes->toArray());
+
+            $this->seo_service->generateSeoData($post);
+            DB::commit();
+            return ResponseHelper::success('Köşe Yazısı ekleme işlemi başarılı bir şekilde gerçekleştirildi.');
+        } catch (\Exception $exception) {
+            DB::rollBack();dd($exception->getMessage());
+            return ResponseHelper::error('Bir hata oluştu', [$exception->getMessage()]);
+        }
     }
 
     /**

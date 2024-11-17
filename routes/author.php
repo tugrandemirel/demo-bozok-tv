@@ -12,9 +12,9 @@ Route::middleware(['auth', 'role:Author'])->prefix('dashboard')->as('author.')->
         Route::post('/', [PostController::class, 'index'])->name('post');
         Route::get('/create', [PostController::class, 'create'])->name('create');
         Route::post('/store', [PostController::class, 'store'])->name('store');
-        Route::get('/show', [PostController::class, 'show'])->name('show');
-        Route::get('/edit', [PostController::class, 'edit'])->name('edit');
-        Route::put('/update', [PostController::class, 'update'])->name('update');
+        Route::get('/show/{post_uuid}', [PostController::class, 'show'])->name('show');
+        Route::get('/edit/{post_uuid}', [PostController::class, 'edit'])->name('edit');
+        Route::post('/update', [PostController::class, 'update'])->name('update');
     });
 //    Route::resource('posts', PostController::class);
 });

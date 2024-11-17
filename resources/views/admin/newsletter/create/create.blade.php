@@ -75,9 +75,8 @@
     @vite([
         "resources/js/select2.js",
         "resources/js/admin/newsletter/create.js",
-        "resources/js/admin/ckeditor.js",
         "resources/js/admin/newsletter/general-setting-tab.js",
-
+        "resources/js/summernote.js",
         "resources/js/admin/newsletter/category-store.js",
         "resources/js/admin/newsletter/newsletter-source-store.js",
         "resources/js/admin/newsletter/create/store.js",

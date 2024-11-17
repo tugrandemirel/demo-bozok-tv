@@ -98,7 +98,7 @@ let PostsDatatablesDataSourceAjaxServer = function () {
                                 <div class="d-flex align-items-center">
                                     ${image}
                                     <div class="ml-3">
-                                        <a href="" class="text-dark-75 font-weight-bold  text-hover-primary line-height-sm d-block pb-2">${row?.post_title}</a>
+                                        <a href="/author/dashboard/posts/edit/${row.post_uuid}" class="text-dark-75 font-weight-bold  text-hover-primary line-height-sm d-block pb-2">${row?.post_title}</a>
                                     </div>
                                 </div
                         `
@@ -175,7 +175,7 @@ let PostsDatatablesDataSourceAjaxServer = function () {
                     class: "min-w-100px gap-5",
                     render: function (data, type, row) {
                         return `
-                                    <a href="/admin/dashboard/newsletters/show/${row.uuid}" class="btn btn-icon btn-light btn-sm">
+                                   /* <a href="/author/dashboard/posts/show/${row.post_uuid}" class="btn btn-icon btn-light btn-sm">
                                         <span class="svg-icon svg-icon-md svg-icon-warning">
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <defs></defs>
@@ -186,9 +186,9 @@ let PostsDatatablesDataSourceAjaxServer = function () {
                                                 </g>
                                             </svg><!--end::Svg Icon-->
                                         </span>
-                                    </a>
+                                    </a>*/
 
-                             <a href="/admin/dashboard/newsletters/edit/${row.uuid}" class="btn btn-icon btn-light btn-sm" data-toggle="tooltip" title="Düzenle" data-placement="left" data-original-title="Düzenle">
+                             <a href="/author/dashboard/posts/edit/${row.post_uuid}" class="btn btn-icon btn-light btn-sm" data-toggle="tooltip" title="Düzenle" data-placement="left" data-original-title="Düzenle">
                                         <span class="svg-icon svg-icon-md svg-icon-primary">
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <defs></defs>
