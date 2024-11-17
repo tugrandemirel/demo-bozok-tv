@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -50,5 +51,10 @@ class Post extends Model implements Sortable
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(PostReview::class);
     }
 }

@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('.summernote').summernote({
         lang: 'tr-TR', // Türkçe dil desteği
-        height: 1000,   // Editörün yüksekliği
+        minHeight: 200,
         toolbar: [
             ['style', ['style']], // Stil menüsü
             ['font', ['bold', 'italic', 'underline', 'clear']],

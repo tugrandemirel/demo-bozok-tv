@@ -19,4 +19,9 @@ class PostStatus extends Model
     {
         return $query->where('code', 'pending');
     }
+
+    public function scopeRejected($query)
+    {
+        return $query->where('code', 'rejected');
+    }
 }

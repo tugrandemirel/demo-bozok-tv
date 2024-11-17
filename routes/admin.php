@@ -75,5 +75,6 @@ Route::middleware(['auth'])->prefix('dashboard')->as('admin.')->group(function (
     Route::prefix('posts')->as('posts.')->group(function (){
         Route::any('/', [PostController::class, 'index'])->name('index');
         Route::get('/show/{post_uuid}', [PostController::class, 'show'])->name('show');
+        Route::post('/update/', [PostController::class, 'update'])->name('update');
     });
 });

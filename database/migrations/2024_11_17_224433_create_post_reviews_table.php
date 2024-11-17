@@ -17,9 +17,8 @@ return new class extends Migration
         Schema::create('post_reviews', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Post::class);
-            $table->foreignIdFor(PostStatus::class);
             $table->foreignIdFor(User::class);
-            $table->text("description");
+            $table->text("review_note");
             $table->timestamps();
             $table->softDeletes();
         });

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\ViewComposer\CategoryViewComposer;
 use App\ViewComposer\NewsletterSourceViewComposer;
+use App\ViewComposer\PostStatusViewComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,5 +32,8 @@ class ViewComposerProvider extends ServiceProvider
             'admin.newsletter.edit.edit',
             'admin.newsletter.create.create',
         ], NewsletterSourceViewComposer::class);
+        View::composer([
+            'admin.posts.modals.post-status-modal',
+        ], PostStatusViewComposer::class);
     }
 }
