@@ -14,8 +14,7 @@ class PostReview extends Model
     protected $fillable = [
         "user_id",
         "post_id",
-        "post_status_id",
-        "description"
+        "review_note"
     ];
 
     public function user(): BelongsTo
@@ -26,10 +25,5 @@ class PostReview extends Model
     public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class);
-    }
-
-    public function status(): BelongsTo
-    {
-        return $this->belongsTo(PostStatus::class, 'post_status_id');
     }
 }

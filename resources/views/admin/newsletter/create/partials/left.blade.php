@@ -59,7 +59,7 @@
         <div class="form-group">
             <label for="category" class="form-label label-between">
                 Kategori Seçimi:
-                <button type="button" data-toggle="modal" data-target="#categoryCreateModal" title="Kategori Ekle">
+                <button type="button" data-toggle="modal" class="btn btn-link btn-icon btn-sm" data-target="#categoryCreateModal" title="Kategori Ekle">
                     <i class="flaticon2-plus text-success"></i>
                 </button>
             </label>
@@ -73,7 +73,7 @@
         <div class="form-group">
             <label for="newsletter_source" class="form-label label-between">
                 Haber Kaynağı:
-                <button type="button"  data-toggle="modal" data-target="#newsletterSourceCreateModal" title="Haber Kaynağı Ekle">
+                <button type="button"  data-toggle="modal" class="btn btn-link btn-icon btn-sm" data-target="#newsletterSourceCreateModal" title="Haber Kaynağı Ekle">
                     <i class="flaticon2-plus text-success"></i>
                 </button>
             </label>

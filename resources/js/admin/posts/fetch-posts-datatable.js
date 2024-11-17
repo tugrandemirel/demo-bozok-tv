@@ -98,7 +98,7 @@ let PostsDatatablesDataSourceAjaxServer = function () {
                                 <div class="d-flex align-items-center">
                                     ${image}
                                     <div class="ml-3">
-                                        <a href="/admin/dashboard/posts/edit/${row.post_uuid}" class="text-dark-75 font-weight-bold  text-hover-primary line-height-sm d-block pb-2">${row?.post_title}</a>
+                                        <a href="/admin/dashboard/posts/show/${row.post_uuid}" class="text-dark-75 font-weight-bold  text-hover-primary line-height-sm d-block pb-2">${row?.post_title}</a>
                                     </div>
                                 </div
                         `
