@@ -16,7 +16,7 @@ class AuthorPostService
             $user = auth()->user();
 
             $posts = Post::query()
-                ->select('posts.created_at', 'posts.title as post_title', 'posts.order as post_order_no')
+                ->select('posts.created_at', 'posts.title as post_title', 'posts.uuid as post_uuid', 'posts.order as post_order_no')
                 ->addSelect('post_statuses.name as post_status_name', 'post_statuses.code as post_status_code')
                 ->addSelect('morph_images.image_name', 'morph_images.path as image_path', 'morph_images.image_type')
                 ->join('users', 'users.id', '=', 'posts.user_id')

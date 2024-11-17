@@ -74,10 +74,9 @@
 
     @vite([
         "resources/js/select2.js",
-//        "resources/js/tagify.js",
         "resources/js/admin/newsletter/edit.js",
         "resources/js/admin/newsletter/general-setting-tab.js",
-
+        "resources/js/summernote.js",
         "resources/js/admin/newsletter/category-store.js",
         "resources/js/admin/newsletter/newsletter-source-store.js",
         "resources/js/admin/newsletter/update.js",

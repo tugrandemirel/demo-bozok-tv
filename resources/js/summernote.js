@@ -1,14 +1,14 @@
 $(document).ready(function () {
     $('.summernote').summernote({
         lang: 'tr-TR', // Türkçe dil desteği
-        height: 850,   // Editörün yüksekliği
+        height: 1000,   // Editörün yüksekliği
         toolbar: [
             ['style', ['style']], // Stil menüsü
             ['font', ['bold', 'italic', 'underline', 'clear']],
             ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph']],
             ['table', ['table']],
-            ['insert', ['link', 'picture', 'hr', 'codeview']], // Kod bloğu ve resim ekleme
+            ['insert', ['link', 'picture', 'hr', 'codeview', 'video']], // Kod bloğu ve resim ekleme
             ['view', ['fullscreen', 'help']] // Tam ekran ve yardım
         ],
         styleTags: [
@@ -45,7 +45,20 @@ $(document).ready(function () {
                         e.preventDefault();
                     }
                 }
+            },
+            onChange: function(contents) {
+                centerVideos(); // İçerik değiştiğinde iframe'leri draggable yap
             }
         }
     });
+    // Kullanıcı iframe yapıştırdığında, draggable özellik ekleme
+    function centerVideos() {
+        $('#summernote').next('.note-editable').find('iframe').each(function () {
+            // Eğer iframe bir div ile sarılmamışsa sar
+            if (!$(this).parent().hasClass('video-wrapper')) {
+                $(this).wrap('<div class="video-wrapper" style="text-align: center;"></div>');
+            }
+        });
+    }
+    centerVideos()
 });

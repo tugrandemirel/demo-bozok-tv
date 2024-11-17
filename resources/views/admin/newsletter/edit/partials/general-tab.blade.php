@@ -7,7 +7,7 @@
         </div>
         <div id="form-group">
             <label class="form-label">Spot: </label>
-            <textarea name="spot" class=" form-control" cols="30" rows="5">{{ $newsletter?->spot }}</textarea>
+            <textarea name="spot" class="summernote form-control" cols="30" rows="5">{{ $newsletter?->spot }}</textarea>
         </div>
     </div>
 </div>
@@ -15,7 +15,7 @@
     <div class="card-body">
         <div class="form-group">
             <label class="form-label">Haber İçeriği:</label>
-            <textarea name="content" class=" form-control" cols="30" rows="10">{{ $newsletter->content }}</textarea>
+            <textarea name="content" class="summernote form-control" cols="30" rows="10">{{ $newsletter->content }}</textarea>
         </div>
     </div>
 </div>

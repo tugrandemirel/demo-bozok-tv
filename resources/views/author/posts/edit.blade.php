@@ -2,7 +2,7 @@
     $postsToggle = 'active';
 @endphp
 @extends('admin.layouts.app')
-@section('title', 'Köşe Yazısı Oluştur')
+@section('title', 'Köşe Yazısı Düzenle')
 @push('css')
 @endpush
 @section('content')
@@ -10,7 +10,7 @@
         <div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
             <!--begin::Info-->
             <div class="d-flex align-items-center flex-wrap mr-2">
-                <a href="{{ route('admin.newsletters.index') }}" class="btn btn-bg-white btn-icon-danger btn-hover-primary btn-icon mr-3 my-2 my-lg-0">
+                <a href="{{ route('author.posts.index') }}" class="btn btn-bg-white btn-icon-danger btn-hover-primary btn-icon mr-3 my-2 my-lg-0">
                    <span class="svg-icon svg-icon-primary svg-icon-2x">
                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -52,12 +52,12 @@
         <!--begin::Card body-->
         <div class="card-body p-12">
 
-            <form action="" id="postStoreForm" enctype="multipart/form-data">
+            <form id="postUpdateForm" data-uuid="{{ $post->post_uuid }}" enctype="multipart/form-data">
                 <div class="form-group">
                     <label class="col-form-label col-sm-12">Kapak Görseli</label>
                     <div class="col-sm-12">
                         <div class="image-input image-input-outline w-100 text-center"  id="file">
-                            <div class="image-input-wrapper  w-100" style="background-image: url({{ asset('assets/media/users/100_1.jpg') }})"></div>
+                            <div class="image-input-wrapper  w-100" style="background-image: url({{ asset('/storage/'.$post->image_path) }})"></div>
 
                             <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="İç Kapak Görselini değiştir">
                                 <i class="fa fa-pen icon-sm text-muted"></i>
@@ -74,18 +74,18 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label" id="title">Başlık:</label>
-                    <input type="text" name="title" id="title" class="form-control">
-                    <p class="form-text text-muted">En fazla 150 karakter giriniz.(<span class="character_count"> Kalan karakter sayısı: 150</span>)</p>
+                    <input type="text" name="title" id="title" value="{{ $post->post_title }}" class="form-control">
+                    <p class="form-text text-muted">En fazla 150 karakter giriniz.(<span class="character_count"> Kalan karakter sayısı: {{ 150 - strlen($post->post_title) }}</span>)</p>
                 </div>
                 <div class="form-group">
                     <label class="form-label">İçerik:</label>
-                    <textarea name="content" class="summernote" id="" cols="30" rows="10"></textarea>
+                    <textarea name="content" class="summernote" id="content" cols="30" rows="10">{{ $post->post_content }}</textarea>
                 </div>
             </form>
 
             <div class="row">
                 <div class="col-md-12 text-end">
-                    <button type="button" id="postStoreButton" class="btn btn-primary mr-2">Kaydet</button>
+                    <button type="button" id="postUpdateButton" class="btn btn-primary mr-2">Kaydet</button>
                 </div>
             </div>
         </div>
@@ -97,7 +97,7 @@
 @push('js')
 @vite([
     "resources/css/custom-summernote.css",
-    "resources/js/author/posts/store.js",
+    "resources/js/author/posts/update.js",
     "resources/js/summernote.js",
     "resources/js/author/posts/image-upload.js"
 ])
