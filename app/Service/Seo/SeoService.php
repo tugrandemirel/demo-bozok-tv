@@ -42,6 +42,12 @@ class SeoService
                    $keywords = $this->generateKeywords($model->description);
                    break;
 
+               case 'App\Models\Post':
+                   $title = $model->title;
+                   $description = $this->generateDescription($model->content);
+                   $keywords = $this->generateKeywords($model->content);
+                   break;
+
                default:
                    throw new \Exception("Geçersiz model türü");
            }
@@ -65,7 +71,7 @@ class SeoService
            // Veritabanına kayıt işlemi
            $seoData = [
                'uuid' => Str::uuid(),
-               'created_by_user_id' => auth()->id(),
+               'created_by_user_id' => $model->created_by_user_id ?? $model->user_id,
                'meta_title' => $this->sanitizeMetaTitle($title),
                'meta_description' => $this->sanitizeMetaDescription($description),
                'meta_keywords' => implode(',', $keywords),

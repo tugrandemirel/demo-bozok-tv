@@ -45,7 +45,6 @@ class GalleryController extends Controller
         $attributes = collect($request->validated());
         $attributes->put('created_by_user_id', auth()->id());
         $attributes->put('uuid', Str::uuid());
-        $attributes->put('order', Gallery::query()->max('order') + 1);
 
         $file = $attributes->get('file');
         $attributes->forget('file');

@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import ckeditor5 from '@ckeditor/vite-plugin-ckeditor5';
-import path from 'path'; // Path modülünü doğru bir şekilde import ediyoruz
 
 export default defineConfig({
     plugins: [
@@ -11,8 +10,9 @@ export default defineConfig({
                 'resources/css/custom.css',
                 'resources/js/app.js',
                 "resources/js/select2.js",
-
+                "resources/js/summernote.js",
                 "resources/js/admin/ckeditor.js",
+                "resources/css/custom-summernote.css",
 
                 // NEWSLETTER
                 "resources/js/admin/newsletter/create.js",
@@ -41,6 +41,12 @@ export default defineConfig({
                 "resources/js/admin/image/index.js",
                 "resources/js/admin/image/edit.js",
                 "resources/js/admin/image/update.js",
+
+
+
+                // AUTHOR
+
+                "resources/js/author/posts/fetch-posts-datatable.js",
             ],
 
             refresh: true,

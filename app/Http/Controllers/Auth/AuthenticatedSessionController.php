@@ -33,10 +33,10 @@ class AuthenticatedSessionController extends Controller
 
         if ($user->hasRole('Super-admin')) {
             return redirect()->route('admin.index');
-        } elseif ($user->hasRole('admin')) {
+        } elseif ($user->hasRole('Admin')) {
             return redirect()->route('admin.index');
-        } elseif ($user->hasRole('author')) {
-            return redirect()->intended('/author/dashboard');
+        } elseif ($user->hasRole('Author')) {
+            return redirect()->route('author.index');
         } else {
             // Diğer kullanıcılar (örneğin 'user' rolüne sahip olanlar) için
             return redirect()->intended('/home'); // User rolü için varsayılan yönlendirme

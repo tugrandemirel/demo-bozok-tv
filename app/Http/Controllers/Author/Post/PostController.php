@@ -1,0 +1,126 @@
+<?php
+
+namespace App\Http\Controllers\Author\Post;
+
+use App\Helper\ImageHelper;
+use App\Helpers\Response\ResponseHelper;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Author\Posts\PostFilterRequest;
+use App\Http\Requests\Author\Posts\PostStoreRequest;
+use App\Models\PostStatus;
+use App\Service\Posts\AuthorPostService;
+use App\Service\Seo\SeoService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use function Pest\Laravel\post;
+
+class PostController extends Controller
+{
+    private const PATH = 'author.posts.';
+    protected SeoService $seo_service;
+    protected AuthorPostService $author_post_service;
+    public function __construct(AuthorPostService $author_post_service, SeoService $seo_service)
+    {
+        $this->author_post_service = $author_post_service;
+        $this->seo_service = $seo_service;
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(PostFilterRequest $request)
+    {
+        try {
+            if ($request->ajax()) {
+                return $this->author_post_service->getAllDataForDatatable($request);
+            }
+            return view(self::PATH.'index');
+        } catch (\Exception $exception){
+            abort(404);
+        }
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view(self::PATH.'create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(PostStoreRequest $request): JsonResponse
+    {
+        $attributes = collect($request->validated());
+
+        $file = $attributes->get('file');
+        $attributes->forget('file');
+
+        $attributes->put('uuid', Str::uuid());
+        DB::beginTransaction();
+        try {
+            $pending = PostStatus::query()
+                ->select('id')
+                ->pending()
+                ->first();
+
+            $attributes->put('post_status_id', $pending->id);
+
+            $user = auth()->user();
+            $post = $user->posts()
+                ->create($attributes->toArray());
+
+            if ($file) {
+                $image = ImageHelper::uploadImage($file);
+                $gallery_image['uuid'] = Str::uuid();
+                $gallery_image['alt_text'] = $post->title;
+                $gallery_image['created_by_user_id'] = $user->id;
+                $gallery_image['is_active'] = $attributes->get('is_active');
+                $post->image()
+                    ->create($image);
+            }
+            $this->seo_service->generateSeoData($post);
+            DB::commit();
+            return ResponseHelper::success('Köşe Yazısı ekleme işlemi başarılı bir şekilde gerçekleştirildi.');
+        } catch (\Exception $exception) {
+            DB::rollBack();dd($exception->getMessage());
+            return ResponseHelper::error('Bir hata oluştu', [$exception->getMessage()]);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+}

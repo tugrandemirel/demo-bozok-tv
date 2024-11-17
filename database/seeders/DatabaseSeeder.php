@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             NewsletterSourceSeeder::class,
             NewsletterPublicationStatusSeeder::class,
+            PostStatusSeeder::class,
         ]);
     }
 }

@@ -41,7 +41,6 @@ class GalleryImageController extends Controller
                 $gallery_image['alt_text'] = $attributes->get('alt_text');
                 $gallery_image['created_by_user_id'] = $user->id;
                 $gallery_image['is_active'] = $attributes->get('is_active');
-                $gallery_image['order'] = $gallery->images()->max('order') + 1;
                 $gallery->images()
                     ->create($gallery_image);
 

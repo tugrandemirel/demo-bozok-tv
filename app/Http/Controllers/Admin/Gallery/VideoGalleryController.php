@@ -20,7 +20,6 @@ class VideoGalleryController extends Controller
         $attributes = collect($request->validated());
         $attributes->put('created_by_user_id', auth()->id());
         $attributes->put('uuid', Str::uuid());
-        $attributes->put('order', VideoGallery::query()->max('order') + 1);
 
         $gallery_uuid = $attributes->get('gallery_uuid');
         $attributes->forget('gallery_uuid');
