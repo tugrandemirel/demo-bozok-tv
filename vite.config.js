@@ -7,6 +7,7 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/css/custom.css',
+                "resources/css/full-screen-modal.css",
                 'resources/js/app.js',
                 "resources/js/select2.js",
                 "resources/js/summernote.js",
@@ -40,6 +41,8 @@ export default defineConfig({
                 "resources/js/admin/image/edit.js",
                 "resources/js/admin/image/update.js",
 
+                // POST
+                "resources/js/admin/posts/fetch-posts-datatable.js",
 
 
                 // AUTHOR

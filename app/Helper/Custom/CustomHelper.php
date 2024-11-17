@@ -32,6 +32,17 @@ class CustomHelper
         return $colors[$status];
     }
 
+    public static function getPostStatusLabelColor($status)
+    {
+        $colors = [
+            'pending' => 'info',
+            'approved' => 'success',
+            'rejected' => 'danger',
+        ];
+
+        return $colors[$status];
+    }
+
     public static function getNewsletterPublicationStatusLabelText($status)
     {
         $colors = [

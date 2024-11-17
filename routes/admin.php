@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Newsletter\NewsletterCategoryController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterNewsletterSourceController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterTagController;
+use App\Http\Controllers\Admin\Posts\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,5 +70,10 @@ Route::middleware(['auth'])->prefix('dashboard')->as('admin.')->group(function (
             Route::get('/edit/{image_uuid}', [GalleryImageController::class, 'edit'])->name('edit');
             Route::post('/update/', [GalleryImageController::class, 'update'])->name('update');
         });
+    });
+
+    Route::prefix('posts')->as('posts.')->group(function (){
+        Route::any('/', [PostController::class, 'index'])->name('index');
+        Route::get('/show/{post_uuid}', [PostController::class, 'show'])->name('show');
     });
 });
