@@ -9,6 +9,7 @@ use App\Http\Requests\Author\Posts\PostFilterRequest;
 use App\Http\Requests\Author\Posts\PostStoreRequest;
 use App\Http\Requests\Author\Posts\PostUpdateRequest;
 use App\Models\Post;
+use App\Models\PostReview;
 use App\Models\PostStatus;
 use App\Service\Posts\AuthorPostService;
 use App\Service\Seo\SeoService;
@@ -98,7 +99,35 @@ class PostController extends Controller
      */
     public function show(string $post_uuid)
     {
-        //
+        try {
+            $post = Post::query()
+                ->select('posts.created_at', 'posts.title as post_title', 'posts.content as post_content', 'posts.uuid as post_uuid', 'posts.order as post_order_no')
+                ->addSelect('post_statuses.name as post_status_name', 'post_statuses.code as post_status_code')
+                ->addSelect('morph_images.image_name', 'morph_images.path as image_path', 'morph_images.image_type')
+                ->addSelect('users.name as user_name', 'users.surname as user_surname', 'users.email as user_email')
+                ->join('users', 'users.id', '=', 'posts.user_id')
+                ->join('post_statuses', 'post_statuses.id', '=', 'posts.post_status_id')
+                ->join('morph_images', function ($join) {
+                    $join->on('morph_images.imageable_id', '=', 'posts.id')
+                        ->where('morph_images.imageable_type', Post::class);
+                })
+                ->where('posts.uuid', $post_uuid)
+                ->where('posts.user_id', auth()->id())
+                ->first();
+
+            /** @var PostReview $post_review */
+            $post_reviews = PostReview::query()
+                ->select('post_reviews.review_note', 'post_reviews.created_at')
+                ->addSelect('users.name as user_name', "users.surname as user_surname")
+                ->join('users', 'users.id', 'post_reviews.user_id')
+                ->whereRelation("post", "uuid", "=", $post->post_uuid)
+                ->get();
+
+            return view(self::PATH . 'show', compact('post', 'post_reviews'));
+        } catch (\Exception $exception) {
+            dd($exception->getMessage());
+            abort(404);
+        }
     }
 
     /**
