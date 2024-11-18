@@ -45,7 +45,6 @@ export default defineConfig({
                 "resources/js/admin/posts/fetch-posts-datatable.js",
                 "resources/js/admin/posts/post-status-modal.js",
 
-
                 // AUTHOR
 
                 "resources/js/author/posts/fetch-posts-datatable.js",

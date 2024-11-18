@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Posts\PostFilterRequest;
 use App\Http\Requests\Admin\Posts\PostUpdateRequest;
 use App\Models\Post;
+use App\Models\PostReview;
 use App\Models\PostStatus;
 use App\Service\Posts\AuthorPostService;
 use Illuminate\Support\Facades\DB;
@@ -46,9 +47,14 @@ class PostController extends Controller
                 ->where('posts.uuid', $post_uuid)
                 ->first();
 
-            return view(self::PATH . 'show', compact('post'));
+            /** @var PostReview $post_review */
+            $post_reviews = PostReview::query()
+                ->select('review_note', 'created_at')
+                ->whereRelation("post", "uuid", "=", $post->post_uuid)
+                ->get();
+
+            return view(self::PATH . 'show', compact('post', 'post_reviews'));
         } catch (\Exception $exception) {
-            dd($exception->getMessage());
             abort(404);
         }
     }
