@@ -94,14 +94,13 @@ class PostController extends Controller
                 ->where('uuid', $post_uuid)
                 ->first();
 
-            if ($post_rejected->code === $post_status->code || $post_pending->code === $post_status_code->code) {
-                $post_review = $post->reviews()
-                    ->create([
-                        'user_id' => auth()->id(),
-                        "post_status_id" => $post_status->id,
-                        'review_note' => $attributes->get('review_note')
-                    ]);
-            }
+            $post_review = $post->reviews()
+                ->create([
+                    'user_id' => auth()->id(),
+                    "post_status_id" => $post_status->id,
+                    'review_note' => $attributes->get('review_note')
+                ]);
+
             $post->update([
                 'post_status_id' => $post_status->id
             ]);
@@ -110,7 +109,6 @@ class PostController extends Controller
             return ResponseHelper::success('Köşe yazısı yayın durumu başarılu bir şekilde gerçekleştirildi.');
         } catch (\Exception $exception) {
             DB::rollBack();
-            dd($exception->getMessage());
             return ResponseHelper::error('Bir hata oluştur: ', $exception->getMessage());
         }
     }

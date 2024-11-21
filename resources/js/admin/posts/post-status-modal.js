@@ -1,20 +1,3 @@
-$(document).on('change', '#post_status', function() {
-    let selected = $(this)
-    console.log(selected.val())
-    if (selected.val() === "rejected") {
-        postReviewRowShow()
-    } else {
-        postReviewRowHidden()
-    }
-})
-
-const postReviewRowHidden = () => {
-    $('#review_note_row').addClass('d-none')
-}
-const postReviewRowShow = () => {
-    $('#review_note_row').removeClass('d-none')
-}
-
 let btn = KTUtil.getById("postStatusModalButton");
 KTUtil.addEvent(btn, "click", function () {
     btn.disabled = true;
