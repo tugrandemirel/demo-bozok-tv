@@ -18,7 +18,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group d-none" id="review_note_row">
+                    <div class="form-group">
                         <label for="post_status">Geri Bildirim Mesajı</label>
                         <textarea name="review_note" id="review_note" class="summernote" cols="30" rows="20"></textarea>
                     </div>

@@ -51,7 +51,6 @@ class AuthorPostService
                 ->join('post_statuses', 'post_statuses.id', '=', 'posts.post_status_id')
                 ->orderByDesc('posts.order');
 
-            // DataTables çıktısını JSON olarak döndür
             return DataTables::of($posts)->toJson();
 
         } catch (\Exception $exception) {

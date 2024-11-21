@@ -13,6 +13,7 @@
                         <thead>
                         <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                             <th>Açıklama</th>
+                            <th>Durum</th>
                             <th>Geri Bildirim Yapan</th>
                             <th>Tarih</th>
                         </tr>
@@ -24,7 +25,13 @@
                                     {!! $post_review->review_note !!}
                                 </td>
                                 <td>
-                                    {{ $post_review->user_name }} {{ $post_review->user_lastname }}
+                                    <span style="width: 120px;">
+                                        <span class="label label-{{ \App\Helpers\Custom\CustomHelper::getPostStatusLabelColor($post_review?->status?->code) }}  label-dot mr-2"></span>
+                                        <span class="font-weight-bold text-{{ \App\Helpers\Custom\CustomHelper::getPostStatusLabelColor($post_review?->status?->code) }} ">{{ $post_review?->status?->name }}</span>
+                                    </span>
+                                </td>
+                                <td>
+                                    {{ $post_review->user?->name }} {{ $post_review->user?->surname }}
                                 </td>
                                 <td>
                                     {{ $post_review->created_at->translatedFormat('j F Y') }}

@@ -138,9 +138,8 @@
         </div>
 
     </div>
-   @include('admin.posts.modals.content-modal')
-   @include('admin.posts.modals.post-status-modal')
-   @include('admin.posts.modals.review-note-modal')
+   @include('author.posts.modals.content-modal')
+   @include('author.posts.modals.review-note-modal')
 @endsection
 @push('js')
     @vite([

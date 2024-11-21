@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Post::class);
             $table->foreignIdFor(User::class);
+            $table->foreignIdFor(PostStatus::class);
             $table->text("review_note");
             $table->timestamps();
             $table->softDeletes();

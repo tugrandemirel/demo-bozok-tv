@@ -10,6 +10,7 @@ use App\Models\Post;
 use App\Models\PostReview;
 use App\Models\PostStatus;
 use App\Service\Posts\AuthorPostService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
@@ -49,7 +50,7 @@ class PostController extends Controller
 
             /** @var PostReview $post_review */
             $post_reviews = PostReview::query()
-                ->select('review_note', 'created_at')
+                ->with(['status', 'user'])
                 ->whereRelation("post", "uuid", "=", $post->post_uuid)
                 ->get();
 
@@ -59,7 +60,7 @@ class PostController extends Controller
         }
     }
 
-    public function update(PostUpdateRequest $request)
+    public function update(PostUpdateRequest $request): JsonResponse
     {
         $attributes = collect($request->validated());
         $post_uuid = $attributes->get('post_uuid');
@@ -76,6 +77,13 @@ class PostController extends Controller
                 ->rejected()
                 ->first();
 
+            /** @var PostStatus $post_pending */
+            $post_pending = PostStatus::query()
+                ->select('code', 'id')
+                ->pending()
+                ->first();
+
+            /** @var PostStatus $post_status */
             $post_status = PostStatus::query()
                 ->select('id', 'code')
                 ->where('code', $post_status_code)
@@ -86,13 +94,13 @@ class PostController extends Controller
                 ->where('uuid', $post_uuid)
                 ->first();
 
-            if ($post_rejected->code === $post_status->code) {
-                $post_review = $post->reviews()
-                    ->create([
-                        'user_id' => auth()->id(),
-                        'review_note' => $attributes->get('review_note')
-                    ]);
-            }
+            $post_review = $post->reviews()
+                ->create([
+                    'user_id' => auth()->id(),
+                    "post_status_id" => $post_status->id,
+                    'review_note' => $attributes->get('review_note')
+                ]);
+
             $post->update([
                 'post_status_id' => $post_status->id
             ]);
@@ -101,7 +109,6 @@ class PostController extends Controller
             return ResponseHelper::success('Köşe yazısı yayın durumu başarılu bir şekilde gerçekleştirildi.');
         } catch (\Exception $exception) {
             DB::rollBack();
-            dd($exception->getMessage());
             return ResponseHelper::error('Bir hata oluştur: ', $exception->getMessage());
         }
     }
