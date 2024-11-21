@@ -23,6 +23,7 @@ return new class extends Migration
             $table->timestamp('end_date')->nullable(); // Bitiş tarihi (isteğe bağlı)
             $table->enum('status', [SurveyStatusEnum::ACTIVE->value, SurveyStatusEnum::INACTIVE->value])->default(SurveyStatusEnum::INACTIVE->value); // Anketin aktif/pasif durumu
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
