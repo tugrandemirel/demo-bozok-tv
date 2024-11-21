@@ -119,7 +119,9 @@ class PostController extends Controller
             $post_reviews = PostReview::query()
                 ->select('post_reviews.review_note', 'post_reviews.created_at')
                 ->addSelect('users.name as user_name', "users.surname as user_surname")
+                ->addSelect("post_statuses.name as post_status_name", "post_statuses.code as post_status_code",)
                 ->join('users', 'users.id', 'post_reviews.user_id')
+                ->join('post_statuses', 'post_statuses.id', '=', 'post_reviews.post_status_id')
                 ->whereRelation("post", "uuid", "=", $post->post_uuid)
                 ->get();
 

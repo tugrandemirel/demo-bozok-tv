@@ -20,7 +20,7 @@ class CustomHelper
         return $record ? $record->id : null;
     }
 
-    public static function getNewsletterPublicationStatusLabelColor($status)
+    public static function getNewsletterPublicationStatusLabelColor($status): string
     {
         $colors = [
             'archive' => 'info',
@@ -29,10 +29,10 @@ class CustomHelper
             'removed' => 'danger',
         ];
 
-        return $colors[$status];
+        return $colors[$status] ?? '-';
     }
 
-    public static function getPostStatusLabelColor($status)
+    public static function getPostStatusLabelColor($status): string
     {
         $colors = [
             'pending' => 'info',
@@ -40,10 +40,10 @@ class CustomHelper
             'rejected' => 'danger',
         ];
 
-        return $colors[$status];
+        return $colors[$status] ?? '-';
     }
 
-    public static function getNewsletterPublicationStatusLabelText($status)
+    public static function getNewsletterPublicationStatusLabelText($status): string
     {
         $colors = [
             'archive' => 'Arşiv',
@@ -52,10 +52,10 @@ class CustomHelper
             'removed' => 'Yayından Kaldırılmış',
         ];
 
-        return $colors[$status];
+        return $colors[$status] ?? '-';
     }
 
-    public static function getImageTypeName(MorphImageImageTypeEnum $type)
+    public static function getImageTypeName(MorphImageImageTypeEnum $type): string
     {
         return match ($type) {
             MorphImageImageTypeEnum::COVER => 'KAPAK',
@@ -65,7 +65,7 @@ class CustomHelper
         };
     }
 
-    public static function getGalleryTypeName(GalleryTypeEnum $enum)
+    public static function getGalleryTypeName(GalleryTypeEnum $enum): string
     {
         return match ($enum) {
             GalleryTypeEnum::IMAGE => 'Resim Galeri',
@@ -75,7 +75,7 @@ class CustomHelper
     }
 
 
-    public static function getEmbed($url)
+    public static function getEmbed($url): string
     {
         $embed = '';
         if ($url) {

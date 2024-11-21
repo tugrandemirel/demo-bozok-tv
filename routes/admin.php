@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth', 'role:Super-admin', 'role:Admin'])->prefix('dashboard')->as('admin.')->group(function () {
+Route::middleware(['auth', 'role:Super-admin|Admin'])->prefix('dashboard')->as('admin.')->group(function () {
     Route::get('/', [IndexController::class, 'index'])->name('index');
 
     Route::prefix('newsletters')->as('newsletters.')->group(function () {

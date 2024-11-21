@@ -34,6 +34,7 @@ class ViewComposerProvider extends ServiceProvider
         ], NewsletterSourceViewComposer::class);
         View::composer([
             'admin.posts.modals.post-status-modal',
+            'author.posts.modals.post-status-modal',
         ], PostStatusViewComposer::class);
     }
 }
