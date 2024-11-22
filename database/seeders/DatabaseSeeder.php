@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\QuestionUserAnswer;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -26,6 +27,12 @@ class DatabaseSeeder extends Seeder
             NewsletterSourceSeeder::class,
             NewsletterPublicationStatusSeeder::class,
             PostStatusSeeder::class,
+            PostSeeder::class,
+            SurveySeeder::class,
+            SurveyQuestionSeeder::class,
+            QuestionAnswerOptionsSeeder::class,
+            SurveyUserKvkkDataSeeder::class,
+            QuestionUserAnswerSeeder::class
         ]);
     }
 }
