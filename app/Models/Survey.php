@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enum\Survey\SurveyStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Survey extends Model
@@ -24,4 +25,9 @@ class Survey extends Model
     protected $casts = [
         'status' => SurveyStatusEnum::class
     ];
+
+    public function questions(): HasMany
+    {
+        return $this->hasMany(SurveyQuestion::class);
+    }
 }
