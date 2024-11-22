@@ -7,19 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class QuestionAnswerOption extends Model
+class SurveyUserKvkkData extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
         "uuid",
-        "survey_question_id",
-        "created_by_user_id",
-        "answer_text",
+        "question_user_answer_id",
+        "ip_address",
+        "browser",
+        "os",
+        "location",
     ];
 
-    public function question(): BelongsTo
+    public function questionUserAnswer(): BelongsTo
     {
-        return $this->belongsTo(SurveyQuestion::class);
+        return $this->belongsTo(QuestionUserAnswer::class);
     }
 }
