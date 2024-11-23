@@ -57,7 +57,7 @@ export default defineConfig({
                 //SURVEY
                 "resources/js/admin/surveys/store-survey-modal.php.js",
                 "resources/js/admin/surveys/edit-survey-modal.js",
-                "resources/js/admin/surveys/update-survey-modal.php.js",
+                "resources/js/admin/surveys/update-survey-modal.js",
                 "resources/js/admin/surveys/fetch-surveys-datatable.js",
             ],
 
