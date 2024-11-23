@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Newsletter\NewsletterController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterNewsletterSourceController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterTagController;
 use App\Http\Controllers\Admin\Posts\PostController;
+use App\Http\Controllers\Admin\Surveys\SurveyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -76,5 +77,12 @@ Route::middleware(['auth', 'role:Super-admin|Admin'])->prefix('dashboard')->as('
         Route::any('/', [PostController::class, 'index'])->name('index');
         Route::get('/show/{post_uuid}', [PostController::class, 'show'])->name('show');
         Route::post('/update/', [PostController::class, 'update'])->name('update');
+    });
+
+    Route::prefix('surveys')->as('survey.')->group(function (){
+        Route::any('/', [SurveyController::class, 'index'])->name('index');
+        Route::post('/store', [SurveyController::class, 'store'])->name('store');
+        Route::get('/edit/{survey_uuid}', [SurveyController::class, 'edit'])->name('edit');
+        Route::post('/update', [SurveyController::class, 'update'])->name('update');
     });
 });

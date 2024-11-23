@@ -11,6 +11,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 "resources/js/select2.js",
                 "resources/js/summernote.js",
+                'resources/js/daterange.js',
                 "resources/css/custom-summernote.css",
 
                 // NEWSLETTER
@@ -51,6 +52,13 @@ export default defineConfig({
                 "resources/js/author/posts/update.js",
                 "resources/js/author/posts/store.js",
                 "resources/js/author/posts/image-upload.js",
+
+
+                //SURVEY
+                "resources/js/admin/surveys/store-survey-modal.php.js",
+                "resources/js/admin/surveys/edit-survey-modal.js",
+                "resources/js/admin/surveys/update-survey-modal.php.js",
+                "resources/js/admin/surveys/fetch-surveys-datatable.js",
             ],
 
             refresh: true,
