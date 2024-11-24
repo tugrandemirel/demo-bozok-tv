@@ -86,12 +86,14 @@ Route::middleware(['auth', 'role:Super-admin|Admin'])->prefix('dashboard')->as('
         Route::get('/show/{survey_uuid}', [SurveyController::class, 'show'])->name('show');
         Route::get('/edit/{survey_uuid}', [SurveyController::class, 'edit'])->name('edit');
         Route::post('/update', [SurveyController::class, 'update'])->name('update');
+        Route::delete('/destroy', [SurveyController::class, 'destroy'])->name('destroy');
 
         Route::prefix('questions')->as('question.')->group(function (){
             Route::any('/', [QuestionController::class, 'index'])->name('index');
             Route::post('/store', [QuestionController::class, 'store'])->name('store');
             Route::get('/edit/{question_uuid}', [QuestionController::class, 'edit'])->name('edit');
             Route::post('/update', [QuestionController::class, 'update'])->name('update');
+            Route::delete('/destroy', [QuestionController::class, 'destroy'])->name('destroy');
         });
     });
 });

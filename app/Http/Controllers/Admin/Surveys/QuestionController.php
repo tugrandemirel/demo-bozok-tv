@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Surveys;
 
 use App\Helpers\Response\ResponseHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Surveys\Questions\QuestionDestroyRequest;
 use App\Http\Requests\Admin\Surveys\Questions\QuestionFilterRequest;
 use App\Http\Requests\Admin\Surveys\Questions\QuestionStoreRequest;
 use App\Http\Requests\Admin\Surveys\Questions\QuestionUpdateRequest;
@@ -81,7 +82,7 @@ class QuestionController extends Controller
                 ->with(['options' => fn($query) => $query->select("survey_question_id", "answer_text", "id")])
                 ->first();
 
-            return ResponseHelper::success('Anket çekme işlemi başarılı bir şekilde gerçekleştirildi', $survey_question);
+            return ResponseHelper::success('Soru getirme işlemi başarılı bir şekilde gerçekleştirildi', $survey_question);
         } catch (\Exception $exception) {
             return ResponseHelper::error('Bir hata ile karşılaşıldı.', [$exception->getMessage()]);
         }
@@ -121,11 +122,28 @@ class QuestionController extends Controller
         }
     }
 
+    public function destroy(QuestionDestroyRequest $request)
+    {
+        $attributes = collect($request->validated());
+        try {
+            $question = SurveyQuestion::query()
+                ->where('uuid', $attributes->get('question_uuid'))
+                ->first();
+
+            $question->options()->delete();
+            $question->delete();
+
+            return ResponseHelper::success('Soru işlemi başarılı bir şekilde gerçekleştirildi');
+        } catch (\Exception $exception) {
+            return ResponseHelper::error('Bir hata ile karşılaşıldı.', [$exception->getMessage()]);
+        }
+    }
+
     /**
      * @param $answer_text
      * @return Collection
      */
-    protected function mappingAnswertText($answer_text)
+    protected function mappingAnswertText($answer_text): Collection
     {
         return collect($answer_text)->map(function ($answer) {
             return [

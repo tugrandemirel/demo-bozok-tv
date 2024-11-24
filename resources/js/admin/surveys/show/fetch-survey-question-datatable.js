@@ -17,7 +17,7 @@ let QuestionsDatatablesDataSourceAjaxServer = function () {
 
         questions_datatable.DataTable({
             "fixedHeader": {
-                "header":true
+                "header": true
             },
             responsive: true,
             searchDelay: 500,
@@ -70,10 +70,11 @@ let QuestionsDatatablesDataSourceAjaxServer = function () {
                     data: null,
                     class: "min-w-150px",
                     render: function (data, type, row) {
-                        return `  <div class="d-flex align-items-center">
-                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg" href="#">${row?.question_text ?? '-'}</span>
-</div>
-`
+                        return `
+                            <div class="d-flex align-items-center">
+                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg" href="#">${row?.question_text ?? '-'}</span>
+                            </div>
+                            `
                     },
                     searchable: false,
                 },
@@ -81,10 +82,11 @@ let QuestionsDatatablesDataSourceAjaxServer = function () {
                     data: "options_count",
                     class: "min-w-150px",
                     render: function (data, type, row) {
-                        return `  <div class="d-flex align-items-center">
-                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">${row?.options_count ?? '-'}</span>
-</div>
-`
+                        return `
+                            <div class="d-flex align-items-center">
+                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">${row?.options_count ?? '-'}</span>
+                            </div>
+                            `
                     },
                     searchable: false,
                 },
@@ -92,10 +94,11 @@ let QuestionsDatatablesDataSourceAjaxServer = function () {
                     data: "survey_question_order",
                     class: "min-w-150px",
                     render: function (data, type, row) {
-                        return `  <div class="d-flex align-items-center">
-                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">${row?.survey_question_order ?? '-'}</span>
-</div>
-`
+                        return `
+                            <div class="d-flex align-items-center">
+                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">${row?.survey_question_order ?? '-'}</span>
+                            </div>
+                            `
                     },
                     searchable: false,
                 },
@@ -128,7 +131,7 @@ let QuestionsDatatablesDataSourceAjaxServer = function () {
                                     <!--end::Svg Icon-->
                                 </span>
                             </a>
-                            <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm" data-question-uuid="${row?.survey_question_uuid}">
+                            <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm delete-question-modal" data-question-uuid="${row?.survey_question_uuid}">
                                 <span class="svg-icon svg-icon-md svg-icon-primary">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

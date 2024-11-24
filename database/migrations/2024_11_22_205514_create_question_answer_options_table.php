@@ -16,11 +16,13 @@ return new class extends Migration
         Schema::create('question_answer_options', function (Blueprint $table) {
             $table->id();
             $table->uuid();
-            $table->foreignIdFor(SurveyQuestion::class);
+            $table->unsignedBigInteger('survey_question_id');
             $table->foreignIdFor(User::class, 'created_by_user_id');
             $table->string('answer_text');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('survey_question_id')->references('id')->on('survey_questions')->onDelete('cascade');
         });
     }
 

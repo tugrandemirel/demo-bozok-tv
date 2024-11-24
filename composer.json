@@ -64,9 +64,7 @@
             "dev-master": "10.x-dev"
         },
         "laravel": {
-            "dont-discover": [
-                "laravel/telescope"
-            ]
+            "dont-discover": []
         }
     },
     "config": {

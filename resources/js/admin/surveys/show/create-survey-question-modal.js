@@ -1,4 +1,4 @@
-$(document).on('click', '#addAnswer', function () {
+$(document).on('click', '#surveyQuestionModal #addAnswer', function () {
     let newAnswerGroup = $(`
         <div class="form-group repeater">
             <label for="answer">Soru Seçeneği</label>
@@ -17,7 +17,7 @@ $(document).on('click', '#addAnswer', function () {
 });
 
 // Cevapları silmek için
-$(document).on('click', '.remove-answer', function (e) {
+$(document).on('click', '#surveyQuestionModal .remove-answer', function (e) {
     e.preventDefault();
     $(this).closest('.form-group').remove(); // İlgili form grubunu sil
 });

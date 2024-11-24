@@ -23,10 +23,11 @@ class QuestionsService
                 ->join("surveys", "surveys.id", "survey_questions.survey_id")
                 ->join('question_answer_options', 'question_answer_options.survey_question_id', '=', "survey_questions.id")
                 ->where("surveys.uuid", $survey_uuid)
-                ->where("survey_questions.deleted_at", null)
+                ->whereNull("question_answer_options.deleted_at")
+                ->whereNull("survey_questions.deleted_at")
                 ->groupBy("survey_questions.id")
                 ->orderByDesc('order');
-
+//dd($questions->get());
             return DataTables::eloquent($questions)->toJson(JSON_PRETTY_PRINT);
         } catch (\Exception $exception) {
             ResponseHelper::error('Bir hata ile karşılaşıdı.', [$exception->getMessage()]);

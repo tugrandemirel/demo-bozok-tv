@@ -59,6 +59,7 @@ export default defineConfig({
                 "resources/js/admin/surveys/edit-survey-modal.js",
                 "resources/js/admin/surveys/update-survey-modal.js",
                 "resources/js/admin/surveys/fetch-surveys-datatable.js",
+                "resources/js/admin/surveys/destroy-survey.js",
 
                 // QUESTION
                 "resources/js/admin/surveys/show/fetch-survey-question-datatable.js",

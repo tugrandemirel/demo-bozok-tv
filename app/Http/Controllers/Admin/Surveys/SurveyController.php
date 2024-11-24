@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Surveys;
 
 use App\Helpers\Response\ResponseHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Surveys\SurveyDestroyRequest;
 use App\Http\Requests\Admin\Surveys\SurveyFilterRequest;
 use App\Http\Requests\Admin\Surveys\SurveyStoreRequest;
 use App\Http\Requests\Admin\Surveys\SurveyUpdateRequest;
@@ -114,8 +115,27 @@ class SurveyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(SurveyDestroyRequest $request): JsonResponse
     {
-        //
+        $attributes = collect($request->validated());
+        try {
+            /** @var Survey $survey */
+            $survey = Survey::query()
+                ->where('uuid', $attributes->get('survey_uuid'))
+                ->first();
+
+            $survey->questions->each(function ($question) {
+                $question->options()->delete();
+            });
+
+            $survey->questions()->delete();
+
+            // Anketi sil
+            $survey->delete();
+
+            return ResponseHelper::success('Soru işlemi başarılı bir şekilde gerçekleştirildi');
+        } catch (\Exception $exception) {
+            return ResponseHelper::error('Bir hata ile karşılaşıldı.', [$exception->getMessage()]);
+        }
     }
 }

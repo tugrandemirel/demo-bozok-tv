@@ -16,11 +16,13 @@ return new class extends Migration
         Schema::create('question_user_answers', function (Blueprint $table) {
             $table->id();
             $table->uuid(); // UUID ile benzersiz ID
-            $table->foreignIdFor(QuestionAnswerOption::class, 'selected_option_id'); // Kullanıcının seçtiği cevap
+            $table->unsignedBigInteger('selected_option_id');
             $table->foreignIdFor(User::class)->nullable(); // Kullanıcı giriş yapmışsa user_id
             $table->string('session_id')->nullable(); // Kullanıcı giriş yapmamışsa benzersiz session_id
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('selected_option_id')->references('id')->on('question_answer_options')->onDelete('cascade');
         });
     }
 

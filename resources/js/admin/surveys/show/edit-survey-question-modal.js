@@ -1,5 +1,3 @@
-import axios from "axios";
-
 $(document).on('click', '.edit-question-modal', function () {
     let button = $(this)
     let modal = $("#surveyQuestionUpdateModal")
@@ -23,7 +21,7 @@ $(document).on('click', '.edit-question-modal', function () {
                 }
                 if (options && options.length > 0) {
                     form.find('input[name="answer_text[]"]').first().val(options[0].answer_text);
-                    // Geri kalan seçenekleri repeater ile ekle
+
                     for (let i = 1; i < options.length; i++) {
                         addAnswerField(form, options[i].answer_text);
                     }
@@ -36,10 +34,11 @@ $(document).on('click', '.edit-question-modal', function () {
             error(errors)
         })
 })
-// Repeater alanı dinamik olarak eklemek için bir fonksiyon
+
 const addAnswerField = (form, answerText = '') => {
     let newAnswerField = `
         <div class="form-group repeater">
+            <label for="answer">Soru Seçeneği</label>
             <div class="row">
                 <div class="col-md-6">
                     <input type="text" class="form-control" name="answer_text[]" value="${answerText}">
@@ -51,10 +50,9 @@ const addAnswerField = (form, answerText = '') => {
         </div>
     `;
 
-    // Yeni alanı formun sonuna ekle
     form.append(newAnswerField);
 };
-// AddAnswer butonuna tıklanınca yeni alan ekleme
+
 $(document).on('click', '#surveyQuestionUpdateModal #addAnswer', function (e) {
     e.preventDefault();
     let form = $(this).closest('form');
@@ -64,7 +62,7 @@ $(document).on('click', '#surveyQuestionUpdateModal #addAnswer', function (e) {
 // Silme butonuna tıklanınca dinamik alanı kaldır
 $(document).on('click', '#surveyQuestionUpdateModal .remove-answer', function (e) {
     e.preventDefault();
-    $(this).closest('.dynamic-answer').remove();
+    $(this).closest('.repeater').remove();
 });
 
 
