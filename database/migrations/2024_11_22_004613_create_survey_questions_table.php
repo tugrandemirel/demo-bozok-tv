@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Survey::class); // Hangi ankete ait olduğu
             $table->foreignIdFor(User::class, 'created_by_user_id'); // Hangi ankete ait olduğu
             $table->string('question_text'); // Sorunun metni
+            $table->unsignedBigInteger('order')->nullable(); // Sorunun metni
             $table->timestamps();
             $table->softDeletes();
         });

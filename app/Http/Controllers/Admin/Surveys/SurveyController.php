@@ -12,6 +12,7 @@ use App\Service\Surveys\SurveysService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Mockery\Exception;
 
 class SurveyController extends Controller
 {
@@ -31,14 +32,6 @@ class SurveyController extends Controller
             return $this->surveys_service->getAllDataForDatatable($request);
         }
         return view(self::PATH.'index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -63,9 +56,21 @@ class SurveyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $survey_uuid)
     {
-        //
+        try {
+            $survey = Survey::query()
+                ->where('uuid', $survey_uuid)
+                ->with(['questions.options'])
+                ->withCount('questions')
+                ->first();
+
+            $options_count = $survey->questions->sum(fn($question) => $question->options->count());
+
+            return view(self::PATH.'show.index', compact('survey', 'options_count'));
+        } catch (Exception $exception) {
+            abort(404);
+        }
     }
 
     /**

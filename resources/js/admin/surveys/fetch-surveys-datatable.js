@@ -145,7 +145,7 @@ let SurveysDatatablesDataSourceAjaxServer = function () {
                     class: "min-w-100px gap-5",
                     render: function (data, type, row) {
                         return `
-                           <a href="/admin/dashboard/survey/show/${row.uuid}" class="btn btn-icon btn-light btn-sm">
+                           <a href="/admin/dashboard/surveys/show/${row.uuid}" class="btn btn-icon btn-light btn-sm">
                                 <span class="svg-icon svg-icon-md svg-icon-warning">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                     <defs></defs>
