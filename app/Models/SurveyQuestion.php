@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\ActivityLoggerTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ use Spatie\EloquentSortable\SortableTrait;
 
 class SurveyQuestion extends Model implements Sortable
 {
-    use HasFactory, SoftDeletes, SortableTrait;
+    use HasFactory, SoftDeletes, SortableTrait, ActivityLoggerTrait;
 
     protected $fillable = [
         'uuid',
@@ -43,4 +44,18 @@ class SurveyQuestion extends Model implements Sortable
         return $this->hasMany(QuestionAnswerOption::class);
     }
 
+    protected static function booted(): void
+    {
+        static::created(function ($survey_question) {
+            $survey_question->logActivity('survey_question_created', 'Yeni bir Soru oluşturdu.', $survey_question);
+        });
+
+        static::updated(function ($survey_question) {
+            $survey_question->logActivity('survey_question_updated', 'Soru güncellendi.', $survey_question);
+        });
+
+        static::deleted(function ($survey_question) {
+            $survey_question->logActivity('survey_question_deleted', 'Soru silindi.', $survey_question);
+        });
+    }
 }
