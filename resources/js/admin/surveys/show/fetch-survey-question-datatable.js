@@ -57,7 +57,7 @@ let QuestionsDatatablesDataSourceAjaxServer = function () {
                 }
             },
             order: [[1, 'desc']],
-            "ordering": true,
+            "ordering": false,
             ajax: {
                 url: "/admin/dashboard/surveys/questions",
                 type: 'POST',
@@ -68,39 +68,40 @@ let QuestionsDatatablesDataSourceAjaxServer = function () {
             columns: [
                 {
                     data: null,
-                    class: "pl-0",
+                    class: "min-w-150px",
                     render: function (data, type, row) {
-                        return `
-                          <div>
-                                <a class=" font-weight-bold" href="#">${row?.question_text ?? '-'}</a>
-                          </div>
-                        `
+                        return `  <div class="d-flex align-items-center">
+                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg" href="#">${row?.question_text ?? '-'}</span>
+</div>
+`
                     },
                     searchable: false,
                 },
                 {
                     data: "options_count",
-                    class: "pl-0",
+                    class: "min-w-150px",
                     render: function (data, type, row) {
-                        return `
+                        return `  <div class="d-flex align-items-center">
                             <span class="text-dark-75 font-weight-bolder d-block font-size-lg">${row?.options_count ?? '-'}</span>
-                        `
+</div>
+`
                     },
                     searchable: false,
                 },
                 {
                     data: "survey_question_order",
-                    class: "pl-0",
+                    class: "min-w-150px",
                     render: function (data, type, row) {
-                        return `
+                        return `  <div class="d-flex align-items-center">
                             <span class="text-dark-75 font-weight-bolder d-block font-size-lg">${row?.survey_question_order ?? '-'}</span>
-                        `
+</div>
+`
                     },
                     searchable: false,
                 },
                 {
                     data: null,
-                    class: "pl-0",
+                    class: "min-w-150px",
                     render: function (data, type, row) {
                         return `
                             <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm" data-question-uuid="${row?.survey_question_uuid}">
