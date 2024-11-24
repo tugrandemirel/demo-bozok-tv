@@ -1,0 +1,1 @@
+$(document).on("click","#imageGalleryUpdateModalFormButton",function(){$(this);let o=$("#imageGalleryUpdateModal").find("#imageGalleryUpdateModalForm"),e=new FormData(o[0]),t="/admin/dashboard/galleries/image/update/";axios.post(t,e).then(function(a){success(a),setTimeout(function(){window.location.reload()},2e3)}).catch(function(a){error(a)})});

@@ -67,6 +67,7 @@ export default defineConfig({
                 "resources/js/admin/surveys/show/store-survey-question-modal.js",
                 "resources/js/admin/surveys/show/edit-survey-question-modal.js",
                 "resources/js/admin/surveys/show/update-survey-question-modal.js",
+                "resources/js/admin/surveys/show/destroy-survey-question.js",
             ],
 
             refresh: true,
