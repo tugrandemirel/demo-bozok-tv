@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enum\Newsletter\NewsletterGeneralEnum;
+use App\Traits\ActivityLoggerTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -15,7 +16,7 @@ use Spatie\Sluggable\SlugOptions;
 
 class Newsletter extends Model implements Sortable
 {
-    use HasFactory, SoftDeletes, HasSlug, SortableTrait;
+    use HasFactory, SoftDeletes, HasSlug, SortableTrait, ActivityLoggerTrait;
 
     protected $fillable = [
         'uuid',
@@ -76,5 +77,25 @@ class Newsletter extends Model implements Sortable
     public function newsletterTags()
     {
         return $this->hasMany(NewsletterTag::class);
+    }
+
+    public function activities(): MorphMany
+    {
+        return $this->morphMany(UserActivity::class, 'activityable');
+    }
+
+    protected static function booted(): void
+    {
+        static::created(function ($newsletter) {
+            $newsletter->logActivity('newsletter_created', 'Yeni bir Haber oluşturdu.', $newsletter);
+        });
+
+        static::updated(function ($newsletter) {
+            $newsletter->logActivity('newsletter_updated', 'Haber güncellendi.', $newsletter);
+        });
+
+        static::deleted(function ($newsletter) {
+            $newsletter->logActivity('newsletter_deleted', 'Haber silindi.', $newsletter);
+        });
     }
 }
