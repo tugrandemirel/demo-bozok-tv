@@ -1,27 +1,33 @@
 // Hata mesajlarını göster
 function error(response) {
-    let { data } = response.response || {}; // response.response boş olabilir
-    let { icon, errors, status } = data || {}; // data boş olabilir
+    // Güvenli bir şekilde response ve data nesnelerini alın
+    let { data } = response?.response || {};
+    let { icon, errors, status, message } = data || {}; // data varsayılan olarak boş olabilir
 
     // Hata mesajlarını oluştur
     let errorMessage = '';
+
     if (errors && typeof errors === 'object') {
         // errors bir nesne ise, anahtarları üzerinde döngü yaparak her bir hatayı topla
         Object.keys(errors).forEach(key => {
-            errors[key].forEach(error => {
-                errorMessage += formatTimelineError(error); // Hata mesajlarını timeline formatında oluştur
-            });
+            if (Array.isArray(errors[key])) {
+                errors[key].forEach(error => {
+                    errorMessage += formatTimelineError(error); // Hata mesajlarını timeline formatında oluştur
+                });
+            } else {
+                // Eğer dizi değilse, tek bir hata mesajı olarak ele al
+                errorMessage += formatTimelineError(errors[key]); // Hata mesajlarını timeline formatında oluştur
+            }
         });
     } else {
-        let { message } = data;
         // Eğer errors tanımlı değilse veya dizi değilse varsayılan bir hata mesajı ekle
-        errorMessage = formatTimelineError(message);
+        errorMessage = formatTimelineError(message || 'Bilinmeyen bir hata oluştu.');
     }
 
     // SweetAlert2 ile hata mesajını göster
     swal.fire({
-        title: status ? 'Hata' : 'Başarısız',
-        icon: icon || 'error',
+        title: status ? 'Hata' : 'Başarısız', // status'a göre başlık ayarı
+        icon: icon || 'error', // Varsayılan icon: 'error'
         html: `<div class="timeline timeline-6 mt-3">${errorMessage}</div>`, // HTML olarak timeline formatını ekle
         showConfirmButton: true,
         confirmButtonText: 'Tamam',

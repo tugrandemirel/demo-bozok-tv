@@ -1,0 +1,1 @@
+$(document).on("click","#videoGalleryCreateModalButton",function(){let l=$("#videoGalleryCreateModal"),e=$("#videoGalleryCreateModalForm"),a=new FormData(e[0]),t="/admin/dashboard/galleries/video/store",d=e.data("uuid");a.append("gallery_uuid",d),axios.post(t,a).then(function(o){success(o),e[0].reset(),l.modal("toggle"),window.location.reload()}).catch(function(o){error(o)})});

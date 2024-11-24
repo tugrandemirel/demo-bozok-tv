@@ -4,6 +4,7 @@ namespace App\Helpers\Custom;
 
 use App\Enum\Gallery\GalleryTypeEnum;
 use App\Enum\MorphImage\MorphImageImageTypeEnum;
+use App\Enum\Survey\SurveyStatusEnum;
 
 class CustomHelper
 {
@@ -53,6 +54,24 @@ class CustomHelper
         ];
 
         return $colors[$status] ?? '-';
+    }
+
+    public static function getSurveyStatusColor($status)
+    {
+        return match ($status) {
+            SurveyStatusEnum::ACTIVE => 'success',
+            SurveyStatusEnum::INACTIVE => 'danger',
+            default => 'info'
+        };
+    }
+
+    public static function getSurveyStatusText($status)
+    {
+        return match ($status) {
+            SurveyStatusEnum::ACTIVE => 'Yayında',
+            SurveyStatusEnum::INACTIVE => 'Yayında Değil',
+            default => 'info'
+        };
     }
 
     public static function getImageTypeName(MorphImageImageTypeEnum $type): string
