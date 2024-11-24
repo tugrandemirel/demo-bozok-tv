@@ -64,6 +64,8 @@ export default defineConfig({
                 "resources/js/admin/surveys/show/fetch-survey-question-datatable.js",
                 "resources/js/admin/surveys/show/create-survey-question-modal.js",
                 "resources/js/admin/surveys/show/store-survey-question-modal.js",
+                "resources/js/admin/surveys/show/edit-survey-question-modal.js",
+                "resources/js/admin/surveys/show/update-survey-question-modal.js",
             ],
 
             refresh: true,

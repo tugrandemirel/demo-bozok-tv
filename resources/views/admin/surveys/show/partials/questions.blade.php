@@ -30,7 +30,7 @@
                 <tr>
                     <th class="p-0">Soru</th>
                     <th class="p-0">Soru Seçenek Sayısı</th>
-                    <th class="p-0">Katılımcı Sayısı</th>
+                    <th class="p-0">Soru Sıra Numarası</th>
                     <th class="p-0 min-w-150px"></th>
                 </tr>
                 </thead>

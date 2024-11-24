@@ -90,6 +90,8 @@ Route::middleware(['auth', 'role:Super-admin|Admin'])->prefix('dashboard')->as('
         Route::prefix('questions')->as('question.')->group(function (){
             Route::any('/', [QuestionController::class, 'index'])->name('index');
             Route::post('/store', [QuestionController::class, 'store'])->name('store');
+            Route::get('/edit/{question_uuid}', [QuestionController::class, 'edit'])->name('edit');
+            Route::post('/update', [QuestionController::class, 'update'])->name('update');
         });
     });
 });

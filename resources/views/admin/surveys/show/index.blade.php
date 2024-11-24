@@ -196,6 +196,7 @@
             </div>
         </div>
     @include('admin.surveys.show.modals.create-survey-question-modal')
+    @include('admin.surveys.show.modals.update-survey-question-modal')
 @endsection
 @push('js')
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
@@ -203,5 +204,7 @@
     "resources/js/admin/surveys/show/fetch-survey-question-datatable.js",
     "resources/js/admin/surveys/show/create-survey-question-modal.js",
     "resources/js/admin/surveys/show/store-survey-question-modal.js",
+    "resources/js/admin/surveys/show/edit-survey-question-modal.js",
+    "resources/js/admin/surveys/show/update-survey-question-modal.js",
 ])
 @endpush

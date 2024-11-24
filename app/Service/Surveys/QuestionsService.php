@@ -15,17 +15,19 @@ class QuestionsService
         $attributes = collect($request->validated());
         $survey_uuid = $attributes->get('survey_uuid');
         try {
-            // TODO Katılımcı sayısı getirilecek. Bunun cevabı daha verilmedi. Şuan acelesi olmadığından kaynaklı olarak. Durum doğrultusunda Tablo yapısı değişebilir.
+            // TODO: Katılımcı sayısı getirilecek. Bunun cevabı daha verilmedi. Şuan acelesi olmadığından kaynaklı olarak. Durum doğrultusunda Tablo yapısı değişebilir.
+            // TODO: Soru içerisindeki seçenekler doğru geliyor fakat, datatable üzerinde sorudak kaç seçenek var sorusunun cevabı hatalı gelmekte.
             $questions = SurveyQuestion::query()
-                ->select("survey_questions.question_text", "survey_questions.uuid as survey_question_uuid")
+                ->select("survey_questions.question_text", "survey_questions.uuid as survey_question_uuid", "survey_questions.order as survey_question_order")
                 ->addSelect(DB::raw('COUNT(question_answer_options.id) as options_count'))
                 ->join("surveys", "surveys.id", "survey_questions.survey_id")
                 ->join('question_answer_options', 'question_answer_options.survey_question_id', '=', "survey_questions.id")
                 ->where("surveys.uuid", $survey_uuid)
+                ->where("survey_questions.deleted_at", null)
                 ->groupBy("survey_questions.id")
-                ->orderByDesc('order')
-                ->get();
-            return DataTables::collection($questions)->toJson(JSON_PRETTY_PRINT);
+                ->orderByDesc('order');
+
+            return DataTables::eloquent($questions)->toJson(JSON_PRETTY_PRINT);
         } catch (\Exception $exception) {
             ResponseHelper::error('Bir hata ile karşılaşıdı.', [$exception->getMessage()]);
         }
