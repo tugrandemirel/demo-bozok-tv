@@ -60,7 +60,7 @@ class User extends Authenticatable
         $firstName = mb_substr($this->name, 0, 1);
         $lastName = mb_substr($this->surname, 0, 1);
 
-        return !is_null($this->profile) ? $this->profile : "https://ui-avatars.com/api/?name=$firstName+$lastName&background=random&color=fff";
+        return !is_null($this->profile) ? asset('storage/' . $this->profile) : "https://ui-avatars.com/api/?name=$firstName+$lastName&background=random&color=fff";
     }
 
     public function getFullNameAttribute()

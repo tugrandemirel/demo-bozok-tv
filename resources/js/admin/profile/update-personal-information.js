@@ -1,24 +1,21 @@
-const btn = KTUtil.getById("imageGalleryCreateModalButton");
-
+let btn = KTUtil.getById("updatePersonalInformation");
 KTUtil.addEvent(btn, "click", function () {
     btn.disabled = true;
     KTUtil.btnWait(btn, "spinner spinner-right spinner-white pr-15", "Lütfen bekleyiniz.");
-    const modal = $('#imageGalleryCreateModal')
-    const modal_form = modal.find('#imageGalleryCreateModalForm')
-    let uuid = modal_form.data('uuid')
 
     setTimeout(function () {
-        let form_data = new FormData(modal_form[0])
-        form_data.append('gallery_uuid', uuid)
-        let url = "/admin/dashboard/galleries/image/store"
+        let form = $('#updatePersonalInformationForm')
+        let form_data = new FormData(form[0])
 
+        let url = '/admin/dashboard/profile/update'
         axios.post(url, form_data)
             .then(function (response) {
                 if (response.status === 200) {
-                    modal.modal('hide');
-                    modal_form[0].reset();
                     success(response)
-                    window.location.reload()
+
+                    setTimeout(function () {
+                        location.reload()
+                    },2000)
                 }
             })
             .catch(function (errors) {
@@ -28,5 +25,5 @@ KTUtil.addEvent(btn, "click", function () {
                 KTUtil.btnRelease(btn);
                 btn.disabled = false;
             });
-    }, 2000);
+    }, 1000);
 });

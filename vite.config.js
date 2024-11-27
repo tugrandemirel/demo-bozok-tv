@@ -68,6 +68,11 @@ export default defineConfig({
                 "resources/js/admin/surveys/show/edit-survey-question-modal.js",
                 "resources/js/admin/surveys/show/update-survey-question-modal.js",
                 "resources/js/admin/surveys/show/destroy-survey-question.js",
+
+                // PROFILE
+                "resources/js/admin/profile/update-personal-information.js",
+                "resources/js/admin/profile/profile-image.js",
+                "resources/js/admin/profile/update-change-password.js",
             ],
 
             refresh: true,

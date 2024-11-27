@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Newsletter\NewsletterController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterNewsletterSourceController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterTagController;
 use App\Http\Controllers\Admin\Posts\PostController;
+use App\Http\Controllers\Admin\Profile\ProfileController;
 use App\Http\Controllers\Admin\Surveys\QuestionController;
 use App\Http\Controllers\Admin\Surveys\SurveyController;
 use Illuminate\Support\Facades\Route;
@@ -95,5 +96,12 @@ Route::middleware(['auth', 'role:Super-admin|Admin'])->prefix('dashboard')->as('
             Route::post('/update', [QuestionController::class, 'update'])->name('update');
             Route::delete('/destroy', [QuestionController::class, 'destroy'])->name('destroy');
         });
+    });
+
+    Route::prefix('profile')->as('profile.')->group(function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('index');
+        Route::post('/update', [ProfileController::class, 'update'])->name('update');
+        Route::get('/change-password', [ProfileController::class, 'changePassword'])->name('changePassword');
+        Route::post('/update-password', [ProfileController::class, 'updatePassword'])->name('updatePassword');
     });
 });
