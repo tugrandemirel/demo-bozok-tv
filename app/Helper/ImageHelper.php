@@ -9,27 +9,23 @@ use Carbon\Carbon;
 class ImageHelper
 {
     // Resim Yükleme
-    public static function uploadImage($image)
+    public static function uploadImage($image): array
     {
         $folderPath = self::generateImagePath();
         $fileName = self::generateImageName($image);
 
-        // Resmi belirlenen klasöre kaydet
         $path = $image->storeAs($folderPath, $fileName, 'public');
-//dd($folderPath, $fileName, $path);
-        // Görsel bilgilerini al ve array olarak döndür
+
         return self::getImageData($image, $path);
     }
 
     // Resim Güncelleme
     public static function updateImage($image, ?string $oldImagePath)
     {
-        // Eski resmi sil
         if ($oldImagePath  && Storage::disk('public')->exists($oldImagePath)) {
             Storage::disk('public')->delete($oldImagePath);
         }
 
-        // Yeni resmi yükle ve bilgilerini döndür
         return self::uploadImage($image);
     }
 
@@ -61,7 +57,7 @@ class ImageHelper
             'image_name' => $imageName,
             'image_ext' => $imageExt,
             'size' => $size,
-            'path' => $path,
+            'path' => 'uploads/'.$path,
             'alt_text' => null, // Başlangıçta boş olabilir, isteğe göre güncellenir
             'width' => $width,
             'height' => $height,
@@ -70,14 +66,14 @@ class ImageHelper
     }
 
     // Klasör yapısını oluşturma (Yıl/Ay/Gün/Saat/ID)
-    private static function generateImagePath()
+    private static function generateImagePath(): string
     {
         $now = Carbon::now();
         return $now->year . '/' . $now->month . '/' . $now->day . '/' . $now->hour;
     }
 
     // Benzersiz resim ismi oluşturma
-    private static function generateImageName($image)
+    private static function generateImageName($image): string
     {
         $image_extension = $image->getClientOriginalExtension();
         $hashed_name = str_replace(['/', '.'], '-', hash('sha256', Str::uuid()->toString()));

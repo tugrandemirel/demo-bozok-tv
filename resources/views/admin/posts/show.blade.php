@@ -99,7 +99,7 @@
                 <!--begin: Pic-->
                 <div class="flex-shrink-0 mr-7 mt-lg-0 mt-3">
                     <div class="symbol symbol-50 symbol-lg-120">
-                        <img src="{{ asset('storage/'. $post->image_path) }}" alt="image">
+                        <img src="{{ asset($post->image_path) }}" alt="image">
                     </div>
 
                     <div class="symbol symbol-50 symbol-lg-120 symbol-primary d-none">

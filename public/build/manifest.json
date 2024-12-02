@@ -20,7 +20,7 @@
     "src": "resources/css/full-screen-modal.css"
   },
   "resources/js/admin/gallery/edit.js": {
-    "file": "assets/edit-28467d24.js",
+    "file": "assets/edit-2624fd3b.js",
     "isEntry": true,
     "src": "resources/js/admin/gallery/edit.js"
   },
@@ -60,7 +60,7 @@
     "src": "resources/js/admin/gallery/video-gallery/video-preview.js"
   },
   "resources/js/admin/image/edit.js": {
-    "file": "assets/edit-0d1a8fa5.js",
+    "file": "assets/edit-fded3ac3.js",
     "isEntry": true,
     "src": "resources/js/admin/image/edit.js"
   },
@@ -95,7 +95,7 @@
     "src": "resources/js/admin/newsletter/create.js"
   },
   "resources/js/admin/newsletter/create/store.js": {
-    "file": "assets/store-51f05d28.js",
+    "file": "assets/store-68885227.js",
     "isEntry": true,
     "src": "resources/js/admin/newsletter/create/store.js"
   },
@@ -105,7 +105,7 @@
     "src": "resources/js/admin/newsletter/edit.js"
   },
   "resources/js/admin/newsletter/fetch-newsletters-datatable.js": {
-    "file": "assets/fetch-newsletters-datatable-e4be22ef.js",
+    "file": "assets/fetch-newsletters-datatable-71dafbb3.js",
     "isEntry": true,
     "src": "resources/js/admin/newsletter/fetch-newsletters-datatable.js"
   },
@@ -130,7 +130,7 @@
     "src": "resources/js/admin/newsletter/update.js"
   },
   "resources/js/admin/posts/fetch-posts-datatable.js": {
-    "file": "assets/fetch-posts-datatable-52117a28.js",
+    "file": "assets/fetch-posts-datatable-4598848b.js",
     "isEntry": true,
     "src": "resources/js/admin/posts/fetch-posts-datatable.js"
   },
@@ -215,7 +215,7 @@
     "src": "resources/js/app.js"
   },
   "resources/js/author/posts/fetch-posts-datatable.js": {
-    "file": "assets/fetch-posts-datatable-fefae2d8.js",
+    "file": "assets/fetch-posts-datatable-88d50d5f.js",
     "isEntry": true,
     "src": "resources/js/author/posts/fetch-posts-datatable.js"
   },

@@ -10,7 +10,7 @@ $(document).on('click', '.update-gallery', function () {
             modal.find('#description').val(data.description); // Eğer açıklama da varsa ekleyin
             modal.find('#gallery_type').val(data.type).trigger('change'); // Galeri türünü ayarlayın
             modal.find('input[name="is_active"]').prop('checked', data.is_active); // Aktiflik durumunu ayarlayın
-            modal.find('.image-input-wrapper').css('background-image', 'url(/storage/' + data.path + ')');
+            modal.find('.image-input-wrapper').css('background-image', 'url(/' + data.path + ')');
 
             // UUID inputunu kontrol et
             let galleryUuidInput = modal.find('#gallery_uuid');
