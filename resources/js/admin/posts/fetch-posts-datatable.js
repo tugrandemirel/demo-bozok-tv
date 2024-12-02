@@ -91,7 +91,7 @@ let PostsDatatablesDataSourceAjaxServer = function () {
                                     </div>`
                         } else {
                             image = `<div class="symbol symbol-50 flex-shrink-0">
-                                        <img src="/storage/${row?.image_path ?? ''}" alt="photo">
+                                        <img src="/${row?.image_path ?? ''}" alt="photo">
                                     </div>`
                         }
                         return `

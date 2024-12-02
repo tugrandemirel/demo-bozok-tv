@@ -110,7 +110,7 @@ let NewslettersDatatablesDataSourceAjaxServer = function () {
 
                         } else {
                             image = `<div class="symbol symbol-50 flex-shrink-0">
-                                        <img src="/storage/${row?.image_cover?.path ?? ''}" alt="photo">
+                                        <img src="/${row?.image_cover?.path ?? ''}" alt="photo">
                                     </div>`
                         }
                         return `
@@ -129,7 +129,6 @@ let NewslettersDatatablesDataSourceAjaxServer = function () {
                     data: "tag_name",
                     class: "min-w-150px",
                     render: function (data, type, row) {
-                        console.log(row)
                         return `
                         <div class="d-flex flex-column flex-grow-1">
                            <span class="text-dark-75 mb-1 font-size-lg">${row.tag_count}</span>

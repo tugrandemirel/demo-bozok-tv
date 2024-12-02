@@ -9,7 +9,7 @@ $(document).on('click', '.single-image-update-modal', function () {
             let { data } = response.data
             modal.find('input[name="alt_text"]').val(data.alt_text);
             modal.find('input[name="is_active"]').prop('checked', data.is_active); // Aktiflik durumunu ayarlayın
-            modal.find('.image-input-wrapper').css('background-image', 'url(/storage/' + data.path + ')');
+            modal.find('.image-input-wrapper').css('background-image', 'url(/' + data.path + ')');
 
             // UUID inputunu kontrol et
             let galleryUuidInput = modal.find('[name=uuid]');

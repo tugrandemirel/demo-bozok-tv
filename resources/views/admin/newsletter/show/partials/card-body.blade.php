@@ -5,7 +5,7 @@
             <!--begin::Image-->
             <div class="card card-custom card-stretch">
                 <div class="card-body p-0 rounded px-10 py-15 d-flex align-items-center justify-content-center bg-{{ \App\Helpers\Custom\CustomHelper::getNewsletterPublicationStatusLabelColor($newsletter->code) }}" style="">
-                    <img src="{{ asset('storage/'.$newsletter->images[0]->path) }}" class="mw-100 w-200px" style="transform: scale(1.6);">
+                    <img src="{{ asset($newsletter->images[0]->path) }}" class="mw-100 w-200px" style="transform: scale(1.6);">
                 </div>
             </div>
             <!--end::Image-->
@@ -271,7 +271,7 @@
                 <div class="d-flex flex-wrap align-items-center mb-10">
                     <!--begin::Symbol-->
                     <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                        <div class="symbol-label" style="background-image: url({{ asset('storage/'.$image->path) }})"></div>
+                        <div class="symbol-label" style="background-image: url({{ asset($image->path) }})"></div>
                     </div>
                     <!--end::Symbol-->
 

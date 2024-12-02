@@ -16,13 +16,13 @@ KTUtil.addEvent(btn, "click", function () {
                     $('#newsletterSourceCreateModal').modal('hide');
                     form[0].reset();
                     success(response)
-                    updateNewsletterSource()
                     setTimeout(function () {
-                        window.location.href
+                        window.location.reload()
                     },2000)
                 }
             })
             .catch(function (errors) {
+                console.log(errors)
                 error(errors)
             })
             .finally(function () {

@@ -137,7 +137,7 @@
                         <!--begin::Bottom-->
                         <div class="pt-4">
                             <!--begin::Image-->
-                            <div class="bgi-no-repeat bgi-size-cover rounded min-h-265px" style="background-image: url({{ \Illuminate\Support\Facades\Storage::url($gallery->path) }})"></div>
+                            <div class="bgi-no-repeat bgi-size-cover rounded min-h-265px" style="background-image: url({{ asset($gallery->path) }})"></div>
                             <!--end::Image-->
                             <!--begin::Text-->
                             <p class="text-dark-75 font-size-lg font-weight-normal pt-5 mb-2">{{ $gallery?->description }}</p>
