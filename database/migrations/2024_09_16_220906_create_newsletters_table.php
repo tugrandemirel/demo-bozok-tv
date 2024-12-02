@@ -25,7 +25,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class, 'created_by_user_id');
             $table->string('title');
             $table->text('spot');
-            $table->text('content');
+            $table->longText('content');
             $table->boolean('is_main_headline')->default(NewsletterGeneralEnum::OFF->value);
             $table->boolean('is_five_cuff')->default(NewsletterGeneralEnum::OFF->value);
             $table->boolean('is_outstanding')->default(NewsletterGeneralEnum::OFF->value);

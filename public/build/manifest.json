@@ -79,6 +79,11 @@
     "isEntry": true,
     "src": "resources/js/admin/image/update.js"
   },
+  "resources/js/admin/input-mask.js": {
+    "file": "assets/input-mask-7235bccc.js",
+    "isEntry": true,
+    "src": "resources/js/admin/input-mask.js"
+  },
   "resources/js/admin/newsletter/category-store.js": {
     "file": "assets/category-store-18b58849.js",
     "isEntry": true,
