@@ -51,7 +51,7 @@ class NewsletterService
                 'newsletter_publication_statuses.name',
                 'newsletter_publication_statuses.code'
             )
-            ->orderBy('newsletters.created_at', 'desc')
+            ->orderBy('newsletters.order', 'desc')
             ->get()
             ->groupBy('id', '')
             ->map(function ($items) {
