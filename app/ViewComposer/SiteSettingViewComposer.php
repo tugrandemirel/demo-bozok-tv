@@ -10,7 +10,7 @@ class SiteSettingViewComposer
 {
     public function compose(View $view): void
     {
-       $general_setting = Cache::rememberForever('generel_setting',  function () {
+       $general_setting = Cache::rememberForever('general_setting',  function () {
            return new GeneralSetting();
        });
 

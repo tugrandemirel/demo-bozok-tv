@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SiteSetting\GeneralSettingRequest;
 use App\Settings\GeneralSetting;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
 
 class GeneralSettingController extends Controller
 {
@@ -53,7 +54,7 @@ class GeneralSettingController extends Controller
             $general_setting->is_active = $attributes->get('is_active');
 
             $general_setting->save();
-
+            Cache::forget('general_setting');
             return ResponseHelper::success('İşleminiz başarılı bir şekilde gerçekleştirildi');
         } catch (\Exception $exception) {dd($exception->getMessage());
             return ResponseHelper::error('Bir hata oluştu.', [$exception->getMessage()]);
