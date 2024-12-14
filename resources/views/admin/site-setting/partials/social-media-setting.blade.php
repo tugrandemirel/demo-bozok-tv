@@ -12,7 +12,7 @@
       </span>
     </div>
     <div class="text-black">
-        Iconları <a href="https://preview.keenthemes.com/metronic/demo1/features/icons/fontawesome5.html" target="_blank">buradan</a> seçebilirsiniz.
+        Iconları <a href="https://fontawesome.com/search" target="_blank">buradan</a> seçebilirsiniz.
 
         <b>Yapmanız gereken oradaki yazıyı kopyalayarak Icon İnputu içerisine düz metin olarak yapıştırmak</b>.
         Örneğin Facebook iconu için: <b>fab fa-facebook</b> yazısını kopyalamanız ve icon inputu içerisine yapıştırmanız.
