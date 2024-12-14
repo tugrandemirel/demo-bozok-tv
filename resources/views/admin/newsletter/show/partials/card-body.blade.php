@@ -13,7 +13,7 @@
         @endif
         <div class="col-xxl-{{ (!$newsletter->images->isEmpty()) ? '8' : '12' }} pl-xxl-11">
             <div class="line-height-xl">
-                {{ $newsletter->spot }}
+                {!! $newsletter->spot !!}
             </div>
         </div>
     </div>

@@ -4,6 +4,11 @@
 @extends('admin.layouts.app')
 @section('title', 'Haber Oluştur')
 @push('css')
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 @endpush
 @section('content')
     <div class="subheader py-2 py-lg-6  subheader-solid " id="kt_subheader">
@@ -68,8 +73,6 @@
     @include('admin.newsletter.create.modals.newsletter-source.newsletter-source-create-modal')
 @endsection
 @push('js')
-
-    <script src="{{ asset('assets/js/pages/crud/forms/widgets/bootstrap-daterangepicker.js') }}"></script>
     <script src="{{ asset('assets/js/pages/select2.js') }}"></script>
 
     @vite([
