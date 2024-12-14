@@ -154,6 +154,36 @@
     "isEntry": true,
     "src": "resources/js/admin/profile/update-personal-information.js"
   },
+  "resources/js/admin/site-setting/contact-setting/update.js": {
+    "file": "assets/update-d907821f.js",
+    "isEntry": true,
+    "src": "resources/js/admin/site-setting/contact-setting/update.js"
+  },
+  "resources/js/admin/site-setting/general-setting/image.js": {
+    "file": "assets/image-6c49108b.js",
+    "isEntry": true,
+    "src": "resources/js/admin/site-setting/general-setting/image.js"
+  },
+  "resources/js/admin/site-setting/general-setting/update.js": {
+    "file": "assets/update-6ab6b51a.js",
+    "isEntry": true,
+    "src": "resources/js/admin/site-setting/general-setting/update.js"
+  },
+  "resources/js/admin/site-setting/seo-setting/update.js": {
+    "file": "assets/update-ba34166b.js",
+    "isEntry": true,
+    "src": "resources/js/admin/site-setting/seo-setting/update.js"
+  },
+  "resources/js/admin/site-setting/social-media-setting/repeater.js": {
+    "file": "assets/repeater-8cd84dde.js",
+    "isEntry": true,
+    "src": "resources/js/admin/site-setting/social-media-setting/repeater.js"
+  },
+  "resources/js/admin/site-setting/social-media-setting/update.js": {
+    "file": "assets/update-a47d5739.js",
+    "isEntry": true,
+    "src": "resources/js/admin/site-setting/social-media-setting/update.js"
+  },
   "resources/js/admin/surveys/destroy-survey.js": {
     "file": "assets/destroy-survey-0b63573e.js",
     "isEntry": true,

@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.8",
         "spatie/eloquent-sortable": "^4.4",
         "spatie/laravel-permission": "^6.9",
+        "spatie/laravel-settings": "^3.4",
         "spatie/laravel-sluggable": "^3.6",
         "yajra/laravel-datatables-oracle": "10.3.1"
     },

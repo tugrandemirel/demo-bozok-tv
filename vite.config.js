@@ -73,7 +73,15 @@ export default defineConfig({
                 "resources/js/admin/profile/update-personal-information.js",
                 "resources/js/admin/profile/profile-image.js",
                 "resources/js/admin/profile/update-change-password.js",
-                "resources/js/admin/input-mask.js"
+                "resources/js/admin/input-mask.js",
+
+                // site setting
+                "resources/js/admin/site-setting/general-setting/image.js",
+                "resources/js/admin/site-setting/general-setting/update.js",
+                "resources/js/admin/site-setting/contact-setting/update.js",
+                "resources/js/admin/site-setting/seo-setting/update.js",
+                "resources/js/admin/site-setting/social-media-setting/repeater.js",
+                "resources/js/admin/site-setting/social-media-setting/update.js",
             ],
 
             refresh: true,
