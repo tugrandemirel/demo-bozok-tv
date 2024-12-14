@@ -13,13 +13,17 @@ var KTFormRepeater = function() {
 
             hide: function(deleteElement) {
                 swal.fire({
-                    title: 'Silme İşlemi', // status'a göre başlık ayarı
-                    icon: 'info', // Varsayılan icon: 'error'
-                    text: `Silmek istediğinize emin misiniz? `,
-                    showConfirmButton: true,
+                    text: "Silmek istediğinize emin misiniz?",
+                    imageUrl: "/assets/media/svg/illustrations/23.svg",
+                    imageWidth: 400,
+                    imageHeight: 200,
+                    imageAlt: "Custom image",
+                    animation: true,
+                    confirmButtonClass: "btn btn-light-primary font-weight-bold",
+                    cancelButtonClass: "btn btn-transparent-danger font-weight-bold",
+                    confirmButtonText: "Sil",
+                    cancelButtonText: "İptal",
                     showCancelButton: true,
-                    confirmButtonText: 'Sil',
-                    confirmCancelText: 'Hayır',
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $(this).slideUp(deleteElement);
