@@ -19,6 +19,7 @@ class SiteSettingController extends Controller
     {
         $general_setting = app(GeneralSetting::class);
         $contact_setting = app(ContactSetting::class);
+        // TODO: SeoSetting alanı düzenlenecek.
         $seo_setting = app(SeoSetting::class);
         $social_medias = app(SocialMediaSetting::class);
 
