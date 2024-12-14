@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\ViewComposer\CategoryViewComposer;
 use App\ViewComposer\NewsletterSourceViewComposer;
 use App\ViewComposer\PostStatusViewComposer;
+use App\ViewComposer\SiteSettingViewComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -36,5 +37,10 @@ class ViewComposerProvider extends ServiceProvider
             'admin.posts.modals.post-status-modal',
             'author.posts.modals.post-status-modal',
         ], PostStatusViewComposer::class);
+
+        View::composer([
+            'admin.layouts.app',
+            "admin.layouts.aside"
+        ], SiteSettingViewComposer::class);
     }
 }

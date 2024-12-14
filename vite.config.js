@@ -79,6 +79,9 @@ export default defineConfig({
                 "resources/js/admin/site-setting/general-setting/image.js",
                 "resources/js/admin/site-setting/general-setting/update.js",
                 "resources/js/admin/site-setting/contact-setting/update.js",
+                "resources/js/admin/site-setting/seo-setting/update.js",
+                "resources/js/admin/site-setting/social-media-setting/repeater.js",
+                "resources/js/admin/site-setting/social-media-setting/update.js",
             ],
 
             refresh: true,

@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\Profile\ProfileController;
 use App\Http\Controllers\Admin\SiteSetting\ContactSettingController;
 use App\Http\Controllers\Admin\SiteSetting\GeneralSettingController;
 use App\Http\Controllers\Admin\SiteSetting\SiteSettingController;
+use App\Http\Controllers\Admin\SiteSetting\SocialMediaSettingController;
 use App\Http\Controllers\Admin\Surveys\QuestionController;
 use App\Http\Controllers\Admin\Surveys\SurveyController;
 use Illuminate\Support\Facades\Route;
@@ -112,5 +113,6 @@ Route::middleware(['auth', 'role:Super-admin|Admin'])->prefix('dashboard')->as('
         Route::get('/index', [SiteSettingController::class, 'index'])->name('index');
         Route::post('/general-setting', [GeneralSettingController::class, 'store'])->name('general-setting-store');
         Route::post('/contact-setting', [ContactSettingController::class, 'store'])->name('contact-setting-store');
+        Route::post('/social-media-setting', [SocialMediaSettingController::class, 'store'])->name('social-media-setting');
     });
 });
