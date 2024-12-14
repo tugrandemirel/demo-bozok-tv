@@ -83,7 +83,7 @@
             <label class="col-form-label col-sm-12">Beşli Manşet Görseli</label>
             <div class="col-sm-12">
                 <div class="image-input image-input-outline w-100 text-center" id="inside_image">
-                    <div class="image-input-wrapper  w-100" style="background-image: url({{ asset('/storage/'.$featured_image?->path) }})"></div>
+                    <div class="image-input-wrapper  w-100" style="background-image: url({{ asset($featured_image?->path) }})"></div>
 
                     <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="İç Kapak Görselini değiştir">
                         <i class="fa fa-pen icon-sm text-muted"></i>
