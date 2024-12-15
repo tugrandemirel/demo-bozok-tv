@@ -20,6 +20,17 @@ class CustomHelper
 
         return $record ? $record->id : null;
     }
+    public static function getIdByCode($modelClass, $code)
+    {
+        if (!class_exists($modelClass) || !$code) {
+            return null;
+        }
+
+        $model = new $modelClass;
+        $record = $model->where('code', $code)->first();
+
+        return $record ? $record->id : null;
+    }
 
     public static function getNewsletterPublicationStatusLabelColor($status): string
     {
