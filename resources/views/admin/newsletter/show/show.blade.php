@@ -1,5 +1,6 @@
 @php
-    $newsletterToggle = 'active';
+    $newslettersToggle = 'menu-item-open';
+    $newsletterToggle = 'menu-item-active';
 @endphp
 @extends('admin.layouts.app')
 @section('title', 'Haber Detay')

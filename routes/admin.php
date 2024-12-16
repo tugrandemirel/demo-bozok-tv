@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Gallery\VideoGalleryController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterCategoryController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterController;
+use App\Http\Controllers\Admin\Newsletter\NewsletterMainHeadlineController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterNewsletterSourceController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterTagController;
 use App\Http\Controllers\Admin\Posts\PostController;
@@ -57,6 +58,10 @@ Route::middleware(['auth', 'role:Super-admin|Admin'])->prefix('dashboard')->as('
         Route::prefix('tags')->as('tag.')->group(function () {
             Route::get('/index', [NewsletterTagController::class, 'index'])->name('index');
             Route::post('store', [NewsletterTagController::class, 'store'])->name('store');
+        });
+
+        Route::prefix('main-headlines')->as('main-headline')->group(function () {
+            Route::get("/", [NewsletterMainHeadlineController::class, 'index'])->name('index');
         });
     });
 
