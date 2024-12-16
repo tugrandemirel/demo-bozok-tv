@@ -199,6 +199,7 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         Spatie\EloquentSortable\EloquentSortableServiceProvider::class,
         \App\Providers\ViewComposerProvider::class,
+        \App\Providers\ObserverServiceProvider::class
 
     ],
 

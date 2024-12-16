@@ -7,6 +7,7 @@ use App\Traits\ActivityLoggerTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -40,6 +41,11 @@ class Ads extends Model implements Sortable
     public function image(): MorphOne
     {
         return $this->morphOne(MorphImage::class, 'imageable');
+    }
+
+    public function mainHeadlines(): MorphTo
+    {
+        return $this->morphTo(MainHeadline::class, 'headlineable');
     }
 
     protected static function booted(): void

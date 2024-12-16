@@ -14,4 +14,9 @@ class Placement extends Model
         'name',
         'code'
     ];
+
+    public function scopeMainHeadline($query)
+    {
+        return $query->where("code", "main_headline");
+    }
 }

@@ -10,6 +10,7 @@ use App\Http\Requests\Admin\Newsletter\NewsletterFilterRequest;
 use App\Http\Requests\Admin\Newsletter\NewsletterPublicationStatusChangeRequest;
 use App\Http\Requests\Admin\Newsletter\NewsletterStoreRequest;
 use App\Http\Requests\Admin\Newsletter\NewsletterUpdateRequest;
+use App\Models\MainHeadline;
 use App\Models\MorphImage;
 use App\Models\Newsletter;
 use App\Models\NewsletterPublicationStatus;
@@ -136,8 +137,15 @@ class NewsletterController extends Controller
                 SeoSetting::query()
                     ->create($seo);
             }
-            DB::commit();
 
+            if ($attributes->get('is_main_headline') === NewsletterGeneralEnum::ON->value) {
+                /** @var MainHeadline $main_headlines */
+                $main_headline = New MainHeadline();
+                $main_headline->headlineable()->associate($newsletter);
+                $main_headline->save();
+            }
+
+            DB::commit();
             return ResponseHelper::success('Haber kaydetme işlemi başarılı bir şekilde gerçekleştirildi.');
         } catch (\Throwable $exception) {
             DB::rollBack();

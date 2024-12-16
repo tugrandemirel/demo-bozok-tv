@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Ads\AdsStoreRequest;
 use App\Models\Ads;
 use App\Models\AdType;
+use App\Models\MainHeadline;
+use App\Models\Placement;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -70,6 +72,7 @@ class AdsController extends Controller
                 ->special()
                 ->first();
 
+            /** @var Ads $ads */
             $ads = Ads::query()
                 ->create($attributes->toArray());
 
@@ -78,8 +81,21 @@ class AdsController extends Controller
                     return ResponseHelper::error('Bir hata oluştu', ['Lütfen Resim seçimi yapınız.'], 422);
                 } else {
                     $image = ImageHelper::uploadImage($image);
-                    $ads_image = $ads->image()->create($image);
+                    $ads->image()->create($image);
                 }
+            }
+
+            /** @var Placement $placement_main_headline */
+            $placement_main_headline = Placement::query()
+                ->select('code')
+                ->mainHeadline()
+                ->first();
+
+            if ($placement_main_headline->code === $request->input('placement')) {
+                /** @var MainHeadline $main_headlines */
+                $main_headline = New MainHeadline();
+                $main_headline->headlineable()->associate($ads);
+                $main_headline->save();
             }
 
             DB::commit();
