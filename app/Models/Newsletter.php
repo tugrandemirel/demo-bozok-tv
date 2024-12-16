@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -67,6 +68,11 @@ class Newsletter extends Model implements Sortable
     public function images(): MorphMany
     {
         return $this->morphMany(MorphImage::class, 'imageable');
+    }
+
+    public function mainHeadlines(): MorphTo
+    {
+        return $this->morphTo(MainHeadline::class, 'headlineable');
     }
 
     public function seoSetting(): MorphOne

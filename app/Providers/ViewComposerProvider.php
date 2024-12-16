@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\ViewComposer\CategoryViewComposer;
 use App\ViewComposer\NewsletterSourceViewComposer;
+use App\ViewComposer\PlacementViewComposer;
 use App\ViewComposer\PostStatusViewComposer;
 use App\ViewComposer\SiteSettingViewComposer;
 use Illuminate\Support\Facades\View;
@@ -42,5 +43,13 @@ class ViewComposerProvider extends ServiceProvider
             'admin.layouts.app',
             "admin.layouts.aside"
         ], SiteSettingViewComposer::class);
+
+        View::composer([
+            "admin.ads.create",
+        ], PlacementViewComposer::class);
+
+        View::composer([
+            "admin.ads.create",
+        ], AdTypeViewComposer::class);
     }
 }

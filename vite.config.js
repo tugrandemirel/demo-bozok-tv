@@ -82,6 +82,10 @@ export default defineConfig({
                 "resources/js/admin/site-setting/seo-setting/update.js",
                 "resources/js/admin/site-setting/social-media-setting/repeater.js",
                 "resources/js/admin/site-setting/social-media-setting/update.js",
+
+                // ADS
+                "resources/js/admin/ads/create.js",
+                "resources/js/admin/ads/store.js",
             ],
 
             refresh: true,

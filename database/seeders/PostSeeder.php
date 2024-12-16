@@ -10,6 +10,7 @@ use App\Service\Seo\SeoService;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PostSeeder extends Seeder
 {
@@ -31,6 +32,7 @@ class PostSeeder extends Seeder
             // Her bir kullanıcı için rastgele post oluştur
             for ($i = 0; $i < 15; $i++) { // Her yazar için 1-5 arası post
                 $post = Post::query()->create([
+                    "uuid" => Str::uuid(),
                     'title' => $faker->sentence(6, true), // Faker ile rastgele başlık
                     'content' => $faker->paragraph(5, true), // Faker ile rastgele içerik
                     'user_id' => $authors_ids[array_rand($authors_ids)],

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Ads\AdsController;
 use App\Http\Controllers\Admin\Gallery\GalleryController;
 use App\Http\Controllers\Admin\Gallery\GalleryImageController;
 use App\Http\Controllers\Admin\Gallery\VideoGalleryController;
@@ -107,6 +108,12 @@ Route::middleware(['auth', 'role:Super-admin|Admin'])->prefix('dashboard')->as('
         Route::post('/update', [ProfileController::class, 'update'])->name('update');
         Route::get('/change-password', [ProfileController::class, 'changePassword'])->name('changePassword');
         Route::post('/update-password', [ProfileController::class, 'updatePassword'])->name('updatePassword');
+    });
+
+    Route::prefix('ads')->as('ads.')->group(function () {
+        Route::get('/', [AdsController::class, 'index'])->name('index');
+        Route::get('/create', [AdsController::class, 'create'])->name('create');
+        Route::post('/store', [AdsController::class, 'store'])->name('store');
     });
 
     Route::prefix('site-setting')->as('site_setting.')->group(function (){

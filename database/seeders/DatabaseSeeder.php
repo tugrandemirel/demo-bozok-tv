@@ -27,12 +27,14 @@ class DatabaseSeeder extends Seeder
             NewsletterSourceSeeder::class,
             NewsletterPublicationStatusSeeder::class,
             PostStatusSeeder::class,
-            PostSeeder::class,
-            SurveySeeder::class,
-            SurveyQuestionSeeder::class,
-            QuestionAnswerOptionsSeeder::class,
-            SurveyUserKvkkDataSeeder::class,
-            QuestionUserAnswerSeeder::class
+            PlacementSeeder::class,
+            AdTypeSeeder::class,
+//            PostSeeder::class,
+//            SurveySeeder::class,
+//            SurveyQuestionSeeder::class,
+//            QuestionAnswerOptionsSeeder::class,
+//            SurveyUserKvkkDataSeeder::class,
+//            QuestionUserAnswerSeeder::class
         ]);
     }
 }
