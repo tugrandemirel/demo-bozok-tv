@@ -47,7 +47,7 @@
                         <span class="menu-text">Dashboard</span>
                     </a>
                 </li>
-                <li class="menu-item menu-item-submenu {{ $newslettersToggle }}" aria-haspopup="true" data-menu-toggle="hover">
+                <li class="menu-item menu-item-submenu {{ $newslettersToggle ?? '' }}" aria-haspopup="true" data-menu-toggle="hover">
                     <a href="javascript:;" class="menu-link menu-toggle">
                         <span class="svg-icon menu-icon">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Bucket.svg-->
@@ -71,7 +71,7 @@
                                     <span class="menu-text">Haberler</span>
                                 </span>
                             </li>
-                            <li class="menu-item {{ $newsletterToggle }}" aria-haspopup="true">
+                            <li class="menu-item {{ $newsletterToggle ?? '' }}" aria-haspopup="true">
                                 <a href="{{ route('admin.newsletters.index') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
