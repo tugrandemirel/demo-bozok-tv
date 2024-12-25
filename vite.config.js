@@ -26,6 +26,9 @@ export default defineConfig({
 
                 "resources/js/admin/newsletter/show/publication-status.js",
 
+                // MAIN HEADLINE
+                "resources/js/admin/newsletter/main-headline/draggable.js",
+
                 // GALLERY
                 "resources/js/admin/gallery/index.js",
                 "resources/js/admin/gallery/store.js",

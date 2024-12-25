@@ -124,6 +124,11 @@
     "isEntry": true,
     "src": "resources/js/admin/newsletter/general-setting-tab.js"
   },
+  "resources/js/admin/newsletter/main-headline/draggable.js": {
+    "file": "assets/draggable-20069d0f.js",
+    "isEntry": true,
+    "src": "resources/js/admin/newsletter/main-headline/draggable.js"
+  },
   "resources/js/admin/newsletter/newsletter-source-store.js": {
     "file": "assets/newsletter-source-store-d315293a.js",
     "isEntry": true,

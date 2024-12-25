@@ -76,11 +76,11 @@
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
-                                    <span class="menu-text">Habler Listesi</span>
+                                    <span class="menu-text">Haber Listesi</span>
                                 </a>
                             </li>
-                            <li class="menu-item" aria-haspopup="true">
-                                <a href="{{ route('admin.newsletters.index') }}" class="menu-link">
+                            <li class="menu-item {{ $newsletterMainHeadlineToggle ?? '' }}" aria-haspopup="true">
+                                <a href="{{ route('admin.newsletters.main-headline.index') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>

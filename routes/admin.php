@@ -60,8 +60,9 @@ Route::middleware(['auth', 'role:Super-admin|Admin'])->prefix('dashboard')->as('
             Route::post('store', [NewsletterTagController::class, 'store'])->name('store');
         });
 
-        Route::prefix('main-headlines')->as('main-headline')->group(function () {
+        Route::prefix('main-headlines')->as('main-headline.')->group(function () {
             Route::get("/", [NewsletterMainHeadlineController::class, 'index'])->name('index');
+            Route::post("/update", [NewsletterMainHeadlineController::class, 'update'])->name('update');
         });
     });
 
