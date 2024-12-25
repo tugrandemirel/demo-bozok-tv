@@ -54,8 +54,7 @@
                             <th>Sıra Numarası</th>
                             <th class="pl-7">Manşet</th>
                             <th>Durum</th>
-                            <th>Reklam Türü</th>
-                            <th>Bilgilendirme</th>
+                            <th>Manşet Türü</th>
                             <th>Oluşturma Tarihi</th>
                         </tr>
                     </thead>
@@ -86,24 +85,6 @@
                                 </td>
                                 <td>
                                     <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $main_headline?->ad_type_name }}</span>
-                                </td>
-                                <td>
-                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                                       <span class="text-muted"> Başlangıç Tarihi:</span> {{ optional($main_headline)->ads_start_date
-                                            ? \Carbon\Carbon::parse($main_headline->ads_start_date)
-                                            ->locale(app()->getLocale())
-                                            ->isoFormat('ddd DD MMM YYYY')
-                                            : '-'
-                                        }}
-                                    </span>
-                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                                       <span class="text-muted"> Bitiş Tarihi:</span> {{ optional($main_headline)->ads_end_date
-                                            ? \Carbon\Carbon::parse($main_headline->ads_end_date)
-                                            ->locale(app()->getLocale())
-                                            ->isoFormat('ddd DD MMM YYYY')
-                                            : '-'
-                                        }}
-                                    </span>
                                 </td>
                                 <td>
                                     <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
@@ -145,14 +126,6 @@
                                 <td>
                                     <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                         Haber
-                                    </span>
-                                </td>
-                                <td>
-                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                                        <span class="text-muted">Kategori: </span> {{ $main_headline?->category_name }}
-                                    </span>
-                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                                       <span class="text-muted">Kaynak: </span> {{ $main_headline?->newsletter_source_name }}
                                     </span>
                                 </td>
                                 <td>
