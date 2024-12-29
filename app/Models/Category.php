@@ -17,6 +17,7 @@ class Category extends Model
 {
     use HasFactory, SoftDeletes, HasSlug, SortableTrait;
 
+
     protected $fillable = [
         'uuid',
         'created_by_user_id',

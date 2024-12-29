@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enum\MorphImage\MorphImageImageTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -68,7 +69,7 @@ class MorphImage extends Model
         return $query->where('imageable_type', Gallery::class);
     }
 
-    public function imageable()
+    public function imageable(): MorphTo
     {
         return $this->morphTo();
     }

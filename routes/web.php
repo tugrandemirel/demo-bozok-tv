@@ -14,7 +14,27 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
+/* $main_headlines = \App\Models\MainHeadline::query()
+        ->with(['headlineable' => function (\Illuminate\Database\Eloquent\Relations\MorphTo $morphTo) {
+            $morphTo->constrain([
+                \App\Models\Newsletter::class => function ($qu) {
+                $qu->with([
+                    'category',
+                    'images' => function ($q) {
+                        $q->where('image_type', \App\Enum\MorphImage\MorphImageImageTypeEnum::COVER);
+                    }
+                ]);
+                },
+                \App\Models\Ads::class => function ($qu) {
+                    $qu->where('is_active', \App\Enum\Ads\AdsIsActiveEnum::ACTIVE);
+                    $qu->with('image');
+                }
+            ]);
+        }])
+        ->limit(10)
+        ->orderBy('order')
+        ->get();*/
 Route::get('/', function () {
     return view('welcome');
 });
