@@ -43,6 +43,9 @@ class Ads extends Model implements Sortable
         return $this->morphOne(MorphImage::class, 'imageable');
     }
 
+    /**
+     * Ads ile ilişkili MainHeadline'ı alır.
+     */
     public function mainHeadlines(): MorphTo
     {
         return $this->morphTo(MainHeadline::class, 'headlineable');

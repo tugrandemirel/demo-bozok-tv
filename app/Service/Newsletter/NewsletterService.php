@@ -4,14 +4,16 @@ namespace App\Service\Newsletter;
 
 use App\Http\Requests\Admin\Newsletter\NewsletterFilterRequest;
 use App\Http\Resources\Admin\Newsletter\NewsletterResource;
+use App\Interfaces\Repositories\NewsletterRepositoryInterface;
 use App\Models\Newsletter;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 
-class NewsletterService
+class NewsletterService implements NewsletterRepositoryInterface
 {
-    public function getAllDataForDatatable(NewsletterFilterRequest $request): JsonResponse
+    public function getAllDataForDatatable(NewsletterFilterRequest|Request $request): JsonResponse
     {
         $newsletters = Newsletter::query()
             ->select(
@@ -92,5 +94,10 @@ class NewsletterService
             });
 
         return DataTables::of(NewsletterResource::collection($newsletters))->make(true);
+    }
+
+    public function getMainHeadlines()
+    {
+
     }
 }

@@ -257,7 +257,7 @@ class NewsletterController extends Controller
         }
     }
 
-    public function update(NewsletterUpdateRequest $request)
+    public function update(NewsletterUpdateRequest $request): JsonResponse
     {
         $attributes = collect($request->validated());
         $attributes->put('publish_date', !is_null($attributes->get('publish_date')) ? Carbon::createFromFormat('d/m/Y H:i', $attributes->get('publish_date'))->toDateTimeString() : null);
@@ -363,10 +363,22 @@ class NewsletterController extends Controller
                         ->create($seo);
                 }
             }
+            $main_headline = $newsletter->mainHeadlines()->first();
+            if ($attributes->get('is_main_headline') === NewsletterGeneralEnum::OFF->value) {
+                if ($main_headline) {
+                    $main_headline->delete();
+                }
+            } else {
+                if (!$main_headline) {
+                    $main_headline = New MainHeadline();
+                    $main_headline->headlineable()->associate($newsletter);
+                    $main_headline->save();
+                }
+            }
 
             DB::commit();
             return ResponseHelper::success('Haber güncelleme işlemi başarılı bir şekilde gerçekleştirildi.');
-        } catch (\Throwable $exception) {
+        } catch (\Throwable $exception) { dd($exception->getMessage());
             return ResponseHelper::error('Bir hata oluştu', [$exception->getMessage()]);
         }
     }

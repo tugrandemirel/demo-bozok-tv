@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use App\Enum\Newsletter\NewsletterGeneralEnum;
+use App\Http\Controllers\Admin\Newsletter\NewsletterController;
 use App\Traits\ActivityLoggerTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -70,14 +73,32 @@ class Newsletter extends Model implements Sortable
         return $this->morphMany(MorphImage::class, 'imageable');
     }
 
-    public function mainHeadlines(): MorphTo
+    public function image(): MorphOne
     {
-        return $this->morphTo(MainHeadline::class, 'headlineable');
+        return $this->morphOne(MorphImage::class, 'imageable');
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, "category_id");
+    }
+
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(NewsletterPublicationStatus::class, "newsletter_publication_status_id");
+    }
+
+    /**
+     * Newsletter ile ilişkili MainHeadline'ı alır.
+     */
+    public function mainHeadlines(): MorphOne
+    {
+        return $this->morphOne(MainHeadline::class, 'headlineable');
     }
 
     public function seoSetting(): MorphOne
     {
-        return $this->morphOne(MorphImage::class, 'seoable');
+        return $this->morphOne(SeoSetting::class, 'seoable');
     }
 
     public function newsletterTags()
