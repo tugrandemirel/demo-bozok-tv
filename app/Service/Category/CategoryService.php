@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Service\Category;
+
+use App\Http\Resources\CategoryResource;
+use App\Repositories\CategoryRepository;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+
+class CategoryService
+{
+    protected CategoryRepository $category_repository;
+
+    public function __construct(CategoryRepository $category_repository)
+    {
+        $this->category_repository = $category_repository;
+    }
+
+    public function getCategories(Request $request): AnonymousResourceCollection
+    {
+        $categories = $this->category_repository->getCategories($request);
+        return CategoryResource::collection($categories);
+    }
+}
