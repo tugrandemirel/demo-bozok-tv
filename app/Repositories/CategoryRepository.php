@@ -18,6 +18,7 @@ class CategoryRepository implements CategoryRepositoryInterface
             ->select('name', "slug")
             ->where("is_active", CategoryIsActiveEnum::ACTIVE)
             ->where("home_page", CategoryHomePageEnum::ACTIVE)
+            ->orderBy('order')
             ->get();
 
         return $categories;
