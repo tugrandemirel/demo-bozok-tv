@@ -13,12 +13,12 @@ class MainHeadlineObserve
      */
     public function creating(MainHeadline $mainHeadline): void
     {
-        if (!Auth::check()) {
-            throw new \Exception('Lütfen kullanıcı girişi yapınız.');
-        }
+//        if (!Auth::check()) {
+//            throw new \Exception('Lütfen kullanıcı girişi yapınız.');
+//        }
 
-        $mainHeadline->uuid = Str::uuid();
-        $mainHeadline->created_by_user_id = Auth::id();
+//        $mainHeadline->uuid = Str::uuid();
+//        $mainHeadline->created_by_user_id = Auth::id();
     }
 
     /**

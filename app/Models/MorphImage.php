@@ -19,8 +19,8 @@ class MorphImage extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'morphable_id',
-        'morphable_type',
+        'imageable_id',
+        'imageable_type',
         'image_name',
         'image_ext',
         'size',
