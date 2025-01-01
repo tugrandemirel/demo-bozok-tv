@@ -28,4 +28,15 @@ class CategoryApiController extends Controller
         }
 
     }
+
+    public function getCategoryNewsletters(Request $request, string $slug): JsonResponse
+    {
+        try {
+            /** @var CategoryService $newsletters */
+            $newsletters = $this->category_service->getCategoryNewsletters($request, $slug);
+            return ResponseHelper::success("Kategoriye bağlı haberler başarılı bir şekilde çekildi.", ['data' => $newsletters], 200);
+        } catch (\Exception $exception) {
+            return ResponseHelper::error("Bir hata oluştu.", [$exception->getMessage()]);
+        }
+    }
 }
