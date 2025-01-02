@@ -111,7 +111,7 @@ class Newsletter extends Model implements Sortable
         return $this->morphMany(UserActivity::class, 'activityable');
     }
 
-    protected static function booted(): void
+    /*protected static function booted(): void
     {
         static::created(function ($newsletter) {
             $newsletter->logActivity('newsletter_created', 'Yeni bir Haber oluşturdu.', $newsletter);
@@ -124,5 +124,5 @@ class Newsletter extends Model implements Sortable
         static::deleted(function ($newsletter) {
             $newsletter->logActivity('newsletter_deleted', 'Haber silindi.', $newsletter);
         });
-    }
+    }*/
 }

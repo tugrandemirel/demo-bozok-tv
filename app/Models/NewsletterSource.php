@@ -57,4 +57,9 @@ class NewsletterSource extends Model
     {
         return $this->morphOne(SeoSetting::class, 'seoable');
     }
+
+    public function scopeBozokTv($query)
+    {
+        return $query->where('slug', "bozok-tv");
+    }
 }

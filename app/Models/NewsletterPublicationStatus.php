@@ -31,7 +31,7 @@ class NewsletterPublicationStatus extends Model
         return $query->where('code', 'draft')->first();
     }
 
-    public function scopeNotRemoved($query)
+    public function scopeRemoved($query)
     {
         return $query->whereNot('code', 'removed');
     }

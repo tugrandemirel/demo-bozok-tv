@@ -86,7 +86,7 @@ class SeoService
                'twitter_image' => $twitterImage, // Twitter resmi
            ];
 
-           SeoSetting::updateOrCreate(
+           SeoSetting::query()->updateOrCreate(
                [
                    'seoable_type' => $seoData['seoable_type'],
                    'seoable_id' => $seoData['seoable_id']
