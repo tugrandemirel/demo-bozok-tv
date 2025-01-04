@@ -14,6 +14,7 @@ class NewsletterResource extends JsonResource
             'content' => $this?->content,
             'is_main_headline' => $this?->is_main_headline,
             'publish_date' => $this?->publish_date,
+            'created_at' => $this?->created_at,
             'image' => MorphImageResource::make($this->whenLoaded('image')),
             'images' => MorphImageResource::make($this->whenLoaded('images')),
             'category' => CategoryResource::make($this->whenLoaded('category')),

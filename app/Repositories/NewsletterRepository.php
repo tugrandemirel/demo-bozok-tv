@@ -99,7 +99,7 @@ class NewsletterRepository implements NewsletterRepositoryInterface
     public function getLastMinuteNewsletters()
     {
         $last_minute_newsletters = Newsletter::query()
-            ->select("title", "slug")
+            ->select("title", "slug", "created_at", "publish_date")
             ->lastMinute()
             ->orderByDesc("order")
             ->limit(5)
