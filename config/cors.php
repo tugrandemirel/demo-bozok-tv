@@ -17,7 +17,7 @@ return [
 
     'paths' => ['api/*'],
     'allowed_methods' => ['*'],
-    'allowed_origins' => ['http://localhost:3000'], // Belirli bir domain
+    'allowed_origins' => ['*'], // Belirli bir domain
     'allowed_headers' => ['*'],
     'supports_credentials' => false,
 
