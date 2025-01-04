@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\CategoryApiController;
 use App\Http\Controllers\Api\V1\MainHeadlineApiController;
+use App\Http\Controllers\Api\V1\NewsletterLastMinuteApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Route;
     Route::prefix("v1")->group(function (){
         Route::apiResource('main-headline', MainHeadlineApiController::class);
         Route::apiResource('categories', CategoryApiController::class);
+        Route::apiResource('last-minutes', NewsletterLastMinuteApiController::class);
     }) ;
 
 
