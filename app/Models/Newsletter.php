@@ -111,6 +111,11 @@ class Newsletter extends Model implements Sortable
         return $this->morphMany(UserActivity::class, 'activityable');
     }
 
+    public function scopeLastMinute($query)
+    {
+        return $query->where('is_last_minute', NewsletterGeneralEnum::ON);
+    }
+
     /*protected static function booted(): void
     {
         static::created(function ($newsletter) {
