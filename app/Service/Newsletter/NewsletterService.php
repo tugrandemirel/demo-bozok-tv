@@ -44,4 +44,10 @@ class NewsletterService implements NewsletterRepositoryInterface
 
         return \App\Http\Resources\NewsletterResource::collection($last_minutes_newsletters);
     }
+
+    public function getFeaturedNews(Request $request): AnonymousResourceCollection
+    {
+        $featured_news = $this->newsletter_repository->getFeaturedNews($request);
+        return \App\Http\Resources\NewsletterResource::collection($featured_news);
+    }
 }
