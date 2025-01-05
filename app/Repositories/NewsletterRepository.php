@@ -135,6 +135,7 @@ class NewsletterRepository implements NewsletterRepositoryInterface
                 },
                 "seoSetting",
             ])
+            ->orderByDesc("order")
             ->limit(2)
             ->get();
 
