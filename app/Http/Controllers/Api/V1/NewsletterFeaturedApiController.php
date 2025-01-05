@@ -21,7 +21,7 @@ class NewsletterFeaturedApiController extends Controller
     {
         try {
             $featured_news = $this->newsletter_service->getFeaturedNews($request);
-            return ResponseHelper::success("Ana Manşet Başarılı bir şekilde çekildi.", ['data' => $featured_news], 200);
+            return ResponseHelper::success("Öne Çıkanlar Başarılı bir şekilde çekildi.", ['data' => $featured_news], 200);
         } catch (\Exception $exception) {
             return ResponseHelper::error("Bir hata oluştu.", [$exception->getMessage()]);
         }

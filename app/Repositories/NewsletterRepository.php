@@ -130,7 +130,7 @@ class NewsletterRepository implements NewsletterRepositoryInterface
                     $query->where('code', $newsletter_publication_status_active);
                 },
                 "image" => function ($query) {
-                    $query->select("path")
+                    $query->select("path", "id", "imageable_id")
                         ->where("image_type", MorphImageImageTypeEnum::COVER);
                 },
                 "seoSetting",
