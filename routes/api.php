@@ -30,6 +30,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('last-minutes', [NewsletterLastMinuteApiController::class, 'index']);
         Route::get("featured-news", [NewsletterFeaturedApiController::class, 'index']);
         Route::get("today-headline-news", [NewsletterTodayHeadlineApiController::class, 'index']);
+        Route::get("last-news/", [NewsletterApiController::class, 'getLastNewsletters']);
         Route::get("newsletter/{slug}", [NewsletterApiController::class, 'show']);
     }) ;
 

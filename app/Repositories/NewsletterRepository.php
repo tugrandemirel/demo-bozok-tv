@@ -185,6 +185,26 @@ class NewsletterRepository implements NewsletterRepositoryInterface
         return $newsletter;
     }
 
+    public function getLastNewsletters()
+    {
+        $newsletter_publication_status_active = self::getNewsletterStatusActiveCode();
+        $newsletter_publication_status_archive = self::getNewsletterStatusArchiveCode();
+
+        $newsletters = Newsletter::query()
+            ->whereHas('status', function ($query) use ($newsletter_publication_status_active, $newsletter_publication_status_archive) {
+                $query->whereIn('code', [$newsletter_publication_status_active, $newsletter_publication_status_archive]);
+            })
+            ->with([
+                "seoSetting",
+                "image",
+            ])
+            ->limit(10)
+            ->orderBy("order")
+            ->get();
+
+        return $newsletters;
+    }
+
     public static function getNewsletterStatusActiveCode()
     {
         return NewsletterPublicationStatus::query()

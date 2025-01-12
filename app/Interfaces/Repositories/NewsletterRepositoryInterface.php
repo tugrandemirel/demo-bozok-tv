@@ -15,4 +15,6 @@ interface NewsletterRepositoryInterface
     public function getNewsletter($slug);
 
     public function getTodayHeadlineNewsletters();
+
+    public function getLastNewsletters();
 }
