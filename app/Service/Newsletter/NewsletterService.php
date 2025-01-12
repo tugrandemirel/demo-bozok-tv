@@ -50,4 +50,10 @@ class NewsletterService implements NewsletterRepositoryInterface
         $featured_news = $this->newsletter_repository->getFeaturedNews($request);
         return \App\Http\Resources\NewsletterResource::collection($featured_news);
     }
+
+    public function getNewsletter($slug): \App\Http\Resources\NewsletterResource
+    {
+        $newsletter = $this->newsletter_repository->getNewsletter($slug);
+        return \App\Http\Resources\NewsletterResource::make($newsletter);
+    }
 }

@@ -142,11 +142,39 @@ class NewsletterRepository implements NewsletterRepositoryInterface
         return $featured_news;
     }
 
+    public function getNewsletter($slug)
+    {
+        $newsletter_publication_status_active = self::getNewsletterStatusActiveCode();
+        $newsletter_publication_status_archive = self::getNewsletterStatusArchiveCode();
+
+        $newsletter = Newsletter::query()
+            ->whereHas('status', function ($query) use ($newsletter_publication_status_active, $newsletter_publication_status_archive) {
+                $query->whereIn('code', [$newsletter_publication_status_active, $newsletter_publication_status_archive]);
+            })
+            ->with([
+                "seoSetting",
+                "images",
+                "category",
+            ])
+            ->first();
+
+        return $newsletter;
+    }
+
     public static function getNewsletterStatusActiveCode()
     {
         return NewsletterPublicationStatus::query()
             ->select("code")
             ->onTheAir()
+            ->first()
+            ->code;
+    }
+
+    public static function getNewsletterStatusArchiveCode()
+    {
+        return NewsletterPublicationStatus::query()
+            ->select("code")
+            ->archive()
             ->first()
             ->code;
     }
