@@ -178,7 +178,7 @@ class NewsletterRepository implements NewsletterRepositoryInterface
                 "seoSetting",
                 "image",
             ])
-            ->limit(6)
+            ->limit(3)
             ->orderBy("order")
             ->get();
 
