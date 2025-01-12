@@ -11,4 +11,6 @@ interface NewsletterRepositoryInterface
     public function getLastMinuteNewsletters();
 
     public function getFeaturedNews(Request $request);
+
+    public function getNewsletter($slug);
 }
