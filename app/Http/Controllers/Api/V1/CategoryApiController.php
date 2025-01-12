@@ -39,4 +39,19 @@ class CategoryApiController extends Controller
             return ResponseHelper::error("Bir hata oluştu.", [$exception->getMessage()]);
         }
     }
+
+    public function show(Request $request, string $slug)
+    {
+
+    }
+
+    public function relatedNewsletters(Request $request, string $slug): JsonResponse
+    {
+        try {
+            $newsletters = $this->category_service->getRelatedNewsletters($request, $slug);
+            return ResponseHelper::success("Kategoriye bağlı haberler başarılı bir şekilde çekildi.", ['data' => $newsletters], 200);
+        } catch (\Exception $exception) {
+            return ResponseHelper::error("Bir hata oluştu.", [$exception->getMessage()]);
+        }
+    }
 }

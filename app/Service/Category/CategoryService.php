@@ -28,4 +28,10 @@ class CategoryService
         $newsletters = $this->category_repository->getCategoryNewsletters($request, $slug);
         return NewsletterResource::collection($newsletters);
     }
+
+    public function getRelatedNewsletters(Request $request, string $slug)
+    {
+        $newsletters = $this->category_repository->getRelatedNewsletters($request, $slug);
+        return NewsletterResource::collection($newsletters);
+    }
 }
