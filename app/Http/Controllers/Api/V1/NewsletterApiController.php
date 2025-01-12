@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Helpers\Response\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Service\Newsletter\NewsletterService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Mockery\Exception;
 
@@ -14,6 +15,16 @@ class NewsletterApiController extends Controller
     public function __construct(NewsletterService $newsletter_service)
     {
         $this->newsletter_service = $newsletter_service;
+    }
+
+    public function getLastNewsletters(): JsonResponse
+    {
+        try {
+            $newsletter = $this->newsletter_service->getLastNewsletters();
+            return ResponseHelper::success("Ana Manşet Başarılı bir şekilde çekildi.", ['data' => $newsletter], 200);
+        } catch (Exception $exception) {
+            return ResponseHelper::error("Bir hata oluştu.", [$exception->getMessage()]);
+        }
     }
 
     public function show($slug)
