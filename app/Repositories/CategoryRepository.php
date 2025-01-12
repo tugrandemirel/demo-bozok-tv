@@ -58,7 +58,7 @@ class CategoryRepository implements CategoryRepositoryInterface
                 },
             ])
             ->orderBy('order')
-            ->limit(5)
+            ->limit(9)
             ->get();
 
         return $newsletters;
