@@ -56,4 +56,10 @@ class NewsletterService implements NewsletterRepositoryInterface
         $newsletter = $this->newsletter_repository->getNewsletter($slug);
         return \App\Http\Resources\NewsletterResource::make($newsletter);
     }
+
+    public function getTodayHeadlineNewsletters()
+    {
+        $newsletter = $this->newsletter_repository->getTodayHeadlineNewsletters();
+        return \App\Http\Resources\NewsletterResource::collection($newsletter);
+    }
 }

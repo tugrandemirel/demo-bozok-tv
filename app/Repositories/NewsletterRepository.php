@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Enum\MorphImage\MorphImageImageTypeEnum;
+use App\Enum\Newsletter\NewsletterGeneralEnum;
 use App\Http\Requests\Admin\Newsletter\NewsletterFilterRequest;
 use App\Http\Resources\Admin\Newsletter\NewsletterResource;
 use App\Interfaces\Repositories\NewsletterRepositoryInterface;
@@ -159,6 +160,27 @@ class NewsletterRepository implements NewsletterRepositoryInterface
                 "source"
             ])
             ->first();
+
+        return $newsletter;
+    }
+
+    public function getTodayHeadlineNewsletters()
+    {
+        $newsletter_publication_status_active = self::getNewsletterStatusActiveCode();
+        $newsletter_publication_status_archive = self::getNewsletterStatusArchiveCode();
+
+        $newsletter = Newsletter::query()
+            ->whereHas('status', function ($query) use ($newsletter_publication_status_active, $newsletter_publication_status_archive) {
+                $query->whereIn('code', [$newsletter_publication_status_active, $newsletter_publication_status_archive]);
+            })
+            ->where('is_today_headline', NewsletterGeneralEnum::ON)
+            ->with([
+                "seoSetting",
+                "image",
+            ])
+            ->limit(6)
+            ->orderBy("order")
+            ->get();
 
         return $newsletter;
     }
