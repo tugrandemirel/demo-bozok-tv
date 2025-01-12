@@ -88,6 +88,11 @@ class Newsletter extends Model implements Sortable
         return $this->belongsTo(NewsletterPublicationStatus::class, "newsletter_publication_status_id");
     }
 
+    public function source(): BelongsTo
+    {
+        return $this->belongsTo(NewsletterSource::class, "newsletter_source_id");
+    }
+
     /**
      * Newsletter ile ilişkili MainHeadline'ı alır.
      */

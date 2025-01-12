@@ -11,14 +11,16 @@ class NewsletterResource extends JsonResource
         return [
             'title' => $this?->title,
             'slug' => $this?->slug,
+            'spot' => $this?->spot,
             'content' => $this?->content,
             'is_main_headline' => $this?->is_main_headline,
             'publish_date' => $this?->publish_date,
             'created_at' => $this?->created_at,
             'image' => MorphImageResource::make($this->whenLoaded('image')),
-            'images' => MorphImageResource::make($this->whenLoaded('images')),
+            'images' => MorphImageResource::collection($this->whenLoaded('images')),
             'category' => CategoryResource::make($this->whenLoaded('category')),
-            "seo" => SeoSettingResource::make($this->whenLoaded("seoSetting"))
+            "seo" => SeoSettingResource::make($this->whenLoaded("seoSetting")),
+            "source" => NewsletterSourceResource::make($this->whenLoaded("source"))
         ];
     }
 }

@@ -151,10 +151,12 @@ class NewsletterRepository implements NewsletterRepositoryInterface
             ->whereHas('status', function ($query) use ($newsletter_publication_status_active, $newsletter_publication_status_archive) {
                 $query->whereIn('code', [$newsletter_publication_status_active, $newsletter_publication_status_archive]);
             })
+            ->where('slug',  $slug)
             ->with([
                 "seoSetting",
                 "images",
                 "category",
+                "source"
             ])
             ->first();
 
