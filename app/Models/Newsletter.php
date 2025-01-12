@@ -116,6 +116,11 @@ class Newsletter extends Model implements Sortable
         return $query->where('is_last_minute', NewsletterGeneralEnum::ON);
     }
 
+    public function scopeOutStanding($query)
+    {
+        return $query->where('is_outstanding', NewsletterGeneralEnum::ON);
+    }
+
     /*protected static function booted(): void
     {
         static::created(function ($newsletter) {

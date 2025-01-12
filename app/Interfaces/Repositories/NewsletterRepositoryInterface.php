@@ -9,4 +9,6 @@ interface NewsletterRepositoryInterface
     public function getAllDataForDatatable(Request $request);
 
     public function getLastMinuteNewsletters();
+
+    public function getFeaturedNews(Request $request);
 }

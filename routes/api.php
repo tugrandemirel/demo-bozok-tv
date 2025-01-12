@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\CategoryApiController;
 use App\Http\Controllers\Api\V1\MainHeadlineApiController;
+use App\Http\Controllers\Api\V1\NewsletterFeaturedApiController;
 use App\Http\Controllers\Api\V1\NewsletterLastMinuteApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,9 +20,11 @@ use Illuminate\Support\Facades\Route;
 
 
     Route::prefix("v1")->group(function (){
-        Route::apiResource('main-headline', MainHeadlineApiController::class);
-        Route::apiResource('categories', CategoryApiController::class);
-        Route::apiResource('last-minutes', NewsletterLastMinuteApiController::class);
+        Route::get('main-headline', [MainHeadlineApiController::class, 'index']);
+        Route::get('categories', [CategoryApiController::class, 'index']);
+        Route::get('category-newsletters/{slug}', [CategoryApiController::class, 'getCategoryNewsletters']);
+        Route::get('last-minutes', [NewsletterLastMinuteApiController::class, 'index']);
+        Route::get("featured-news", [NewsletterFeaturedApiController::class, 'index']);
     }) ;
 
 

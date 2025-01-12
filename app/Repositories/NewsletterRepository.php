@@ -2,10 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Enum\MorphImage\MorphImageImageTypeEnum;
 use App\Http\Requests\Admin\Newsletter\NewsletterFilterRequest;
 use App\Http\Resources\Admin\Newsletter\NewsletterResource;
 use App\Interfaces\Repositories\NewsletterRepositoryInterface;
 use App\Models\Newsletter;
+use App\Models\NewsletterPublicationStatus;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -98,13 +100,54 @@ class NewsletterRepository implements NewsletterRepositoryInterface
 
     public function getLastMinuteNewsletters()
     {
+        $newsletter_publication_status_active = self::getNewsletterStatusActiveCode();
+
+        /** @var Newsletter $last_minute_newsletters */
         $last_minute_newsletters = Newsletter::query()
-            ->select("title", "slug", "created_at", "publish_date")
+            ->select("title", "slug", "created_at")
             ->lastMinute()
+            ->with([
+                "status" => function ($query) use ($newsletter_publication_status_active) {
+                    $query->where('code', $newsletter_publication_status_active);
+                }
+            ])
             ->orderByDesc("order")
             ->limit(5)
             ->get();
 
         return $last_minute_newsletters;
+    }
+
+    public function getFeaturedNews(Request $request)
+    {
+        $newsletter_publication_status_active = self::getNewsletterStatusActiveCode();
+
+        $featured_news = Newsletter::query()
+            ->select("id", "title", "slug")
+            ->outStanding()
+            ->with([
+                "status" => function ($query) use ($newsletter_publication_status_active) {
+                    $query->where('code', $newsletter_publication_status_active);
+                },
+                "image" => function ($query) {
+                    $query->select("path", "id", "imageable_id")
+                        ->where("image_type", MorphImageImageTypeEnum::COVER);
+                },
+                "seoSetting",
+            ])
+            ->orderByDesc("order")
+            ->limit(2)
+            ->get();
+
+        return $featured_news;
+    }
+
+    public static function getNewsletterStatusActiveCode()
+    {
+        return NewsletterPublicationStatus::query()
+            ->select("code")
+            ->onTheAir()
+            ->first()
+            ->code;
     }
 }
