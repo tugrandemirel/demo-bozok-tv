@@ -40,9 +40,14 @@ class CategoryApiController extends Controller
         }
     }
 
-    public function show(Request $request, string $slug)
+    public function show(Request $request, string $slug): JsonResponse
     {
-
+        try {
+            $newsletters = $this->category_service->getCategoryBySlugNewsletters($request, $slug);
+            return ResponseHelper::success("Kategoriye bağlı haberler başarılı bir şekilde çekildi.", ['data' => $newsletters], 200);
+        } catch (\Exception $exception) {
+            return ResponseHelper::error("Bir hata oluştu.", [$exception->getMessage()]);
+        }
     }
 
     public function relatedNewsletters(Request $request, string $slug): JsonResponse
@@ -50,6 +55,26 @@ class CategoryApiController extends Controller
         try {
             $newsletters = $this->category_service->getRelatedNewsletters($request, $slug);
             return ResponseHelper::success("Kategoriye bağlı haberler başarılı bir şekilde çekildi.", ['data' => $newsletters], 200);
+        } catch (\Exception $exception) {
+            return ResponseHelper::error("Bir hata oluştu.", [$exception->getMessage()]);
+        }
+    }
+
+    public function getCategory(string $slug)
+    {
+        try {
+            $category = $this->category_service->getCategory($slug);
+            return ResponseHelper::success("Kategoriye bağlı haberler başarılı bir şekilde çekildi.", ['data' => $category], 200);
+        } catch (\Exception $exception) {
+            return ResponseHelper::error("Bir hata oluştu.", [$exception->getMessage()]);
+        }
+    }
+
+    public function getCategoryBySlugNewsletter(string $slug)
+    {
+        try {
+            $category = $this->category_service->getCategoryBySlugNewsletter($slug);
+            return ResponseHelper::success("Kategoriye bağlı haber başarılı bir şekilde çekildi.", ['data' => $category], 200);
         } catch (\Exception $exception) {
             return ResponseHelper::error("Bir hata oluştu.", [$exception->getMessage()]);
         }

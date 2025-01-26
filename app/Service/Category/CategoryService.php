@@ -29,9 +29,28 @@ class CategoryService
         return NewsletterResource::collection($newsletters);
     }
 
+
+    public function getCategoryBySlugNewsletters(Request $request, string $slug)
+    {
+        $newsletters = $this->category_repository->getCategoryNewsletters($request, $slug);
+        return NewsletterResource::collection($newsletters);
+    }
+
     public function getRelatedNewsletters(Request $request, string $slug)
     {
         $newsletters = $this->category_repository->getRelatedNewsletters($request, $slug);
         return NewsletterResource::collection($newsletters);
+    }
+
+    public function getCategory(string $slug)
+    {
+        $category = $this->category_repository->getCategory($slug);
+        return CategoryResource::make($category);
+    }
+
+    public function getCategoryBySlugNewsletter(string $slug)
+    {
+        $newsletter = $this->category_repository->getCategoryBySlugNewsletter($slug);
+        return NewsletterResource::collection($newsletter);
     }
 }

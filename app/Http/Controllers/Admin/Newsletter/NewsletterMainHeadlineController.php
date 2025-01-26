@@ -54,7 +54,7 @@ class NewsletterMainHeadlineController extends Controller
             })
             ->leftJoin("placements", "placements.id", "=", "ads.placement_id")
             ->leftJoin("ad_types", "ad_types.id", "=", "ads.ad_type_id")
-            ->orderBy('main_headlines.order', 'asc')
+            ->orderBy('main_headlines.order', 'desc')
            ->get();
 
 //            ->paginate(20);
