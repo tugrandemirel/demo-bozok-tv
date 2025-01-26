@@ -37,7 +37,7 @@ class NewsletterStoreRequest extends FormRequest
     {
         return [
             'title' => 'required|max:191',
-            'spot' => 'required|max:500',
+            'spot' => 'required',
             'content' => 'required|min:30',
             "cover_image" => "required|mimes:jpg,jpeg,png",
             "inside_image" => "nullable|mimes:jpg,jpeg,png",

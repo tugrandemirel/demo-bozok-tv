@@ -22,24 +22,26 @@ class AdsController extends Controller
 {
     private const PATH = 'admin.ads.';
 
-    public function index(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    public function index()
     {
-        /** @var LengthAwarePaginator $ads */
-        $ads = Ads::query()
-            ->select('ads.*')
-            ->addSelect(DB::raw("MAX(morph_images.path) as path"))
-            ->addSelect(DB::raw("MAX(placements.name) as placement_name"))
-            ->addSelect(DB::raw("MAX(ad_types.name) as ad_type_name"))
-            ->addSelect(DB::raw("MAX(ad_types.code) as ad_type_code"))
-            ->leftJoin('morph_images', function ($join) {
-                $join->on("morph_images.imageable_id", "=", "ads.id")
-                    ->where("morph_images.imageable_type", "=", Ads::class);
-            })
-            ->join("placements", "placements.id", "=", "ads.placement_id")
-            ->join("ad_types", "ad_types.id", "=", "ads.ad_type_id")
-            ->whereNull("ads.deleted_at")
-            ->groupBy('ads.id')
-            ->paginate(10);
+//        /** @var LengthAwarePaginator $ads */
+//        $ads = Ads::query()
+//            ->select('ads.*')
+//            ->addSelect(DB::raw("MAX(morph_images.path) as path"))
+//            ->addSelect(DB::raw("MAX(placements.name) as placement_name"))
+//            ->addSelect(DB::raw("MAX(ad_types.name) as ad_type_name"))
+//            ->addSelect(DB::raw("MAX(ad_types.code) as ad_type_code"))
+//            ->leftJoin('morph_images', function ($join) {
+//                $join->on("morph_images.imageable_id", "=", "ads.id")
+//                    ->where("morph_images.imageable_type", "=", Ads::class);
+//            })
+//            ->join("placements", "placements.id", "=", "ads.placement_id")
+//            ->join("ad_types", "ad_types.id", "=", "ads.ad_type_id")
+//            ->whereNull("ads.deleted_at")
+//            ->groupBy('ads.id')
+//            ->paginate(10);
+
+        $ads = collect();
 
         return view(self::PATH.'index', compact("ads"));
     }
