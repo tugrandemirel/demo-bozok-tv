@@ -8,6 +8,7 @@ use App\Traits\ActivityLoggerTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -33,12 +34,6 @@ class Newsletter extends Model implements Sortable
         'spot',
         'content',
         'is_main_headline',
-        'is_five_cuff',
-        'is_outstanding',
-        'is_last_minute',
-        'is_today_headline',
-        'is_special_news',
-        'is_street_interview',
         'is_seo',
         'publish_date',
         'order',
@@ -46,12 +41,6 @@ class Newsletter extends Model implements Sortable
 
     protected $casts = [
         'is_main_headline' => NewsletterGeneralEnum::class,
-        'is_five_cuff' => NewsletterGeneralEnum::class,
-        'is_outstanding' => NewsletterGeneralEnum::class,
-        'is_last_minute' => NewsletterGeneralEnum::class,
-        'is_today_headline' => NewsletterGeneralEnum::class,
-        'is_special_news' => NewsletterGeneralEnum::class,
-        'is_street_interview' => NewsletterGeneralEnum::class,
         'is_seo' => NewsletterGeneralEnum::class,
         'publish_date' => 'datetime'
     ];
@@ -109,6 +98,21 @@ class Newsletter extends Model implements Sortable
     public function newsletterTags()
     {
         return $this->hasMany(NewsletterTag::class);
+    }
+
+    public function outstandings(): HasOne
+    {
+        return $this->hasOne(NewsletterOutstanding::class);
+    }
+
+    public function lastMinutes(): HasOne
+    {
+        return $this->hasOne(NewsletterLastMinute::class);
+    }
+
+    public function todayHeadline(): HasOne
+    {
+        return $this->hasOne(NewsletterTodayHeadline::class);
     }
 
     public function activities(): MorphMany

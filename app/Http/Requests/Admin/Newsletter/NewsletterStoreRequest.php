@@ -50,8 +50,6 @@ class NewsletterStoreRequest extends FormRequest
             'is_outstanding' => ['required', new Enum(NewsletterGeneralEnum::class)],
             'is_last_minute' => ['required', new Enum(NewsletterGeneralEnum::class)],
             'is_today_headline' => ['required', new Enum(NewsletterGeneralEnum::class)],
-            'is_special_news' => ['required', new Enum(NewsletterGeneralEnum::class)],
-            'is_street_interview' => ['required', new Enum(NewsletterGeneralEnum::class)],
             'five_cuff_image' => ['sometimes', 'required_if:is_five_cuff,' . NewsletterGeneralEnum::ON->value, 'mimes:jpg,jpeg,png'],
             'tags' => 'required|array',
             'is_seo' => 'nullable',
@@ -70,8 +68,6 @@ class NewsletterStoreRequest extends FormRequest
             "is_outstanding" => $this->get('is_outstanding')  === 'on' ? NewsletterGeneralEnum::ON->value : NewsletterGeneralEnum::OFF->value,
             "is_last_minute" => $this->get('is_last_minute')  === 'on' ? NewsletterGeneralEnum::ON->value : NewsletterGeneralEnum::OFF->value,
             "is_today_headline" => $this->get('is_today_headline')  === 'on' ? NewsletterGeneralEnum::ON->value : NewsletterGeneralEnum::OFF->value,
-            "is_special_news" => $this->get('is_special_news')  === 'on' ? NewsletterGeneralEnum::ON->value : NewsletterGeneralEnum::OFF->value,
-            "is_street_interview" => $this->get('is_street_interview')  === 'on' ? NewsletterGeneralEnum::ON->value : NewsletterGeneralEnum::OFF->value,
             "is_seo" => $this->get('is_seo')  === 'on' ? NewsletterGeneralEnum::ON->value : NewsletterGeneralEnum::OFF->value,
         ]);
     }

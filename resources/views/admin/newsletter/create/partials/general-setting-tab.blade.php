@@ -56,28 +56,6 @@
                    </span>
                 </div>
             </div>
-            <div class="col-md-3">
-                <label class="form-label">Özel Haber</label>
-                <div class="">
-                   <span class="switch switch-icon">
-                        <label>
-                             <input type="checkbox"  name="is_special_news"/>
-                             <span></span>
-                        </label>
-                   </span>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <label class="form-label">Sokak Röportajı</label>
-                <div class="">
-                   <span class="switch switch-icon">
-                        <label>
-                             <input type="checkbox"  name="is_street_interview"/>
-                             <span></span>
-                        </label>
-                   </span>
-                </div>
-            </div>
         </div>
         <div class="form-group row hidden" id="five_cuff_image">
             <label class="col-form-label col-sm-12">Beşli Manşet Görseli</label>

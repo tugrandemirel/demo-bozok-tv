@@ -85,6 +85,8 @@ class NewsletterController extends Controller
             $newsletter = Newsletter::query()
                 ->create($attributes->toArray());
 
+            if ($attributes->get("is_five_"))
+
             foreach ($tags as $tag) {
                 /** @var Tag $create_tag */
                 $create_tag = Tag::query()
@@ -100,7 +102,6 @@ class NewsletterController extends Controller
                         'tag_id' => $create_tag?->id
                     ]);
             }
-
 
             if ($cover_image) {
                 $cover_image_create = ImageHelper::uploadImage($cover_image);
@@ -145,6 +146,18 @@ class NewsletterController extends Controller
                 $main_headline->save();
             }
 
+            if ($attributes->get('is_outstanding') === NewsletterGeneralEnum::ON->value) {
+                $newsletter->outstandings()->create([]);
+            }
+
+            if ($attributes->get('is_last_minute') === NewsletterGeneralEnum::ON->value) {
+                $newsletter->lastMinutes()->create([]);
+            }
+
+            if ($attributes->get('is_today_headline') === NewsletterGeneralEnum::ON->value) {
+                $newsletter->todayHeadline()->create([]);
+            }
+
             DB::commit();
             return ResponseHelper::success('Haber kaydetme işlemi başarılı bir şekilde gerçekleştirildi.');
         } catch (\Throwable $exception) {
@@ -164,7 +177,20 @@ class NewsletterController extends Controller
             /** @var Newsletter $newsletter */
             $newsletter = Newsletter::query()
                 ->select('newsletters.*', 'newsletter_publication_statuses.code')
+                ->addSelect(DB::raw('CASE WHEN newsletter_five_cuffs.id IS NOT NULL THEN true ELSE false END as has_five_cuff'))
+                ->addSelect(DB::raw('CASE WHEN newsletter_last_minutes.id IS NOT NULL THEN true ELSE false END as has_last_minute'))
+                ->addSelect(DB::raw('CASE WHEN newsletter_outstandings.id IS NOT NULL THEN true ELSE false END as has_out_standing'))
+                ->addSelect(DB::raw('CASE WHEN newsletter_today_headlines.id IS NOT NULL THEN true ELSE false END as has_today_headline'))
+                ->addSelect(DB::raw("case WHEN main_headlines.id IS NOT NULL THEN true ELSE false END as has_main_headline"))
                 ->join('newsletter_publication_statuses', 'newsletter_publication_statuses.id', '=', 'newsletters.newsletter_publication_status_id')
+                ->leftJoin("newsletter_five_cuffs", "newsletters.id", "=", "newsletter_five_cuffs.newsletter_id")
+                ->leftJoin("newsletter_last_minutes", "newsletters.id", "=", "newsletter_last_minutes.newsletter_id")
+                ->leftJoin("newsletter_outstandings", "newsletters.id", "=", "newsletter_outstandings.newsletter_id")
+                ->leftJoin("newsletter_today_headlines", "newsletters.id", "=", "newsletter_today_headlines.newsletter_id")
+                ->leftJoin("main_headlines", function ($join) {
+                    $join->on("newsletters.id", "=", "main_headlines.headlineable_id")
+                        ->where("main_headlines.headlineable_type", Newsletter::class);
+                })
                 ->where('newsletters.uuid', $newsletter_uuid)
                 ->first();
 
@@ -187,10 +213,9 @@ class NewsletterController extends Controller
                 ->join('newsletter_tags', 'newsletters.id', '=', 'newsletter_tags.newsletter_id')
                 ->join('tags', 'newsletter_tags.tag_id', '=', 'tags.id')
                 ->where('newsletters.id', $newsletter->id)
-                ->select('tags.*') // Tag bilgilerini seçiyoruz
+                ->select('tags.*')
                 ->get();
             $newsletter['tags'] = $tags;
-
 
             return view(self::PATH . 'show.show', compact('publication_statuses', 'newsletter'));
         } catch (\Exception $exception) {
@@ -209,10 +234,22 @@ class NewsletterController extends Controller
             /** @var Newsletter $newsletter */
             $newsletter = Newsletter::query()
                 ->select('newsletters.*', 'newsletter_publication_statuses.code')
+                ->addSelect(DB::raw('CASE WHEN newsletter_five_cuffs.id IS NOT NULL THEN true ELSE false END as has_five_cuff'))
+                ->addSelect(DB::raw('CASE WHEN newsletter_last_minutes.id IS NOT NULL THEN true ELSE false END as has_last_minute'))
+                ->addSelect(DB::raw('CASE WHEN newsletter_outstandings.id IS NOT NULL THEN true ELSE false END as has_out_standing'))
+                ->addSelect(DB::raw('CASE WHEN newsletter_today_headlines.id IS NOT NULL THEN true ELSE false END as has_today_headline'))
+                ->addSelect(DB::raw("case WHEN main_headlines.id IS NOT NULL THEN true ELSE false END as has_main_headline"))
                 ->join('newsletter_publication_statuses', 'newsletter_publication_statuses.id', '=', 'newsletters.newsletter_publication_status_id')
+                ->leftJoin("newsletter_five_cuffs", "newsletters.id", "=", "newsletter_five_cuffs.newsletter_id")
+                ->leftJoin("newsletter_last_minutes", "newsletters.id", "=", "newsletter_last_minutes.newsletter_id")
+                ->leftJoin("newsletter_outstandings", "newsletters.id", "=", "newsletter_outstandings.newsletter_id")
+                ->leftJoin("newsletter_today_headlines", "newsletters.id", "=", "newsletter_today_headlines.newsletter_id")
+                ->leftJoin("main_headlines", function ($join) {
+                    $join->on("newsletters.id", "=", "main_headlines.headlineable_id")
+                        ->where("main_headlines.headlineable_type", Newsletter::class);
+                })
                 ->where('newsletters.uuid', $newsletter_uuid)
                 ->first();
-
 
             /** @var MorphImage $cover_image */
             $cover_image = MorphImage::query()
@@ -248,7 +285,6 @@ class NewsletterController extends Controller
                 ->select('tags.*') // Tag bilgilerini seçiyoruz
                 ->get();
             $newsletter['tags'] = $tags;
-
 
             return view(self::PATH . 'edit.edit', compact('cover_image', 'inside_image', 'featured_image', 'publication_statuses', 'newsletter'));
         } catch (\Exception $exception) {
@@ -363,7 +399,9 @@ class NewsletterController extends Controller
                         ->create($seo);
                 }
             }
+
             $main_headline = $newsletter->mainHeadlines()->first();
+
             if ($attributes->get('is_main_headline') === NewsletterGeneralEnum::OFF->value) {
                 if ($main_headline) {
                     $main_headline->delete();
@@ -376,9 +414,36 @@ class NewsletterController extends Controller
                 }
             }
 
+            $outstanding = $newsletter->outstandings()->first();
+            if ($attributes->get('is_outstanding') === NewsletterGeneralEnum::ON->value) {
+                if (!$outstanding) {
+                    $newsletter->outstandings()->create([]);
+                }
+            } else {
+                $outstanding?->delete();
+            }
+
+            $last_minute = $newsletter->lastMinutes()->first();
+            if ($attributes->get('is_last_minute') === NewsletterGeneralEnum::ON->value) {
+                if (!$last_minute) {
+                    $newsletter->lastMinutes()->create([]);
+                }
+            } else {
+                $last_minute?->delete();
+            }
+
+            $today_headline = $newsletter->todayHeadline()->first();
+            if ($attributes->get('is_today_headline') === NewsletterGeneralEnum::ON->value) {
+                if (!$today_headline) {
+                    $newsletter->todayHeadline()->create([]);
+                }
+            } else {
+                $today_headline?->delete();
+            }
+
             DB::commit();
             return ResponseHelper::success('Haber güncelleme işlemi başarılı bir şekilde gerçekleştirildi.');
-        } catch (\Throwable $exception) { dd($exception->getMessage());
+        } catch (\Throwable $exception) {
             return ResponseHelper::error('Bir hata oluştu', [$exception->getMessage()]);
         }
     }
