@@ -143,6 +143,8 @@ class NewsletterController extends Controller
                 /** @var MainHeadline $main_headlines */
                 $main_headline = New MainHeadline();
                 $main_headline->headlineable()->associate($newsletter);
+                $main_headline->created_by_user_id = auth()->id();
+                $main_headline->uuid = 1;
                 $main_headline->save();
             }
 

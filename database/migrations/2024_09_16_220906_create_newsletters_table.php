@@ -26,14 +26,6 @@ return new class extends Migration
             $table->string('title');
             $table->text('spot');
             $table->longText('content');
-            $table->boolean('is_main_headline')->default(NewsletterGeneralEnum::OFF->value);
-            $table->boolean('is_five_cuff')->default(NewsletterGeneralEnum::OFF->value);
-            $table->boolean('is_outstanding')->default(NewsletterGeneralEnum::OFF->value);
-            $table->boolean('is_last_minute')->default(NewsletterGeneralEnum::OFF->value);
-            $table->boolean('is_today_headline')->default(NewsletterGeneralEnum::OFF->value);
-            $table->boolean('is_special_news')->default(NewsletterGeneralEnum::OFF->value);
-            $table->boolean('is_street_interview')->default(NewsletterGeneralEnum::OFF->value);
-            $table->boolean('is_seo')->default(NewsletterGeneralEnum::OFF->value);
             $table->dateTime('publish_date')->nullable();
             $table->timestamps();
             $table->softDeletes();

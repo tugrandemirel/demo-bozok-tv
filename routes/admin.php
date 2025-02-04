@@ -7,9 +7,13 @@ use App\Http\Controllers\Admin\Gallery\VideoGalleryController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterCategoryController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterController;
+use App\Http\Controllers\Admin\Newsletter\NewsletterFiveCuffController;
+use App\Http\Controllers\Admin\Newsletter\NewsletterLastMinuteController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterMainHeadlineController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterNewsletterSourceController;
+use App\Http\Controllers\Admin\Newsletter\NewsletterOutstandingController;
 use App\Http\Controllers\Admin\Newsletter\NewsletterTagController;
+use App\Http\Controllers\Admin\Newsletter\NewsletterTodayHeadlineController;
 use App\Http\Controllers\Admin\Posts\PostController;
 use App\Http\Controllers\Admin\Profile\ProfileController;
 use App\Http\Controllers\Admin\SiteSetting\ContactSettingController;
@@ -63,6 +67,24 @@ Route::middleware(['auth', 'role:Super-admin|Admin'])->prefix('dashboard')->as('
         Route::prefix('main-headlines')->as('main-headline.')->group(function () {
             Route::get("/", [NewsletterMainHeadlineController::class, 'index'])->name('index');
             Route::post("/update", [NewsletterMainHeadlineController::class, 'update'])->name('update');
+        });
+
+        Route::prefix('outstandings')->as('outstandings.')->group(function () {
+            Route::any("/", [NewsletterOutstandingController::class, 'index'])->name('index');
+//            Route::post("/sort", [NewsletterOutstandingController::class, 'sort'])->name('index');
+//            Route::post("/update", [NewsletterMainHeadlineController::class, 'update'])->name('update');
+        });
+
+        Route::prefix('top-headlines')->as('top_headlines.')->group(function () {
+            Route::any("/", [NewsletterTodayHeadlineController::class, 'index'])->name('index');
+        });
+
+        Route::prefix('five-cuffs')->as('five_cuffs.')->group(function () {
+            Route::any("/", [NewsletterFiveCuffController::class, 'index'])->name('index');
+        });
+
+        Route::prefix('last-minutes')->as('last_minutes.')->group(function () {
+            Route::any("/", [NewsletterLastMinuteController::class, 'index'])->name('index');
         });
     });
 

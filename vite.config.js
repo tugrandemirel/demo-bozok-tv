@@ -28,6 +28,9 @@ export default defineConfig({
 
                 // MAIN HEADLINE
                 "resources/js/admin/newsletter/main-headline/draggable.js",
+                "resources/js/admin/newsletter/fetch-newsletter-outstandings-datatable.js",
+                "resources/js/admin/newsletter/fetch-newsletter-five-cuffs-datatable.js",
+                "resources/js/admin/newsletter/fetch-newsletter-last-minutes-datatable.js",
 
                 // GALLERY
                 "resources/js/admin/gallery/index.js",

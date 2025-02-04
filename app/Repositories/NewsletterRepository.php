@@ -5,14 +5,12 @@ namespace App\Repositories;
 use App\Enum\MorphImage\MorphImageImageTypeEnum;
 use App\Enum\Newsletter\NewsletterGeneralEnum;
 use App\Http\Requests\Admin\Newsletter\NewsletterFilterRequest;
-use App\Http\Resources\Admin\Newsletter\NewsletterResource;
 use App\Interfaces\Repositories\NewsletterRepositoryInterface;
 use App\Models\Newsletter;
+use App\Models\NewsletterFiveCuff;
 use App\Models\NewsletterPublicationStatus;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Yajra\DataTables\DataTables;
 
 class NewsletterRepository implements NewsletterRepositoryInterface
 {

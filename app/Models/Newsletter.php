@@ -33,8 +33,6 @@ class Newsletter extends Model implements Sortable
         'slug',
         'spot',
         'content',
-        'is_main_headline',
-        'is_seo',
         'publish_date',
         'order',
     ];
@@ -105,7 +103,12 @@ class Newsletter extends Model implements Sortable
         return $this->hasOne(NewsletterOutstanding::class);
     }
 
-    public function lastMinutes(): HasOne
+    public function fiveCuff(): HasOne
+    {
+        return $this->hasOne(NewsletterFiveCuff::class);
+    }
+
+    public function lastMinute(): HasOne
     {
         return $this->hasOne(NewsletterLastMinute::class);
     }
@@ -118,16 +121,6 @@ class Newsletter extends Model implements Sortable
     public function activities(): MorphMany
     {
         return $this->morphMany(UserActivity::class, 'activityable');
-    }
-
-    public function scopeLastMinute($query)
-    {
-        return $query->where('is_last_minute', NewsletterGeneralEnum::ON);
-    }
-
-    public function scopeOutStanding($query)
-    {
-        return $query->where('is_outstanding', NewsletterGeneralEnum::ON);
     }
 
     /*protected static function booted(): void

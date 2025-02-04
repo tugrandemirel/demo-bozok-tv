@@ -33,11 +33,6 @@ class NewsletterService implements NewsletterRepositoryInterface
         return DataTables::of(NewsletterResource::collection($newsletters))->make(true);
     }
 
-    public function getMainHeadlines()
-    {
-
-    }
-
     public function getLastMinuteNewsletters(): AnonymousResourceCollection
     {
         $last_minutes_newsletters = $this->newsletter_repository->getLastMinuteNewsletters();
