@@ -114,6 +114,26 @@
     "isEntry": true,
     "src": "resources/js/admin/newsletter/edit.js"
   },
+  "resources/js/admin/newsletter/fetch-newsletter-five-cuffs-datatable.js": {
+    "file": "assets/fetch-newsletter-five-cuffs-datatable-5569ef15.js",
+    "isEntry": true,
+    "src": "resources/js/admin/newsletter/fetch-newsletter-five-cuffs-datatable.js"
+  },
+  "resources/js/admin/newsletter/fetch-newsletter-last-minutes-datatable.js": {
+    "file": "assets/fetch-newsletter-last-minutes-datatable-b0f1a569.js",
+    "isEntry": true,
+    "src": "resources/js/admin/newsletter/fetch-newsletter-last-minutes-datatable.js"
+  },
+  "resources/js/admin/newsletter/fetch-newsletter-outstandings-datatable.js": {
+    "file": "assets/fetch-newsletter-outstandings-datatable-717bfedf.js",
+    "isEntry": true,
+    "src": "resources/js/admin/newsletter/fetch-newsletter-outstandings-datatable.js"
+  },
+  "resources/js/admin/newsletter/fetch-newsletter-today-headlines-datatable.js": {
+    "file": "assets/fetch-newsletter-today-headlines-datatable-bfb8e231.js",
+    "isEntry": true,
+    "src": "resources/js/admin/newsletter/fetch-newsletter-today-headlines-datatable.js"
+  },
   "resources/js/admin/newsletter/fetch-newsletters-datatable.js": {
     "file": "assets/fetch-newsletters-datatable-71dafbb3.js",
     "isEntry": true,

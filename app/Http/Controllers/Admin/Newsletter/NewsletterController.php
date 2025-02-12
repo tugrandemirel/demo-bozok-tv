@@ -153,7 +153,7 @@ class NewsletterController extends Controller
             }
 
             if ($attributes->get('is_last_minute') === NewsletterGeneralEnum::ON->value) {
-                $newsletter->lastMinutes()->create([]);
+                $newsletter->lastMinute()->create([]);
             }
 
             if ($attributes->get('is_today_headline') === NewsletterGeneralEnum::ON->value) {
@@ -425,10 +425,10 @@ class NewsletterController extends Controller
                 $outstanding?->delete();
             }
 
-            $last_minute = $newsletter->lastMinutes()->first();
+            $last_minute = $newsletter->lastMinute()->first();
             if ($attributes->get('is_last_minute') === NewsletterGeneralEnum::ON->value) {
                 if (!$last_minute) {
-                    $newsletter->lastMinutes()->create([]);
+                    $newsletter->lastMinute()->create([]);
                 }
             } else {
                 $last_minute?->delete();
