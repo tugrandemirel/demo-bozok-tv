@@ -57,25 +57,6 @@
                 </div>
             </div>
         </div>
-        <div class="form-group row hidden" id="five_cuff_image">
-            <label class="col-form-label col-sm-12">Beşli Manşet Görseli</label>
-            <div class="col-sm-12">
-                <div class="image-input image-input-outline w-100 text-center" id="inside_image">
-                    <div class="image-input-wrapper  w-100" style="background-image: url({{ asset($featured_image?->path) }})"></div>
-
-                    <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="İç Kapak Görselini değiştir">
-                        <i class="fa fa-pen icon-sm text-muted"></i>
-                        <input type="file" name="five_cuff_image" accept=".png, .jpg, .jpeg"/>
-                        <input type="hidden" name="profile_avatar_remove"/>
-                    </label>
-
-                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="İptal Et">
-                              <i class="ki ki-bold-close icon-xs text-muted"></i>
-                         </span>
-                </div>
-                <span class="form-text">Yalnızca: png, jpg, jpeg.</span>
-            </div>
-        </div>
         <div class="form-group">
             <label class="form-label">Etiket:</label>
             <select class="form-control tags" multiple="multiple" name="tags[]">
@@ -94,7 +75,7 @@
             <div class="">
                    <span class="switch switch-icon">
                         <label>
-                             <input type="checkbox"  name="is_seo" @checked($newsletter?->is_seo === \App\Enum\Newsletter\NewsletterGeneralEnum::ON) id="is_seo"/>
+                             <input type="checkbox"  name="is_seo" @checked($newsletter?->has_seo) id="is_seo"/>
                              <span></span>
                         </label>
                    </span>

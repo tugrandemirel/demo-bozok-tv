@@ -51,12 +51,12 @@ class NewsletterUpdateRequest extends FormRequest
             'is_outstanding' => ['required', new Enum(NewsletterGeneralEnum::class)],
             'is_last_minute' => ['required', new Enum(NewsletterGeneralEnum::class)],
             'is_today_headline' => ['required', new Enum(NewsletterGeneralEnum::class)],
-            'five_cuff_image' => [
-                'sometimes',
-                'nullable', // Bu alan zorunlu değil
-                'required_if:is_five_cuff,' . NewsletterGeneralEnum::ON->value, // Eğer is_five_cuff ON ise gerekli
-                'mimes:jpg,jpeg,png'
-            ],
+//            'five_cuff_image' => [
+//                'sometimes',
+//                'nullable', // Bu alan zorunlu değil
+//                'required_if:is_five_cuff,' . NewsletterGeneralEnum::ON->value, // Eğer is_five_cuff ON ise gerekli
+//                'mimes:jpg,jpeg,png'
+//            ],
             'tags' => 'required|array',
             'is_seo' => 'nullable',
             'seo' => ['sometimes', 'required_if:is_seo,' . NewsletterGeneralEnum::ON->value, 'array'],

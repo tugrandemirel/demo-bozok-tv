@@ -11,6 +11,7 @@ class MorphImageResource extends JsonResource
         return [
             'image_name' => $this?->image_name ?? null,
             'path' => $this?->path ?? null,
+            'sizes' => $this?->sizes ?? null,
             'alt_text' => $this?->alt_text ?? null,
             'width' => $this?->width ?? null,
             'height' => $this?->height ?? null,

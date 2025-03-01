@@ -18,25 +18,6 @@
         </div>
         <span class="form-text">Yalnızca: png, jpg, jpeg.</span>
     </div>
-    <div class="card-body text-center">
-        <div class="card-title">
-            <h2>İç Kapak</h2>
-        </div>
-        <div class="image-input image-input-outline" id="inside_image">
-            <div class="image-input-wrapper" style="background-image: url({{ asset($inside_image?->path) }})"></div>
-
-            <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="İç Kapak Görselini değiştir">
-                <i class="fa fa-pen icon-sm text-muted"></i>
-                <input type="file" name="inside_image" accept=".png, .jpg, .jpeg"/>
-                <input type="hidden" name="profile_avatar_remove"/>
-            </label>
-
-            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="İptal Et">
-                              <i class="ki ki-bold-close icon-xs text-muted"></i>
-                         </span>
-        </div>
-        <span class="form-text">Yalnızca: png, jpg, jpeg.</span>
-    </div>
 </div>
 <div class="card card-custom gutter-b">
     <div class="card-body text-center">

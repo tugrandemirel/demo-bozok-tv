@@ -1,14 +1,3 @@
-$(document).on('change', '#five_cuff', function() {
-    let checkbox = $(this)
-    let five_cuff_image = $('#five_cuff_image')
-    if(checkbox.is(':checked')) {
-        if (five_cuff_image.hasClass('hidden')) {
-            five_cuff_image.removeClass('hidden')
-        }
-    } else {
-        five_cuff_image.addClass('hidden')
-    }
-})
 $(document).on('input', '#meta_description', function() {
     let description = $(this);
     let character_count = description.next().find('.character_count'); // Bir sonraki sibling olan p içindeki karakter sayısını al
