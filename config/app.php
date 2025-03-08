@@ -201,7 +201,7 @@ return [
         \App\Providers\ViewComposerProvider::class,
         \App\Providers\ObserverServiceProvider::class,
         \App\Providers\ApiServiceProvider::class,
-
+        Intervention\Image\ImageServiceProvider::class
     ],
 
     /*
@@ -218,6 +218,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
 //        'Image' => Intervention\Image\Facades\Image::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ])->toArray(),
 
 ];

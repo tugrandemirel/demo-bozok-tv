@@ -8,6 +8,7 @@ use App\Traits\ActivityLoggerTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -32,26 +33,12 @@ class Newsletter extends Model implements Sortable
         'slug',
         'spot',
         'content',
-        'is_main_headline',
-        'is_five_cuff',
-        'is_outstanding',
-        'is_last_minute',
-        'is_today_headline',
-        'is_special_news',
-        'is_street_interview',
-        'is_seo',
         'publish_date',
         'order',
     ];
 
     protected $casts = [
         'is_main_headline' => NewsletterGeneralEnum::class,
-        'is_five_cuff' => NewsletterGeneralEnum::class,
-        'is_outstanding' => NewsletterGeneralEnum::class,
-        'is_last_minute' => NewsletterGeneralEnum::class,
-        'is_today_headline' => NewsletterGeneralEnum::class,
-        'is_special_news' => NewsletterGeneralEnum::class,
-        'is_street_interview' => NewsletterGeneralEnum::class,
         'is_seo' => NewsletterGeneralEnum::class,
         'publish_date' => 'datetime'
     ];
@@ -111,19 +98,29 @@ class Newsletter extends Model implements Sortable
         return $this->hasMany(NewsletterTag::class);
     }
 
+    public function outstandings(): HasOne
+    {
+        return $this->hasOne(NewsletterOutstanding::class);
+    }
+
+    public function fiveCuff(): HasOne
+    {
+        return $this->hasOne(NewsletterFiveCuff::class);
+    }
+
+    public function lastMinute(): HasOne
+    {
+        return $this->hasOne(NewsletterLastMinute::class);
+    }
+
+    public function todayHeadline(): HasOne
+    {
+        return $this->hasOne(NewsletterTodayHeadline::class);
+    }
+
     public function activities(): MorphMany
     {
         return $this->morphMany(UserActivity::class, 'activityable');
-    }
-
-    public function scopeLastMinute($query)
-    {
-        return $query->where('is_last_minute', NewsletterGeneralEnum::ON);
-    }
-
-    public function scopeOutStanding($query)
-    {
-        return $query->where('is_outstanding', NewsletterGeneralEnum::ON);
     }
 
     /*protected static function booted(): void

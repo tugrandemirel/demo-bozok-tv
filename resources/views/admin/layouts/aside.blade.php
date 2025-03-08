@@ -87,6 +87,38 @@
                                     <span class="menu-text">Ana Manşet</span>
                                 </a>
                             </li>
+                            <li class="menu-item {{ $newsletterOutStandingsToggle ?? '' }}" aria-haspopup="true">
+                                <a href="{{ route('admin.newsletters.outstandings.index') }}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">Öne Çıkanlar</span>
+                                </a>
+                            </li>
+                            <li class="menu-item {{ $newsletterTopHeadlineToggle ?? '' }}" aria-haspopup="true">
+                                <a href="{{ route('admin.newsletters.top_headlines.index') }}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">Günün Manşetleri</span>
+                                </a>
+                            </li>
+                            <li class="menu-item {{ $newsletterFiveCuffsToggle ?? '' }}" aria-haspopup="true">
+                                <a href="{{ route('admin.newsletters.five_cuffs.index') }}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">Beşli Manşetleri</span>
+                                </a>
+                            </li>
+                            <li class="menu-item {{ $newsletterLastMinutesToggle ?? '' }}" aria-haspopup="true">
+                                <a href="{{ route('admin.newsletters.last_minutes.index') }}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">Son Dakika</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

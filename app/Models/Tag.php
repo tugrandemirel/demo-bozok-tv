@@ -15,4 +15,9 @@ class Tag extends Model
         'created_by_user_id',
         'name',
     ];
+
+    public function newsletters()
+    {
+        return $this->belongsToMany(Newsletter::class);
+    }
 }

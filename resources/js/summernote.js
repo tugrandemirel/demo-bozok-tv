@@ -6,9 +6,11 @@ $(document).ready(function () {
             ['style', ['style']], // Stil menüsü
             ['font', ['bold', 'italic', 'underline', 'clear']],
             ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
+            ['para', ['ul', 'ol', 'paragraph']], // "justifyCenter" ekledik
             ['table', ['table']],
             ['insert', ['link', 'picture', 'hr', 'codeview', 'video']], // Kod bloğu ve resim ekleme
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']], // Font boyutu seçici
             ['view', ['fullscreen', 'help']] // Tam ekran ve yardım
         ],
         styleTags: [
@@ -19,6 +21,8 @@ $(document).ready(function () {
             lineNumbers: true,
             theme: 'monokai'
         },
+        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Georgia', 'Impact', 'Lucida Sans', 'Tahoma', 'Times New Roman', 'Verdana'],
+        fontSizeUnits: ['px', 'pt', 'em', '%'], // Font boyut birimleri
         tableClassName: 'table table-bordered table-striped',
         callbacks: {
             onPaste: function(e) {
@@ -35,14 +39,14 @@ $(document).ready(function () {
                             image.onload = function() {
                                 // Burada resmin boyutunu ayarlayabilirsiniz
                                 image.width = Math.min(image.width, 800);  // Maksimum genişlik 800px
-                                image.height = 'auto';
+                                image.height = 'auto';  // Yüksekliğini otomatik olarak ayarlıyoruz
                                 // Resmi Summernote editörüne ekleyin
                                 var imageNode = $('<img>').attr('src', image.src);
                                 $('.summernote').summernote('insertNode', imageNode[0]);
                             };
                         };
                         reader.readAsDataURL(blob);
-                        e.preventDefault();
+                        e.preventDefault();  // Varsayılan yapıştırma işlemini engelliyoruz
                     }
                 }
             },
@@ -51,6 +55,7 @@ $(document).ready(function () {
             }
         }
     });
+
     // Kullanıcı iframe yapıştırdığında, draggable özellik ekleme
     function centerVideos() {
         $('#summernote').next('.note-editable').find('iframe').each(function () {
@@ -60,5 +65,7 @@ $(document).ready(function () {
             }
         });
     }
-    centerVideos()
+
+    // İlk çağrı
+    centerVideos();
 });

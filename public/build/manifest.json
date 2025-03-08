@@ -100,7 +100,7 @@
     "src": "resources/js/admin/newsletter/category-store.js"
   },
   "resources/js/admin/newsletter/create.js": {
-    "file": "assets/create-dc40485c.js",
+    "file": "assets/create-9526eae5.js",
     "isEntry": true,
     "src": "resources/js/admin/newsletter/create.js"
   },
@@ -110,9 +110,29 @@
     "src": "resources/js/admin/newsletter/create/store.js"
   },
   "resources/js/admin/newsletter/edit.js": {
-    "file": "assets/edit-494b00e1.js",
+    "file": "assets/edit-dc694093.js",
     "isEntry": true,
     "src": "resources/js/admin/newsletter/edit.js"
+  },
+  "resources/js/admin/newsletter/fetch-newsletter-five-cuffs-datatable.js": {
+    "file": "assets/fetch-newsletter-five-cuffs-datatable-5569ef15.js",
+    "isEntry": true,
+    "src": "resources/js/admin/newsletter/fetch-newsletter-five-cuffs-datatable.js"
+  },
+  "resources/js/admin/newsletter/fetch-newsletter-last-minutes-datatable.js": {
+    "file": "assets/fetch-newsletter-last-minutes-datatable-b0f1a569.js",
+    "isEntry": true,
+    "src": "resources/js/admin/newsletter/fetch-newsletter-last-minutes-datatable.js"
+  },
+  "resources/js/admin/newsletter/fetch-newsletter-outstandings-datatable.js": {
+    "file": "assets/fetch-newsletter-outstandings-datatable-717bfedf.js",
+    "isEntry": true,
+    "src": "resources/js/admin/newsletter/fetch-newsletter-outstandings-datatable.js"
+  },
+  "resources/js/admin/newsletter/fetch-newsletter-today-headlines-datatable.js": {
+    "file": "assets/fetch-newsletter-today-headlines-datatable-bfb8e231.js",
+    "isEntry": true,
+    "src": "resources/js/admin/newsletter/fetch-newsletter-today-headlines-datatable.js"
   },
   "resources/js/admin/newsletter/fetch-newsletters-datatable.js": {
     "file": "assets/fetch-newsletters-datatable-71dafbb3.js",
@@ -120,7 +140,7 @@
     "src": "resources/js/admin/newsletter/fetch-newsletters-datatable.js"
   },
   "resources/js/admin/newsletter/general-setting-tab.js": {
-    "file": "assets/general-setting-tab-f1a7de17.js",
+    "file": "assets/general-setting-tab-4f1fd824.js",
     "isEntry": true,
     "src": "resources/js/admin/newsletter/general-setting-tab.js"
   },
@@ -290,7 +310,7 @@
     "src": "resources/js/select2.js"
   },
   "resources/js/summernote.js": {
-    "file": "assets/summernote-1010618b.js",
+    "file": "assets/summernote-82461a15.js",
     "isEntry": true,
     "src": "resources/js/summernote.js"
   }

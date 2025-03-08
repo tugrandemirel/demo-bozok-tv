@@ -47,7 +47,7 @@ class MainHeadlineRepository implements MainHeadlineRepositoryInterface
                 ]);
             })
             ->limit(20)
-            ->orderBy('order')
+            ->orderBy('order', "desc")
             ->get();
 
         return $main_headlines;

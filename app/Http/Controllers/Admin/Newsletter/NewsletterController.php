@@ -13,6 +13,7 @@ use App\Http\Requests\Admin\Newsletter\NewsletterUpdateRequest;
 use App\Models\MainHeadline;
 use App\Models\MorphImage;
 use App\Models\Newsletter;
+use App\Models\NewsletterFiveCuff;
 use App\Models\NewsletterPublicationStatus;
 use App\Models\SeoSetting;
 use App\Models\Tag;
@@ -101,7 +102,6 @@ class NewsletterController extends Controller
                     ]);
             }
 
-
             if ($cover_image) {
                 $cover_image_create = ImageHelper::uploadImage($cover_image);
                 $cover_image_create['image_type'] = 'COVER';
@@ -109,23 +109,12 @@ class NewsletterController extends Controller
                 $newsletter->images()->create($cover_image_create);
             }
 
-            if ($inside_image) {
-                $inside_image_create = ImageHelper::uploadImage($inside_image);
-                $inside_image_create['image_type'] = 'INSIDE';
-
-                $newsletter->images()->create($inside_image_create);
-            }
-
-            if ($attributes->get('is_five_cuff') === NewsletterGeneralEnum::ON->value) {
-                if (!$five_cuff_image) {
-                    return ResponseHelper::error('Lütfen Beşli Manşet görselini ekleyiniz.');
-                } else {
-                    $five_cuff_image_create = ImageHelper::uploadImage($five_cuff_image);
-                    $five_cuff_image_create['image_type'] = 'FEATURED';
-
-                    $newsletter->images()->create($five_cuff_image_create);
-                }
-            }
+//            if ($inside_image) {
+//                $inside_image_create = ImageHelper::uploadImage($inside_image);
+//                $inside_image_create['image_type'] = 'INSIDE';
+//
+//                $newsletter->images()->create($inside_image_create);
+//            }
 
             if ($attributes->get('is_seo') === NewsletterGeneralEnum::ON->value ) {
                 $this->seo_service->generateSeoData($newsletter);
@@ -142,7 +131,25 @@ class NewsletterController extends Controller
                 /** @var MainHeadline $main_headlines */
                 $main_headline = New MainHeadline();
                 $main_headline->headlineable()->associate($newsletter);
+                $main_headline->created_by_user_id = auth()->id();
+                $main_headline->uuid = 1;
                 $main_headline->save();
+            }
+
+            if ($attributes->get('is_outstanding') === NewsletterGeneralEnum::ON->value) {
+                $newsletter->outstandings()->create([]);
+            }
+
+            if ($attributes->get('is_last_minute') === NewsletterGeneralEnum::ON->value) {
+                $newsletter->lastMinute()->create([]);
+            }
+
+            if ($attributes->get('is_today_headline') === NewsletterGeneralEnum::ON->value) {
+                $newsletter->todayHeadline()->create([]);
+            }
+
+            if ($attributes->get('is_five_cuff') === NewsletterGeneralEnum::ON->value) {
+                $newsletter->fiveCuff()->create([]);
             }
 
             DB::commit();
@@ -164,7 +171,20 @@ class NewsletterController extends Controller
             /** @var Newsletter $newsletter */
             $newsletter = Newsletter::query()
                 ->select('newsletters.*', 'newsletter_publication_statuses.code')
+                ->addSelect(DB::raw('CASE WHEN newsletter_five_cuffs.id IS NOT NULL THEN true ELSE false END as has_five_cuff'))
+                ->addSelect(DB::raw('CASE WHEN newsletter_last_minutes.id IS NOT NULL THEN true ELSE false END as has_last_minute'))
+                ->addSelect(DB::raw('CASE WHEN newsletter_outstandings.id IS NOT NULL THEN true ELSE false END as has_out_standing'))
+                ->addSelect(DB::raw('CASE WHEN newsletter_today_headlines.id IS NOT NULL THEN true ELSE false END as has_today_headline'))
+                ->addSelect(DB::raw("case WHEN main_headlines.id IS NOT NULL THEN true ELSE false END as has_main_headline"))
                 ->join('newsletter_publication_statuses', 'newsletter_publication_statuses.id', '=', 'newsletters.newsletter_publication_status_id')
+                ->leftJoin("newsletter_five_cuffs", "newsletters.id", "=", "newsletter_five_cuffs.newsletter_id")
+                ->leftJoin("newsletter_last_minutes", "newsletters.id", "=", "newsletter_last_minutes.newsletter_id")
+                ->leftJoin("newsletter_outstandings", "newsletters.id", "=", "newsletter_outstandings.newsletter_id")
+                ->leftJoin("newsletter_today_headlines", "newsletters.id", "=", "newsletter_today_headlines.newsletter_id")
+                ->leftJoin("main_headlines", function ($join) {
+                    $join->on("newsletters.id", "=", "main_headlines.headlineable_id")
+                        ->where("main_headlines.headlineable_type", Newsletter::class);
+                })
                 ->where('newsletters.uuid', $newsletter_uuid)
                 ->first();
 
@@ -187,10 +207,9 @@ class NewsletterController extends Controller
                 ->join('newsletter_tags', 'newsletters.id', '=', 'newsletter_tags.newsletter_id')
                 ->join('tags', 'newsletter_tags.tag_id', '=', 'tags.id')
                 ->where('newsletters.id', $newsletter->id)
-                ->select('tags.*') // Tag bilgilerini seçiyoruz
+                ->select('tags.*')
                 ->get();
             $newsletter['tags'] = $tags;
-
 
             return view(self::PATH . 'show.show', compact('publication_statuses', 'newsletter'));
         } catch (\Exception $exception) {
@@ -209,10 +228,27 @@ class NewsletterController extends Controller
             /** @var Newsletter $newsletter */
             $newsletter = Newsletter::query()
                 ->select('newsletters.*', 'newsletter_publication_statuses.code')
+                ->addSelect(DB::raw('CASE WHEN newsletter_five_cuffs.id IS NOT NULL THEN true ELSE false END as has_five_cuff'))
+                ->addSelect(DB::raw('CASE WHEN newsletter_last_minutes.id IS NOT NULL THEN true ELSE false END as has_last_minute'))
+                ->addSelect(DB::raw('CASE WHEN newsletter_outstandings.id IS NOT NULL THEN true ELSE false END as has_out_standing'))
+                ->addSelect(DB::raw('CASE WHEN newsletter_today_headlines.id IS NOT NULL THEN true ELSE false END as has_today_headline'))
+                ->addSelect(DB::raw("case WHEN main_headlines.id IS NOT NULL THEN true ELSE false END as has_main_headline"))
+                ->addSelect(DB::raw("case WHEN seo_settings.id IS NOT NULL THEN true ELSE false END as has_seo"))
                 ->join('newsletter_publication_statuses', 'newsletter_publication_statuses.id', '=', 'newsletters.newsletter_publication_status_id')
+                ->leftJoin("newsletter_five_cuffs", "newsletters.id", "=", "newsletter_five_cuffs.newsletter_id")
+                ->leftJoin("newsletter_last_minutes", "newsletters.id", "=", "newsletter_last_minutes.newsletter_id")
+                ->leftJoin("newsletter_outstandings", "newsletters.id", "=", "newsletter_outstandings.newsletter_id")
+                ->leftJoin("newsletter_today_headlines", "newsletters.id", "=", "newsletter_today_headlines.newsletter_id")
+                ->leftJoin("main_headlines", function ($join) {
+                    $join->on("newsletters.id", "=", "main_headlines.headlineable_id")
+                        ->where("main_headlines.headlineable_type", Newsletter::class);
+                })
+                ->leftJoin("seo_settings", function ($join) {
+                    $join->on("newsletters.id", "=", "seo_settings.seoable_id")
+                        ->where("seo_settings.seoable_type", Newsletter::class);
+                })
                 ->where('newsletters.uuid', $newsletter_uuid)
                 ->first();
-
 
             /** @var MorphImage $cover_image */
             $cover_image = MorphImage::query()
@@ -249,9 +285,8 @@ class NewsletterController extends Controller
                 ->get();
             $newsletter['tags'] = $tags;
 
-
             return view(self::PATH . 'edit.edit', compact('cover_image', 'inside_image', 'featured_image', 'publication_statuses', 'newsletter'));
-        } catch (\Exception $exception) {
+        } catch (\Exception $exception) {dd($exception->getMessage());
             Log::error('NewsletterController show methodunda bir hata ile karşılaşıldı: ', ['errors' => $exception->getMessage()]);
             abort(404);
         }
@@ -277,9 +312,6 @@ class NewsletterController extends Controller
 
         $inside_image = $attributes->get('inside_image');
         $attributes->forget('inside_image');
-
-        $five_cuff_image = $attributes->get('five_cuff_image');
-        $attributes->forget('five_cuff_image');
 
         DB::beginTransaction();
         try {
@@ -323,30 +355,6 @@ class NewsletterController extends Controller
                 }
             }
 
-            if ($attributes->get('is_five_cuff') === NewsletterGeneralEnum::ON->value) {
-                if (!is_null($five_cuff_image)) {
-                    $featured_image_exists = MorphImage::featured()
-                        ->where('imageable_id', $newsletter?->id)
-                        ->first();
-                    if (!is_null($featured_image_exists)) {
-                        $featured_image_update = ImageHelper::updateImage($five_cuff_image, $featured_image_exists->path);
-                        $featured_image_exists->update($featured_image_update);
-                    } else {
-                        $featured_image_create = ImageHelper::uploadImage($five_cuff_image);
-                        $featured_image_create['image_type'] = 'FEATURED';
-
-                        $newsletter->images()->create($featured_image_create);
-                    }
-                }
-            } else {
-                $featured_image_exists = MorphImage::featured()
-                    ->where('imageable_id', $newsletter?->id)
-                    ->first();
-                if ($featured_image_exists) {
-                    ImageHelper::deleteImage($featured_image_exists?->path);
-                }
-            }
-
             if ($attributes->get('is_seo') === NewsletterGeneralEnum::ON->value ) {
                 $this->seo_service->generateSeoData($newsletter);
             } else {
@@ -363,7 +371,9 @@ class NewsletterController extends Controller
                         ->create($seo);
                 }
             }
+
             $main_headline = $newsletter->mainHeadlines()->first();
+
             if ($attributes->get('is_main_headline') === NewsletterGeneralEnum::OFF->value) {
                 if ($main_headline) {
                     $main_headline->delete();
@@ -376,9 +386,45 @@ class NewsletterController extends Controller
                 }
             }
 
+            $outstanding = $newsletter->outstandings()->first();
+            if ($attributes->get('is_outstanding') === NewsletterGeneralEnum::ON->value) {
+                if (!$outstanding) {
+                    $newsletter->outstandings()->create([]);
+                }
+            } else {
+                $outstanding?->delete();
+            }
+
+            $last_minute = $newsletter->lastMinute()->first();
+            if ($attributes->get('is_last_minute') === NewsletterGeneralEnum::ON->value) {
+                if (!$last_minute) {
+                    $newsletter->lastMinute()->create([]);
+                }
+            } else {
+                $last_minute?->delete();
+            }
+
+            $today_headline = $newsletter->todayHeadline()->first();
+            if ($attributes->get('is_today_headline') === NewsletterGeneralEnum::ON->value) {
+                if (!$today_headline) {
+                    $newsletter->todayHeadline()->create([]);
+                }
+            } else {
+                $today_headline?->delete();
+            }
+
+            $five_cuff = $newsletter->fiveCuff()->first();
+            if ($attributes->get('is_five_cuff') === NewsletterGeneralEnum::ON->value) {
+                if (!$five_cuff) {
+                    $newsletter->fiveCuff()->create([]);
+                }
+            } else {
+                $five_cuff?->delete();
+            }
+
             DB::commit();
             return ResponseHelper::success('Haber güncelleme işlemi başarılı bir şekilde gerçekleştirildi.');
-        } catch (\Throwable $exception) { dd($exception->getMessage());
+        } catch (\Throwable $exception) {
             return ResponseHelper::error('Bir hata oluştu', [$exception->getMessage()]);
         }
     }

@@ -60,4 +60,9 @@ class Category extends Model implements Sortable
     {
         return $this->morphOne(SeoSetting::class, 'seoable');
     }
+
+    public function scopePolitic($query)
+    {
+        return $query->where('slug', 'siyaset');
+    }
 }

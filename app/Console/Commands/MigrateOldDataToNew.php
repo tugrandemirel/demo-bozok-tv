@@ -122,21 +122,9 @@ class MigrateOldDataToNew extends Command
                                 "slug" => $old_newsletter->slug == "arsiv" ? Str::slug($old_newsletter->title) : $old_newsletter->slug,
                                 "spot" => $old_newsletter->spot,
                                 "content" => $old_newsletter->detail,
-                                //  Günün Manşeti
-                                "is_today_headline" => $old_newsletter->cuff_of_the_day == 1 ? NewsletterGeneralEnum::ON : NewsletterGeneralEnum::OFF,
-                                //  Beşli Manşet
-                                "is_five_cuff" => $old_newsletter->five_cuff == 1 ? NewsletterGeneralEnum::ON : NewsletterGeneralEnum::OFF,
-                                //  Son Dakika
-                                "is_last_minute" => $old_newsletter->last_minute == 1 ? NewsletterGeneralEnum::ON : NewsletterGeneralEnum::OFF,
-                                //  Flaş Haber
-                                "is_special_news" => $old_newsletter->breaking_news == 1 ? NewsletterGeneralEnum::ON : NewsletterGeneralEnum::OFF,
-                                // Öne Çıkan
-                                "is_outstanding" => $old_newsletter->featured == 1 ? NewsletterGeneralEnum::ON : NewsletterGeneralEnum::OFF,
-                                //  Ana Manşet
-                                "is_main_headline" => $old_newsletter->slider == 1 ? NewsletterGeneralEnum::ON : NewsletterGeneralEnum::OFF,
                             ]);
 
-                        if ($newsletter->is_main_headline) {
+                        if ($old_newsletter->slider) {
                             MainHeadline::query()
                                 ->create([
                                     "uuid" => Str::uuid(),
@@ -144,6 +132,26 @@ class MigrateOldDataToNew extends Command
                                     "headlineable_type" => Newsletter::class,
                                     "headlineable_id" => $newsletter->id,
                                 ]);
+                        }
+
+                        if ($old_newsletter->five_cuff) {
+                            $newsletter->fiveCuff()
+                                ->create([]);
+                        }
+
+                        if ($old_newsletter->featured) {
+                            $newsletter->outstandings()
+                                ->create([]);
+                        }
+
+                        if ($old_newsletter->last_minute) {
+                            $newsletter->lastMinute()
+                                ->create([]);
+                        }
+
+                        if ($old_newsletter->cuff_of_the_day) {
+                            $newsletter->todayHeadline()
+                                ->create([]);
                         }
 
                         if ($old_newsletter->image) {
@@ -165,34 +173,8 @@ class MigrateOldDataToNew extends Command
                                     "image_type" => MorphImageImageTypeEnum::FEATURED,
                                 ]);
                         }
+
                         $seo_service->generateSeoData($newsletter);
-                        /*SeoSetting::query()
-                            ->create([
-
-                            ]);*/
-
-//                        $newsletter_seo_tags = SeoSetting::query()
-//                            ->where('seoable_id', $newsletter->id)
-//                            ->where('seoable_type', Newsletter::class)
-//                            ->first();
-//
-//                        $exploded_newsletter_seo_tags = explode(',', $newsletter_seo_tags->meta_keywords);
-//
-//                        foreach ($exploded_newsletter_seo_tags as $tag) {
-//                            $new_tag = Tag::query()
-//                                ->updateOrCreate([
-//                                    'name' => $tag
-//                                ],[
-//                                    "uuid" => Str::uuid(),
-//                                    "name" => $tag,
-//                                    "created_by_user_id" => $created_by_user_id
-//                                ]);
-//
-//                            $newsletter->newsletterTags()
-//                                ->create([
-//                                'tag_id' => $new_tag?->id
-//                            ]);
-//                        }
 
                         // İlerlemeyi göster
                         $progressBar->advance();

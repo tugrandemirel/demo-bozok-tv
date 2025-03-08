@@ -6,7 +6,7 @@
                 <div class="">
                    <span class="switch switch-icon">
                         <label>
-                             <input type="checkbox"  name="is_main_headline" @checked($newsletter?->is_main_headline === \App\Enum\Newsletter\NewsletterGeneralEnum::ON)/>
+                             <input type="checkbox" name="is_main_headline" @checked($newsletter?->has_main_headline)/>
                              <span></span>
                         </label>
                    </span>
@@ -17,7 +17,7 @@
                 <div class="">
                    <span class="switch switch-icon">
                         <label>
-                             <input type="checkbox"  id="five_cuff" name="is_five_cuff" @checked($newsletter?->is_five_cuff === \App\Enum\Newsletter\NewsletterGeneralEnum::ON)/>
+                             <input type="checkbox" id="five_cuff" name="is_five_cuff" @checked($newsletter?->has_five_cuff)/>
                              <span></span>
                         </label>
                    </span>
@@ -28,7 +28,7 @@
                 <div class="">
                    <span class="switch switch-icon">
                         <label>
-                             <input type="checkbox"  name="is_outstanding" @checked($newsletter?->is_outstanding === \App\Enum\Newsletter\NewsletterGeneralEnum::ON)/>
+                             <input type="checkbox" name="is_outstanding" @checked($newsletter?->has_out_standing)/>
                              <span></span>
                         </label>
                    </span>
@@ -39,7 +39,7 @@
                 <div class="">
                    <span class="switch switch-icon">
                         <label>
-                             <input type="checkbox" name="is_last_minute" @checked($newsletter?->is_last_minute === \App\Enum\Newsletter\NewsletterGeneralEnum::ON)/>
+                             <input type="checkbox" name="is_last_minute" @checked($newsletter?->has_last_minute)/>
                              <span></span>
                         </label>
                    </span>
@@ -50,59 +50,18 @@
                 <div class="">
                    <span class="switch switch-icon">
                         <label>
-                             <input type="checkbox"  name="is_today_headline" @checked($newsletter?->is_today_headline === \App\Enum\Newsletter\NewsletterGeneralEnum::ON)/>
+                             <input type="checkbox" name="is_today_headline" @checked($newsletter?->has_today_headline)/>
                              <span></span>
                         </label>
                    </span>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <label class="form-label">Özel Haber</label>
-                <div class="">
-                   <span class="switch switch-icon">
-                        <label>
-                             <input type="checkbox"  name="is_special_news" @checked($newsletter?->is_special_news === \App\Enum\Newsletter\NewsletterGeneralEnum::ON)/>
-                             <span></span>
-                        </label>
-                   </span>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <label class="form-label">Sokak Röportajı</label>
-                <div class="">
-                   <span class="switch switch-icon">
-                        <label>
-                             <input type="checkbox"  name="is_street_interview" @checked($newsletter?->is_street_interview === \App\Enum\Newsletter\NewsletterGeneralEnum::ON)/>
-                             <span></span>
-                        </label>
-                   </span>
-                </div>
-            </div>
-        </div>
-        <div class="form-group row hidden" id="five_cuff_image">
-            <label class="col-form-label col-sm-12">Beşli Manşet Görseli</label>
-            <div class="col-sm-12">
-                <div class="image-input image-input-outline w-100 text-center" id="inside_image">
-                    <div class="image-input-wrapper  w-100" style="background-image: url({{ asset($featured_image?->path) }})"></div>
-
-                    <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="İç Kapak Görselini değiştir">
-                        <i class="fa fa-pen icon-sm text-muted"></i>
-                        <input type="file" name="five_cuff_image" accept=".png, .jpg, .jpeg"/>
-                        <input type="hidden" name="profile_avatar_remove"/>
-                    </label>
-
-                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="İptal Et">
-                              <i class="ki ki-bold-close icon-xs text-muted"></i>
-                         </span>
-                </div>
-                <span class="form-text">Yalnızca: png, jpg, jpeg.</span>
             </div>
         </div>
         <div class="form-group">
             <label class="form-label">Etiket:</label>
             <select class="form-control tags" multiple="multiple" name="tags[]">
                 @foreach($newsletter->tags as $tag)
-                    <option value="{{ $tag?->uuid }}"   @if($newsletter->tags->contains('uuid', $tag->uuid)) selected @endif>{{ $tag?->name }}</option>
+                    <option value="{{ $tag?->uuid }}" @if($newsletter->tags->contains('uuid', $tag->uuid)) selected @endif>{{ $tag?->name }}</option>
                 @endforeach
             </select>
             <span class="form-text text-muted">Lütfen etiketleri <b>ENTER</b> ile ayırınız.</span>
@@ -116,7 +75,7 @@
             <div class="">
                    <span class="switch switch-icon">
                         <label>
-                             <input type="checkbox"  name="is_seo" @checked($newsletter?->is_seo === \App\Enum\Newsletter\NewsletterGeneralEnum::ON) id="is_seo"/>
+                             <input type="checkbox"  name="is_seo" @checked($newsletter?->has_seo) id="is_seo"/>
                              <span></span>
                         </label>
                    </span>
