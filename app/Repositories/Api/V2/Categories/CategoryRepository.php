@@ -143,13 +143,26 @@ class CategoryRepository
                     ->where("morph_images.imageable_type", "=", Newsletter::class)
                     ->where("morph_images.image_type", "=", MorphImageImageTypeEnum::COVER);
             })
+            ->leftJoin('main_headlines', function ($join) {
+                $join->on('main_headlines.headlineable_id', '=', 'newsletters.id')
+                    ->where('main_headlines.headlineable_type', '=', Newsletter::class); // Sadece Newsletter'a bağlı kayıtları kontrol et
+            })
+            ->leftJoin("newsletter_outstandings", "newsletter_outstandings.newsletter_id", "=", "newsletters.id")
+            ->leftJoin("newsletter_last_minutes", "newsletter_last_minutes.newsletter_id", "=", "newsletters.id")
+            ->leftJoin("newsletter_today_headlines", "newsletter_today_headlines.newsletter_id", "=", "newsletters.id")
+            ->leftJoin("newsletter_five_cuffs", "newsletter_five_cuffs.newsletter_id", "=", "newsletters.id")
             ->join("categories","categories.id", "=", "newsletters.category_id")
             ->join("newsletter_publication_statuses", "newsletter_publication_statuses.id", "=", "newsletters.newsletter_publication_status_id")
+            ->whereNull('main_headlines.id')
+            ->whereNull('newsletter_outstandings.id')
+            ->whereNull('newsletter_last_minutes.id')
+            ->whereNull('newsletter_today_headlines.id')
+            ->whereNull('newsletter_five_cuffs.id')
             ->where("categories.slug", $category_slug)
             ->where("newsletter_publication_statuses.code", $newsletter_publication_status?->code)
             ->limit(24)
             ->get();
-dd($newsletters);
+
         return $newsletters;
     }
 }
