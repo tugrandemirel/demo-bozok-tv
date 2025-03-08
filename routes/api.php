@@ -24,6 +24,10 @@ Route::prefix("v2")->group(function () {
     Route::prefix("categories")->group(function () {
         Route::get("home-categories", [\App\Http\Controllers\Api\V2\Categories\CategoryController::class, "getHomeCategories"]);
         Route::get("/{category_slug}/outstandings", [\App\Http\Controllers\Api\V2\Categories\CategoryController::class, "getSlugByOutstandings"]);
+        Route::prefix('{category}')->group(function () {
+            Route::get("main-headlines", [\App\Http\Controllers\Api\V2\Categories\CategoryController::class, "getMainHeadlines"]);
+        });
+
     });
     Route::get('/main-headline', [MainHeadlineApiController::class, 'index']);
     Route::get("/newsletter-five-cuff", [App\Http\Controllers\Api\V2\Newsletters\NewsletterFiveCuffController::class, 'index']);

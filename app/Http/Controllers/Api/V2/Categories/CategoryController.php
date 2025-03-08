@@ -36,4 +36,14 @@ class CategoryController extends Controller
             return ResponseHelper::error("Slug'a göre öne çıkan haberleri çekme işleminde bir hata ile karşılaşıldı.", $exception->getMessage() );
         }
     }
+
+    public function getMainHeadlines(string $category_slug)
+    {
+        try{
+            $main_headlines = $this->category_service->getCategoryMainHeadlines($category_slug);
+            return ResponseHelper::success("Kategori Ana Maşneti başarılı bir şekilde çekildi.", ["data" => $main_headlines], 200);
+        } catch (\Exception $exception) {
+            return ResponseHelper::error("Kategori Ana Manşeti çekme işleminde bir hata ile karşılaşıldı.", $exception->getMessage() );
+        }
+    }
 }

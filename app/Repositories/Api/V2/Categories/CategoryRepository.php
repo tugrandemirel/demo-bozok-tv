@@ -2,14 +2,20 @@
 
 namespace App\Repositories\Api\V2\Categories;
 
+use App\Enum\Ads\AdsIsActiveEnum;
 use App\Enum\Category\CategoryHomePageEnum;
 use App\Enum\Category\CategoryIsActiveEnum;
 use App\Enum\MorphImage\MorphImageImageTypeEnum;
+use App\Models\Ads;
 use App\Models\Category;
+use App\Models\MainHeadline;
 use App\Models\Newsletter;
 use App\Models\NewsletterLastMinute;
 use App\Models\NewsletterOutstanding;
+use App\Models\NewsletterPublicationStatus;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class CategoryRepository
 {
@@ -58,5 +64,66 @@ class CategoryRepository
             ->get();
 
         return $newsletter_outstandings;
+    }
+
+    public function getMainHeadlines(string $category_slug)
+    {
+        $category = Category::query()
+            ->where("slug", $category_slug)
+            ->first();
+
+        /** @var NewsletterPublicationStatus $newsletter_publication_status */
+        $newsletter_publication_status = NewsletterPublicationStatus::query()
+            ->onTheAir()
+            ->select("code")
+            ->first();
+
+        /** @var Mainheadline $main_headlines */
+        $main_headlines = MainHeadline::query()
+            ->with(['headlineable' => function ($query) {
+                $query->when($query instanceof Newsletter, function ($q) {
+                    $q->select('id', 'title', 'slug', 'category_id', 'newsletter_publication_status_id')
+                        ->without('content') // <-- Content'i hariç tut
+                        ->with([
+                            'image' => function ($subQuery) {
+                                $subQuery->select('id', 'path', 'imageable_id', 'imageable_type');
+                            },
+                            'category:id,name,slug',
+                            'status:id,code'
+                        ]);
+                })->when($query instanceof Ads, function ($q) {
+                    $q->select('id', 'title', 'is_active')
+                        ->with('image:id,url,imageable_id,imageable_type');
+                });
+            }])
+            ->whereHasMorph(
+                'headlineable',
+                [Newsletter::class, Ads::class],
+                function (Builder $query, $type) use ($category_slug, $newsletter_publication_status) {
+                    if ($type === Newsletter::class) {
+                        $query->select('id', 'title', 'slug', 'category_id', 'newsletter_publication_status_id');
+                        $query->whereHas('category', function ($q) use ($category_slug) {
+                            $q->where('slug', $category_slug)
+                                ->where('is_active', CategoryIsActiveEnum::ACTIVE);
+                        })->whereHas('status', function ($q) use ($newsletter_publication_status) {
+                            $q->where('code', $newsletter_publication_status->code);
+                        });
+                    } elseif ($type === Ads::class) {
+                        $query->where('is_active', AdsIsActiveEnum::ACTIVE);
+                    }
+                }
+            )
+            ->orderBy('order', 'desc')
+            ->limit(20)
+            ->get()
+            ->map(function ($mainHeadline) {
+                // Image ilişkisi boşsa null olarak ayarla
+                if ($mainHeadline->headlineable instanceof Newsletter && !$mainHeadline->headlineable->image) {
+                    $mainHeadline->headlineable->setRelation('image', null);
+                }
+                return $mainHeadline;
+            });
+
+        return $main_headlines;
     }
 }

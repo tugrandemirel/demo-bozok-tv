@@ -4,6 +4,7 @@ namespace App\Service\Api\V2\Categories;
 
 use App\Http\Resources\Api\V2\Categories\CategoryResource;
 use App\Http\Resources\Api\V2\Newsletters\LastMinuteResource;
+use App\Http\Resources\MainHeadlineResource;
 use App\Repositories\Api\V2\Categories\CategoryRepository;
 use App\Repositories\Api\V2\Newsletters\LastMinuteRepository;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -27,5 +28,11 @@ class CategoryService
     {
         $categories = $this->category_repository->getSlugByOutstandings($slug);
         return CategoryResource::collection($categories);
+    }
+
+    public function getCategoryMainHeadlines(string $category_slug)
+    {
+        $main_headlines = $this->category_repository->getMainHeadlines($category_slug);
+        return MainHeadlineResource::collection($main_headlines);
     }
 }
