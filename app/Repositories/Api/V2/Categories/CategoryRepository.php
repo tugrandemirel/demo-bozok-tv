@@ -126,4 +126,30 @@ class CategoryRepository
 
         return $main_headlines;
     }
+
+    public function getCategoryLastNewsletter(string $category_slug)
+    {
+        /** @var NewsletterPublicationStatus $newsletter_publication_status */
+        $newsletter_publication_status = NewsletterPublicationStatus::query()
+            ->onTheAir()
+            ->select("code")
+            ->first();
+
+        $newsletters = Newsletter::query()
+            ->select("newsletters.id", "newsletters.title", "newsletters.slug", "newsletters.created_at")
+            ->addSelect(  "morph_images.path as path")
+            ->join("morph_images", function ($join) {
+                $join->on("morph_images.imageable_id", "=", "newsletters.id")
+                    ->where("morph_images.imageable_type", "=", Newsletter::class)
+                    ->where("morph_images.image_type", "=", MorphImageImageTypeEnum::COVER);
+            })
+            ->join("categories","categories.id", "=", "newsletters.category_id")
+            ->join("newsletter_publication_statuses", "newsletter_publication_statuses.id", "=", "newsletters.newsletter_publication_status_id")
+            ->where("categories.slug", $category_slug)
+            ->where("newsletter_publication_statuses.code", $newsletter_publication_status?->code)
+            ->limit(24)
+            ->get();
+dd($newsletters);
+        return $newsletters;
+    }
 }
