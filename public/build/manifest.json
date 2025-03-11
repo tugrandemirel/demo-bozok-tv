@@ -19,6 +19,11 @@
     "isEntry": true,
     "src": "resources/css/full-screen-modal.css"
   },
+  "resources/css/home.css": {
+    "file": "assets/home-057bfcd9.css",
+    "isEntry": true,
+    "src": "resources/css/home.css"
+  },
   "resources/js/admin/ads/create.js": {
     "file": "assets/create-2d2632a6.js",
     "isEntry": true,
@@ -303,6 +308,26 @@
     "file": "assets/daterange-9a6b32f6.js",
     "isEntry": true,
     "src": "resources/js/daterange.js"
+  },
+  "resources/js/front/swiper/five-cuff.js": {
+    "file": "assets/five-cuff-01b26046.js",
+    "isEntry": true,
+    "src": "resources/js/front/swiper/five-cuff.js"
+  },
+  "resources/js/front/swiper/main-headline.js": {
+    "file": "assets/main-headline-ddf72d43.js",
+    "isEntry": true,
+    "src": "resources/js/front/swiper/main-headline.js"
+  },
+  "resources/js/front/swiper/photo-gallery.js": {
+    "file": "assets/photo-gallery-b896247f.js",
+    "isEntry": true,
+    "src": "resources/js/front/swiper/photo-gallery.js"
+  },
+  "resources/js/front/swiper/politic.js": {
+    "file": "assets/politic-d29c4b6f.js",
+    "isEntry": true,
+    "src": "resources/js/front/swiper/politic.js"
   },
   "resources/js/select2.js": {
     "file": "assets/select2-b0f188ba.js",

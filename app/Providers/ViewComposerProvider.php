@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\ViewComposer\CategoryViewComposer;
+use App\ViewComposer\FrontendViewComposer;
 use App\ViewComposer\NewsletterSourceViewComposer;
 use App\ViewComposer\PlacementViewComposer;
 use App\ViewComposer\PostStatusViewComposer;
@@ -51,5 +52,9 @@ class ViewComposerProvider extends ServiceProvider
         View::composer([
             "admin.ads.create",
         ], AdTypeViewComposer::class);
+
+        View::composer([
+            "front.layouts.app",
+        ], FrontendViewComposer::class);
     }
 }

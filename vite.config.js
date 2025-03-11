@@ -6,6 +6,7 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
+                "resources/css/home.css",
                 'resources/css/custom.css',
                 "resources/css/full-screen-modal.css",
                 'resources/js/app.js',
@@ -93,6 +94,13 @@ export default defineConfig({
                 // ADS
                 "resources/js/admin/ads/create.js",
                 "resources/js/admin/ads/store.js",
+
+                // FRONT
+
+                "resources/js/front/swiper/five-cuff.js",
+                "resources/js/front/swiper/main-headline.js",
+                "resources/js/front/swiper/politic.js",
+                "resources/js/front/swiper/photo-gallery.js",
             ],
 
             refresh: true,

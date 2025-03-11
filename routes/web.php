@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Front\CategoryController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -35,9 +36,7 @@ Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
         ->limit(10)
         ->orderBy('order')
         ->get();*/
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -52,3 +51,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+Route::as("front.")->group(function () {
+    Route::get("/", [\App\Http\Controllers\Front\HomeController::class, 'index'])->name("index");
+    Route::prefix('{category_slug}')->as("category.")->group(function () {
+        Route::get('/', [CategoryController::class, 'show'])->name('show');
+    });
+});
