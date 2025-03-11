@@ -25,6 +25,7 @@ Route::prefix("v2")->group(function () {
         Route::get("home-categories", [\App\Http\Controllers\Api\V2\Categories\CategoryController::class, "getHomeCategories"]);
         Route::get("/{category_slug}/outstandings", [\App\Http\Controllers\Api\V2\Categories\CategoryController::class, "getSlugByOutstandings"]);
         Route::prefix('{category}')->group(function () {
+            Route::get('/', [CategoryApiController::class, 'getCategoryBySlug']);
             Route::get("main-headlines", [\App\Http\Controllers\Api\V2\Categories\CategoryController::class, "getMainHeadlines"]);
             Route::get("last-newsletters", [\App\Http\Controllers\Api\V2\Categories\CategoryController::class, "getCategoryLastNewsletters"]);
         });

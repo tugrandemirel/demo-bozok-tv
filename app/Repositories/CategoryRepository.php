@@ -29,6 +29,17 @@ class CategoryRepository implements CategoryRepositoryInterface
 
         return $categories;
     }
+    public function getCategoryBySlug(string $category_slug): Category
+    {
+        /** @var Category $category */
+        $category = Category::query()
+            ->select('name', "slug")
+            ->where("is_active", CategoryIsActiveEnum::ACTIVE)
+            ->where("slug", $category_slug)
+            ->first();
+
+        return $category;
+    }
 
     public function getCategoryBySlugNewsletters(Request $request, $slug)
     {
