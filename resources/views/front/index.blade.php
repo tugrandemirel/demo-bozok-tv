@@ -296,7 +296,6 @@
                             <div class="swiper" id="swiper-mosaic">
                                 <div class="swiper-wrapper">
                                     @foreach($photo_galleries as $photo_gallery)
-                                        @dd($photo_gallery)
                                     <div class="swiper-slide">
                                         <a href="/"
                                            target="_blank">
@@ -440,10 +439,24 @@
                     </div>
                     <ul>
                         @foreach($agenda_outstandings as $agenda_outstanding)
-                            <li>
-                                <a href="/" target="_blank">
-                                    {{ $agenda_outstanding?->title }}</a>
-                            </li>
+                            @if($loop->first)
+                                <li>
+                                    <a href="/" target="_blank">
+                                        <figure>
+                                            <img class="lazyload" loading="lazy"
+                                                 data-src="{{ $agenda_outstanding?->path }}"
+                                                 width="400" height="225"
+                                                 alt="{{ $agenda_outstanding?->title }}"/>
+                                            <figcaption>{{ $agenda_outstanding?->title }}</figcaption>
+                                        </figure>
+                                    </a>
+                                </li>
+                            @else
+                                <li>
+                                    <a href="/" target="_blank">
+                                        {{ $agenda_outstanding?->title }}</a>
+                                </li>
+                            @endif
                         @endforeach
                     </ul>
                 </div>
@@ -465,7 +478,7 @@
                                             <img class="lazyload" loading="lazy"
                                                  data-src="{{ $economi_outstanding?->path }}"
                                                  width="400" height="225"
-                                                 alt="SpaceX'in Starship roketi test uçuşunda patladı"/>
+                                                 alt="{{ $economi_outstanding?->title }}"/>
                                             <figcaption>{{ $economi_outstanding?->title }}</figcaption>
                                         </figure>
                                     </a>
