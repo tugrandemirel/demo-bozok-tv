@@ -23,20 +23,24 @@ class PoliticNewsletterRepository
             ->politic()
             ->first();
 
+        $publication_status_on_the_air = NewsletterPublicationStatus::onTheAir()
+            ->first();
+
         $newsletter_outstanding =  NewsletterOutstanding::query()
             ->select("newsletter_outstandings.id", "newsletter_outstandings.order")
             ->addSelect( "newsletters.title",  "newsletters.slug")
             ->addSelect("newsletter_publication_statuses.name as status_name", "newsletter_publication_statuses.code as status_code")
             ->addSelect(  "morph_images.path as path")
-            ->join("newsletters", function ($join) use ($politic_category) {
+            ->join("newsletters", function ($join) use ($politic_category, $publication_status_on_the_air) {
                 $join->on("newsletters.id", "=", "newsletter_outstandings.newsletter_id")
                     ->join("morph_images", function ($sub_join) use ($politic_category) {
                         $sub_join->on("morph_images.imageable_id", "=", "newsletters.id")
                             ->where("morph_images.imageable_type", "=", Newsletter::class)
                             ->where("morph_images.image_type", "=", MorphImageImageTypeEnum::COVER);
                     })
-                    ->join("newsletter_publication_statuses", function ($sub_join) {
-                        $sub_join->on("newsletter_publication_statuses.id", "=", "newsletters.newsletter_publication_status_id");
+                    ->join("newsletter_publication_statuses", function ($sub_join) use ($publication_status_on_the_air) {
+                        $sub_join->on("newsletter_publication_statuses.id", "=", "newsletters.newsletter_publication_status_id")
+                            ->where("newsletter_publication_statuses.code", "=", $publication_status_on_the_air->code);
                     })
                     ->join("categories", function ($sub_join) use ($politic_category) {
                         $sub_join->on("categories.id", "=", "newsletters.category_id")
@@ -60,20 +64,24 @@ class PoliticNewsletterRepository
             ->politic()
             ->first();
 
+        $publication_status_on_the_air = NewsletterPublicationStatus::onTheAir()
+            ->first();
+
         $newsletter_today_headlines =  NewsletterTodayHeadline::query()
             ->select("newsletter_today_headlines.id", "newsletter_today_headlines.order")
             ->addSelect( "newsletters.title",  "newsletters.slug")
             ->addSelect("newsletter_publication_statuses.name as status_name", "newsletter_publication_statuses.code as status_code")
             ->addSelect(  "morph_images.path as path")
-            ->join("newsletters", function ($join) use ($politic_category) {
+            ->join("newsletters", function ($join) use ($politic_category, $publication_status_on_the_air) {
                 $join->on("newsletters.id", "=", "newsletter_today_headlines.newsletter_id")
                     ->join("morph_images", function ($sub_join) use ($politic_category) {
                         $sub_join->on("morph_images.imageable_id", "=", "newsletters.id")
                             ->where("morph_images.imageable_type", "=", Newsletter::class)
                             ->where("morph_images.image_type", "=", MorphImageImageTypeEnum::COVER);
                     })
-                    ->join("newsletter_publication_statuses", function ($sub_join) {
-                        $sub_join->on("newsletter_publication_statuses.id", "=", "newsletters.newsletter_publication_status_id");
+                    ->join("newsletter_publication_statuses", function ($sub_join) use ($publication_status_on_the_air) {
+                        $sub_join->on("newsletter_publication_statuses.id", "=", "newsletters.newsletter_publication_status_id")
+                            ->where("newsletter_publication_statuses.code", "=", $publication_status_on_the_air->code);
                     })
                     ->join("categories", function ($sub_join) use ($politic_category) {
                         $sub_join->on("categories.id", "=", "newsletters.category_id")

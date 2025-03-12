@@ -7,9 +7,24 @@ $(document).ready(function () {
             delay: 3000,  // 3 saniyede bir geçiş
             disableOnInteraction: false,
         },
+        pagination: {
+            el: ".slider-numbers",
+            clickable: true,
+            renderBullet: function (index, className) {
+                return '<span class="' + className + '">' + (index + 1) + '</span>';
+            }
+        },
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+            0: { // Mobilde farklı ayarlar kullanabiliriz
+                pagination: {
+                    dynamicBullets: false, // Mobilde bullet'lar normal şekilde görünsün
+                    clickable: true
+                }
+            }
         },
         on: {
             slideChange: function () {
@@ -21,4 +36,5 @@ $(document).ready(function () {
             }
         }
     });
+    $(".slider-numbers").append('<a class="all" href="" target="_blank"><strong>T</strong></a>');
 });

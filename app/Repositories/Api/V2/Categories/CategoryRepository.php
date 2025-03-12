@@ -36,20 +36,24 @@ class CategoryRepository
             ->where("slug", $slug)
             ->first();
 
+        $publication_status_on_the_air = NewsletterPublicationStatus::onTheAir()
+            ->first();
+
         $newsletter_outstandings = NewsletterOutstanding::query()
             ->select("newsletter_outstandings.id", "newsletter_outstandings.order")
             ->addSelect( "newsletters.title",  "newsletters.slug")
             ->addSelect("newsletter_publication_statuses.name as status_name", "newsletter_publication_statuses.code as status_code")
             ->addSelect(  "morph_images.path as path")
-            ->join("newsletters", function ($join) {
+            ->join("newsletters", function ($join) use ($publication_status_on_the_air) {
                 $join->on("newsletters.id", "=", "newsletter_outstandings.newsletter_id")
                     ->join("morph_images", function ($sub_join) {
                         $sub_join->on("morph_images.imageable_id", "=", "newsletters.id")
                             ->where("morph_images.imageable_type", "=", Newsletter::class)
                             ->where("morph_images.image_type", "=", MorphImageImageTypeEnum::COVER);
                     })
-                    ->join("newsletter_publication_statuses", function ($sub_join) {
-                        $sub_join->on("newsletter_publication_statuses.id", "=", "newsletters.newsletter_publication_status_id");
+                    ->join("newsletter_publication_statuses", function ($sub_join) use ($publication_status_on_the_air) {
+                        $sub_join->on("newsletter_publication_statuses.id", "=", "newsletters.newsletter_publication_status_id")
+                            ->where("newsletter_publication_statuses.code", "=", $publication_status_on_the_air->code);
                     })
                     ->join("categories", function ($sub_join) {
                         $sub_join->on("categories.id", "=", "newsletters.category_id");
@@ -80,8 +84,8 @@ class CategoryRepository
 
         /** @var Mainheadline $main_headlines */
         $main_headlines = MainHeadline::query()
-            ->with(['headlineable' => function ($query) {
-                $query->when($query instanceof Newsletter, function ($q) {
+            ->with(['headlineable' => function ($query) use ($newsletter_publication_status){
+                $query->when($query instanceof Newsletter, function ($q) use ($newsletter_publication_status) {
                     $q->select('id', 'title', 'slug', 'category_id', 'newsletter_publication_status_id')
                         ->without('content') // <-- Content'i hariç tut
                         ->with([
@@ -89,7 +93,9 @@ class CategoryRepository
                                 $subQuery->select('id', 'path', 'imageable_id', 'imageable_type');
                             },
                             'category:id,name,slug',
-                            'status:id,code'
+                            $q->whereHas('status', function ($q) use ($newsletter_publication_status) {
+                                $q->where('code', $newsletter_publication_status?->code);
+                            })
                         ]);
                 })->when($query instanceof Ads, function ($q) {
                     $q->select('id', 'title', 'is_active')

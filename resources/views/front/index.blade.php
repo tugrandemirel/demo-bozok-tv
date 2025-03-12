@@ -23,8 +23,8 @@
                         <a class="swiper-slide item" href="/"
                            title="{{ $main_headline?->headlineable?->title }}" data-order="2" target="_blank">
                             <div class="img">
-                                <img loading="lazy"
-                                     data-src="{{ $main_headline?->headlineable?->main_headline?->path ?? $main_headline?->headlineable?->image?->path }}"
+                                <img loading="lazy" class="lazyload"
+                                     data-src="{{ $main_headline?->headlineable?->image?->path }}"
                                      width="788" height="450" alt="{{ $main_headline?->headlineable?->title }}" decoding="async">
                             </div>
                             <div class="title">{{ $main_headline?->headlineable?->title }}</div>
@@ -34,7 +34,8 @@
                     <!-- navigation buttons -->
                     <div class="swiper-button-prev"></div>
                     <div class="swiper-button-next"></div>
-                    <div class="slider-numbers"></div>
+                    <div class="slider-numbers">
+                    </div>
                 </div>
             </div>
             <!-- //left slider -->

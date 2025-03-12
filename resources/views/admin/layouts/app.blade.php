@@ -36,7 +36,7 @@
 <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
     <!--begin::Logo-->
     <a href="{{ route('admin.index') }}">
-        <img alt="Logo" src="{{ asset($general_setting->logo['path'] ?? '') }}" width="50%" />
+        <img alt="Logo" src="" width="50%" />
     </a>
     <!--end::Logo-->
     <!--begin::Toolbar-->
