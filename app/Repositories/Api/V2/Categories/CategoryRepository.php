@@ -29,6 +29,18 @@ class CategoryRepository
         return $categories;
     }
 
+    public function getCategoryBySlug(string $category_slug): Category
+    {
+        /** @var Category $category */
+        $category = Category::query()
+            ->select('name', "slug")
+            ->where("is_active", CategoryIsActiveEnum::ACTIVE)
+            ->where("slug", $category_slug)
+            ->first();
+
+        return $category;
+    }
+
     public function getSlugByOutstandings(string $slug)
     {
         $category = Category::query()
@@ -44,6 +56,7 @@ class CategoryRepository
             ->addSelect( "newsletters.title",  "newsletters.slug")
             ->addSelect("newsletter_publication_statuses.name as status_name", "newsletter_publication_statuses.code as status_code")
             ->addSelect(  "morph_images.path as path")
+            ->addSelect(  "categories.slug as category_slug")
             ->join("newsletters", function ($join) use ($publication_status_on_the_air) {
                 $join->on("newsletters.id", "=", "newsletter_outstandings.newsletter_id")
                     ->join("morph_images", function ($sub_join) {
@@ -143,6 +156,7 @@ class CategoryRepository
 
         $newsletters = Newsletter::query()
             ->select("newsletters.id", "newsletters.title", "newsletters.slug", "newsletters.created_at")
+            ->addSelect("categories.slug as category_slug")
             ->addSelect(  "morph_images.path as path")
             ->join("morph_images", function ($join) {
                 $join->on("morph_images.imageable_id", "=", "newsletters.id")

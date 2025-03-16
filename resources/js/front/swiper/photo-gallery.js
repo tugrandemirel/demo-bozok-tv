@@ -10,14 +10,6 @@ $(document).ready(function () {
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
-        },
-        breakpoints: {
-            768: {
-                slidesPerView: 2, // Tabletlerde 2 slayt göster
-            },
-            1024: {
-                slidesPerView: 3, // Büyük ekranlarda 3 slayt göster
-            }
         }
     });
 });

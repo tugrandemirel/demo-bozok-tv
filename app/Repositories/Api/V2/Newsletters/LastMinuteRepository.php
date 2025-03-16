@@ -20,6 +20,7 @@ class LastMinuteRepository
             ->addSelect( "newsletters.title",  "newsletters.slug")
             ->addSelect("newsletter_publication_statuses.name as status_name", "newsletter_publication_statuses.code as status_code")
             ->addSelect(  "morph_images.path as path")
+            ->addSelect(  "categories.slug as category_slug")
             ->join("newsletters", function ($join) use ($publication_status_on_the_air) {
                 $join->on("newsletters.id", "=", "newsletter_last_minutes.newsletter_id")
                     ->join("morph_images", function ($sub_join)  {

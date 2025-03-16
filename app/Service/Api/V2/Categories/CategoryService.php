@@ -26,6 +26,12 @@ class CategoryService
         return CategoryResource::collection($categories);
     }
 
+    public function getCategoryBySlug(string $category_slug): CategoryResource
+    {
+        $categories = $this->category_repository->getCategoryBySlug($category_slug);
+        return CategoryResource::make($categories);
+    }
+
     public function getSlugByOutstandings(string $slug)
     {
         $categories = $this->category_repository->getSlugByOutstandings($slug);

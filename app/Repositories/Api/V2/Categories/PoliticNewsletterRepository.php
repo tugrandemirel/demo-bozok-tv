@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Api\V2\Categories;
 
+use App\Enum\Ads\AdsIsActiveEnum;
+use App\Enum\Category\CategoryIsActiveEnum;
 use App\Enum\MorphImage\MorphImageImageTypeEnum;
 use App\Models\Ads;
 use App\Models\Category;
@@ -31,6 +33,7 @@ class PoliticNewsletterRepository
             ->addSelect( "newsletters.title",  "newsletters.slug")
             ->addSelect("newsletter_publication_statuses.name as status_name", "newsletter_publication_statuses.code as status_code")
             ->addSelect(  "morph_images.path as path")
+            ->addSelect(  "categories.slug as category_slug")
             ->join("newsletters", function ($join) use ($politic_category, $publication_status_on_the_air) {
                 $join->on("newsletters.id", "=", "newsletter_outstandings.newsletter_id")
                     ->join("morph_images", function ($sub_join) use ($politic_category) {
@@ -70,6 +73,7 @@ class PoliticNewsletterRepository
         $newsletter_today_headlines =  NewsletterTodayHeadline::query()
             ->select("newsletter_today_headlines.id", "newsletter_today_headlines.order")
             ->addSelect( "newsletters.title",  "newsletters.slug")
+            ->addSelect(  "categories.slug as category_slug")
             ->addSelect("newsletter_publication_statuses.name as status_name", "newsletter_publication_statuses.code as status_code")
             ->addSelect(  "morph_images.path as path")
             ->join("newsletters", function ($join) use ($politic_category, $publication_status_on_the_air) {
@@ -100,38 +104,51 @@ class PoliticNewsletterRepository
 
     public function getPoliticNewslettersWithMainHeadlines(): Collection|array
     {
-        /** @var NewsletterPublicationStatus $newsletter_publication_status */
         $newsletter_publication_status = NewsletterPublicationStatus::query()
             ->onTheAir()
             ->select("code")
             ->first();
 
-        /** @var Mainheadline $main_headlines */
+        // KATEGORİ SORGUSU (AKTİF VE POLİTİK)
+        $category = Category::query()
+            ->politic()
+            ->where('is_active', CategoryIsActiveEnum::ACTIVE) // Scope'da yoksa ekleyin
+            ->first();
+
+        if (!$category) {
+            return collect(); // Kategori yoksa boş dön
+        }
+
+        // ANA BAŞLIKLARI ÇEK
         $main_headlines = MainHeadline::query()
             ->select("headlineable_type", "headlineable_id", "order", "uuid")
-            ->with('headlineable', function (MorphTo $morphTo) use ($newsletter_publication_status) {
-                $morphTo->constrain([
-                    Newsletter::class => function (Builder $qu) use ($newsletter_publication_status) {
-                        $qu->select("id","title", "category_id", "newsletter_publication_status_id", "slug");
-                        $qu->with([
-                            'image' => function ($q) {
-                                $q->where('image_type', MorphImageImageTypeEnum::COVER);
-                            },
-                            'seoSetting',
-                            "category"=> function ($q) {
-                                $q->where("slug", Category::query()->politic()->first()->slug);
-                            }
-                        ]);
-                        $qu->whereHas("status", function ($q) use ($newsletter_publication_status){
+            ->with(['headlineable' => function ($query) use ($newsletter_publication_status, $category) {
+                $query->when($query instanceof Newsletter, function (Builder $q) use ($newsletter_publication_status, $category) {
+                    $q->select("id", "title", "category_id", "newsletter_publication_status_id", "slug")
+                        ->with(['image', 'seoSetting', 'category'])
+                        ->whereHas("status", function ($q) use ($newsletter_publication_status) {
                             $q->where("code", $newsletter_publication_status->code);
-                        });
-                    },
-                    Ads::class => function ($qu) {
-                        $qu->where('is_active', \App\Enum\Ads\AdsIsActiveEnum::ACTIVE);
-                        $qu->with('image');
+                        })
+                        ->where("category_id", $category->id); // Kategori ID ile doğrudan filtrele
+                })->when($query instanceof Ads, function (Builder $q) {
+                    $q->where('is_active', AdsIsActiveEnum::ACTIVE)
+                        ->with('image');
+                });
+            }])
+            ->whereHasMorph(
+                'headlineable',
+                [Newsletter::class, Ads::class],
+                function (Builder $query, $type) use ($newsletter_publication_status, $category) {
+                    if ($type === Newsletter::class) {
+                        $query->where("category_id", $category->id)
+                            ->whereHas("status", function ($q) use ($newsletter_publication_status) {
+                                $q->where("code", $newsletter_publication_status->code);
+                            });
+                    } elseif ($type === Ads::class) {
+                        $query->where('is_active', AdsIsActiveEnum::ACTIVE);
                     }
-                ]);
-            })
+                }
+            )
             ->limit(10)
             ->orderBy('order')
             ->get();

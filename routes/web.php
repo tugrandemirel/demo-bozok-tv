@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Front\CategoryController;
+use App\Http\Controllers\Front\NewsletterController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -55,5 +56,8 @@ Route::as("front.")->group(function () {
     Route::get("/", [\App\Http\Controllers\Front\HomeController::class, 'index'])->name("index");
     Route::prefix('{category_slug}')->as("category.")->group(function () {
         Route::get('/', [CategoryController::class, 'show'])->name('show');
+        Route::as("newsletter.")->group(function () {
+            Route::get('/{newsletter_slug}', [NewsletterController::class, 'show'])->name('show');
+        });
     });
 });

@@ -2,24 +2,24 @@
     <div class="container">
         <div class="endline">
             <div class="logo">
-                <a href="{{ route("front.index") }}" title="En Son Haber" class="logo-bg" style="background: url({{ asset($general_setting?->logo["path"]) }})"><span>En Son Haber</span></a>
+                <a href="{{ route("front.index") }}" title="{{ $general_setting?->site_name }}" class="logo-bg" style="background: url({{ asset($general_setting?->logo["path"]) }})"><span>{{ $general_setting?->site_name }}</span></a>
             </div>
             <div class="slogan">
-                Copyright &copy; {{ \Carbon\Carbon::now()->format('Y') }} {{ $general_setting?->site_name }} Tüm Hakları Saklıdır.
+                Copyright &copy; {{ \Carbon\Carbon::now()->format('Y') }} {{ \Illuminate\Support\Str::upper($general_setting?->site_name) }} Tüm Hakları Saklıdır.
             </div>
             <div class="social-links">
                 <a href="https://t.me/ensonhaber" target="_blank" rel="nofollow" class="telegram"
-                   title="Ensonhaber Telegram kanalı"><span>Telegram</span></a>
+                   title="{{ $general_setting?->site_name }} Telegram kanalı"><span>Telegram</span></a>
                 <a href="https://wa.me/905333782000" target="_blank" rel="nofollow" class="whatsapp"
-                   title="Ensonhaber whatsapp hattı"><span>WhatsApp</span></a>
+                   title="{{ $general_setting?->site_name }} whatsapp hattı"><span>WhatsApp</span></a>
                 <a href="https://www.youtube.com/channel/UCZHf28-BG2Pz-UFqYJiZBeg" target="_blank" rel="noopener"
                    class="youtube" title="Ensonhaber Youtube"><span>Youtube</span></a>
                 <a href="https://twitter.com/ensonhaber" target="_blank" class="twitter"
-                   title="Ensonhaber Twitter"><span>Twitter</span></a>
+                   title="{{ $general_setting?->site_name }} Twitter"><span>Twitter</span></a>
                 <a href="https://www.instagram.com/ensonhaber/" target="_blank" class="instagram"
-                   title="Ensonhaber Instagram"><span>Instagram</span></a>
+                   title="{{ $general_setting?->site_name }} Instagram"><span>Instagram</span></a>
                 <a href="https://www.facebook.com/ensonhaber" target="_blank" class="facebook"
-                   title="Ensonhaber facebook"><span>Facebook</span></a>
+                   title="{{ $general_setting?->site_name }} facebook"><span>Facebook</span></a>
             </div>
         </div>
     </div>

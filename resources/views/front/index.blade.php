@@ -20,7 +20,7 @@
                 <div class="swiper-container" id="ls">
                     <div class="swiper-wrapper">
                         @foreach($main_headlines as $main_headline)
-                        <a class="swiper-slide item" href="/"
+                        <a class="swiper-slide item" href="{{ route("front.category.newsletter.show", ["category_slug" =>$main_headline?->headlineable?->category?->slug, "newsletter_slug" => $main_headline?->headlineable?->slug ]) }}"
                            title="{{ $main_headline?->headlineable?->title }}" data-order="2" target="_blank">
                             <div class="img">
                                 <img loading="lazy" class="lazyload"
@@ -46,7 +46,7 @@
                     <div class="swiper-wrapper">
                         @foreach($newsletter_today_headlines as $newsletter_today_headline)
                             <a class="swiper-slide item" target="_blank"
-                               href=""
+                               href="{{ route("front.category.newsletter.show", ["category_slug" =>$newsletter_today_headline?->category_slug, "newsletter_slug" => $newsletter_today_headline?->slug ]) }}"
                                title="{{ $newsletter_today_headline?->title }}" data-order="{{ $newsletter_today_headline?->order }}">
                                 <div class="img">
                                     <img src="{{ asset($newsletter_today_headline?->path) }}"
@@ -74,7 +74,7 @@
         <!-- grid slider -->
         <section class="gridslider">
             @foreach($newsletter_five_cuffs as $newsletter_five_cuff)
-                <a class="item" href="/"
+                <a class="item" href="{{ route("front.category.newsletter.show", ["category_slug" =>$newsletter_five_cuff?->category_slug, "newsletter_slug" => $newsletter_five_cuff?->slug ]) }}"
                target="_blank">
                 <figure>
                     <img class="lazyload"
@@ -98,10 +98,9 @@
         <!-- grid news: 12 -->
         <section class="mb-30">
             <div class="grid grid-4">
-                <!-- item -->
                 @foreach($last_newsletters as $last_newsletter)
                 <div class="item">
-                    <a href="dunya/trumpin-resmi-portresi-gundem-oldu.html" target="_blank"
+                    <a href="{{ route("front.category.newsletter.show", ["category_slug" =>$last_newsletter?->category_slug, "newsletter_slug" => $last_newsletter?->slug ]) }}" target="_blank"
                        title="{{ $last_newsletter?->title }}">
                         <picture>
                             <img loading="lazy" class="thumb" width="320" height="180"
@@ -115,12 +114,8 @@
                     </a>
                 </div>
                 @endforeach
-                <!-- //item -->
             </div>
         </section>
-
-        <!-- grid news: 12 -->
-
     </div>
 
 {{--    <div class="esx ad-slot hd-280 hm-280 text-center" id="/9170022/ESH_DESKTOP_ANASAYFA/mansetalti_2"></div>--}}
@@ -131,11 +126,8 @@
 
             <div class="row">
                 <div class="column">
-
-
                     <div class="head-v3 green mb-20">
-                        <a href="kralspor.html">Siyaset Haberleri</a>
-
+                        <a href="{{ route("front.category.show", ["category_slug" => "siyaset"]) }}">Siyaset Haberleri</a>
                     </div>
 
                 </div>
@@ -149,7 +141,7 @@
                             <div class="swiper-wrapper mb-30">
                                 @foreach($politic_newsletters_main_headlines as $politic_newsletters_main_headline)
                                 <div class="swiper-slide">
-                                    <a href="/" target="_blank" title="{{ $politic_newsletters_main_headline?->headlineable?->title }}">
+                                    <a href="{{ route("front.category.newsletter.show", ["category_slug" =>$politic_newsletters_main_headline?->headlineable?->category?->slug, "newsletter_slug" =>$politic_newsletters_main_headline?->headlineable?->slug ]) }}" target="_blank" title="{{ $politic_newsletters_main_headline?->headlineable?->title }}">
                                         <img loading="lazy" class="lazyload" data-src="{{ $politic_newsletters_main_headline?->headlineable?->image?->path }}" width="700" height="400" alt="{{ $politic_newsletters_main_headline?->headlineable?->title }}">
                                     </a>
                                 </div>
@@ -165,7 +157,7 @@
                     <div class="grid grid-2 grid-mobile-2">
                         @foreach($politic_newsletter_outstandings as $politic_newsletter_outstanding)
                         <div class="item">
-                            <a href=""
+                            <a href="{{ route("front.category.newsletter.show", ["category_slug" =>$politic_newsletter_outstanding?->category_slug, "newsletter_slug" => $politic_newsletter_outstanding?->slug ]) }}"
                                target="_blank">
                                 <img class="lazyload"
                                      data-src="{{ $politic_newsletter_outstanding?->path }}"
@@ -187,7 +179,7 @@
                         <!-- item -->
                         @foreach($politic_newsletters_today_headlines as $politic_newsletters_today_headline)
                         <div class="item">
-                            <a href="" target="_blank">
+                            <a href="{{ route("front.category.newsletter.show", ["category_slug" =>$politic_newsletters_today_headline?->category_slug, "newsletter_slug" => $politic_newsletters_today_headline?->slug ]) }}" target="_blank">
                                 <span class="thumb">
                                     <img class="lazyload" width="286" height="161"
                                          data-src="{{ $politic_newsletters_today_headline?->path }}"
@@ -209,26 +201,16 @@
 {{--    <div class="esx ad-slot hd-280 hm-280 text-center" id="/9170022/ESH_DESKTOP_ANASAYFA/mansetalti_3"></div>--}}
     <section class="mosaic-news">
         <div class="container">
-
-
             <div class="parts">
-
                 <div class="part-1">
-                    <!-- column -->
-
-                    <!-- //column -->
-                    <!-- column -->
                     <div class="sutun">
-
-                        <!-- 2 item -->
-                        <!-- //1 item tower -->
 
                         <!-- list item -->
                         <div class="list list-mb">
                             <ul>
                                 @foreach($newsletter_outstandings as $newsletter_outstanding)
                                 <li>
-                                    <a href=""
+                                    <a href="{{ route("front.category.newsletter.show", ["category_slug" =>$newsletter_outstanding?->category_slug, "newsletter_slug" => $newsletter_outstanding?->slug ]) }}"
                                        target="_blank">
                                         <figure>
                                             <span class="img">
@@ -247,20 +229,14 @@
                             </ul>
                         </div>
                         <!-- //1 item -->
-
-
                     </div>
                     <div class="sutun">
-
-                        <!-- 2 item -->
-                        <!-- //1 item tower -->
-
                         <!-- list item -->
                         <div class="list list-mb">
                             <ul>
                                 @foreach($last_minutes as $last_minute)
                                     <li>
-                                        <a href=""
+                                        <a href="{{ route("front.category.newsletter.show", ["category_slug" =>$last_minute?->category_slug, "newsletter_slug" => $last_minute?->slug ]) }}"
                                            target="_blank">
                                             <figure>
                                             <span class="img">
@@ -279,12 +255,8 @@
                             </ul>
                         </div>
                         <!-- //1 item -->
-
-
                     </div>
                     <!-- //column -->
-
-
                 </div>
 
                 <div class="part-2">
@@ -346,7 +318,7 @@
                     <div class="row">
                         <div class="column">
                             <div class="head-v3 green mb-20">
-                                <a href="/">Spor Haberleri</a>
+                                <a href="{{ route("front.category.show", ["category_slug" => "spor"]) }}">Spor Haberleri</a>
                             </div>
                         </div>
                     </div>
@@ -356,7 +328,7 @@
                             {{-- İlk öğeyi al ve SectionHero içinde göster --}}
                             @php $firstItem = $sport_outstandings[0]; @endphp
                             <div class="sectionhero v2">
-                                <a href="/" target="_blank">
+                                <a href="{{ route("front.category.newsletter.show", ["category_slug" =>$firstItem?->category_slug, "newsletter_slug" => $firstItem?->slug ]) }}" target="_blank">
                                     <img class="lazyload"
                                          data-src="{{ $firstItem->path }}"
                                          width="703" height="395"
@@ -372,7 +344,7 @@
                                 {{-- Kalan 4 öğeyi listele --}}
                                 @foreach($sport_outstandings->skip(1)->take(4) as $item)
                                     <div class="item">
-                                        <a href="/" target="_blank">
+                                        <a href="{{ route("front.category.newsletter.show", ["category_slug" =>$item?->category_slug, "newsletter_slug" => $item?->slug ]) }}" target="_blank">
                                             <img class="lazyload"
                                                  data-src="{{ $item->path }}"
                                                  width="229" height="129"
@@ -406,13 +378,13 @@
                 <!-- item -->
                 <div class="item">
                     <div class="item-title blue">
-                        <a href="">Dünya Haberleri</a>
+                        <a href="{{ route("front.category.show", ["category_slug" => "dunya"]) }}">Dünya Haberleri</a>
                     </div>
                     <ul>
                         @foreach($world_outstandings as $world_outstanding)
                         @if($loop->first)
                             <li>
-                            <a href="/" target="_blank">
+                            <a href="{{ route("front.category.newsletter.show", ["category_slug" =>$world_outstanding?->category_slug, "newsletter_slug" => $world_outstanding?->slug ]) }}" target="_blank">
                                 <figure>
                                     <img class="lazyload" loading="lazy"
                                          data-src="{{ $world_outstanding?->path }}"
@@ -424,7 +396,7 @@
                         </li>
                             @else
                         <li>
-                            <a href="/" target="_blank">
+                            <a href="{{ route("front.category.newsletter.show", ["category_slug" =>$world_outstanding?->category_slug, "newsletter_slug" => $world_outstanding?->slug ]) }}" target="_blank">
                                 {{ $world_outstanding?->title }}</a>
                         </li>
                             @endif
@@ -442,7 +414,7 @@
                         @foreach($agenda_outstandings as $agenda_outstanding)
                             @if($loop->first)
                                 <li>
-                                    <a href="/" target="_blank">
+                                    <a href="{{ route("front.category.newsletter.show", ["category_slug" =>$agenda_outstanding?->category_slug, "newsletter_slug" => $agenda_outstanding?->slug ]) }}" target="_blank">
                                         <figure>
                                             <img class="lazyload" loading="lazy"
                                                  data-src="{{ $agenda_outstanding?->path }}"
@@ -454,7 +426,7 @@
                                 </li>
                             @else
                                 <li>
-                                    <a href="/" target="_blank">
+                                    <a href="{{ route("front.category.newsletter.show", ["category_slug" =>$agenda_outstanding?->category_slug, "newsletter_slug" => $agenda_outstanding?->slug ]) }}" target="_blank">
                                         {{ $agenda_outstanding?->title }}</a>
                                 </li>
                             @endif
@@ -471,23 +443,24 @@
                     </div>
 
                     <ul>
-                        @foreach($economi_outstandings as $economi_outstanding)
+                        @foreach($economi_outstandings as $economy_outstanding)
                             @if($loop->first)
                                 <li>
-                                    <a href="/" target="_blank">
+                                    <a href="{{ route("front.category.newsletter.show", ["category_slug" =>$economy_outstanding?->category_slug, "newsletter_slug" => $economy_outstanding?->slug ]) }}" target="_blank">
                                         <figure>
                                             <img class="lazyload" loading="lazy"
-                                                 data-src="{{ $economi_outstanding?->path }}"
+                                                 data-src="{{ $economy_outstanding?->path }}"
                                                  width="400" height="225"
-                                                 alt="{{ $economi_outstanding?->title }}"/>
-                                            <figcaption>{{ $economi_outstanding?->title }}</figcaption>
+                                                 alt="{{ $economy_outstanding?->title }}"/>
+                                            <figcaption>{{ $economy_outstanding?->title }}</figcaption>
                                         </figure>
                                     </a>
                                 </li>
                             @else
                                 <li>
-                                    <a href="/" target="_blank">
-                                        {{ $economi_outstanding?->title }}</a>
+                                    <a href="{{ route("front.category.newsletter.show", ["category_slug" =>$economy_outstanding?->category_slug, "newsletter_slug" => $economy_outstanding?->slug ]) }}" target="_blank">
+                                        {{ $economy_outstanding?->title }}
+                                    </a>
                                 </li>
                             @endif
                         @endforeach

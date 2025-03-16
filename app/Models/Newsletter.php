@@ -123,6 +123,11 @@ class Newsletter extends Model implements Sortable
         return $this->morphMany(UserActivity::class, 'activityable');
     }
 
+    public function createdByUser()
+    {
+        return $this->belongsTo(User::class, "created_by_user_id");
+    }
+
     /*protected static function booted(): void
     {
         static::created(function ($newsletter) {

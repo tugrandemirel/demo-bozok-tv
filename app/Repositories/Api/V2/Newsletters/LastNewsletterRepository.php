@@ -18,6 +18,7 @@ class LastNewsletterRepository
             ->addSelect( "newsletters.title",  "newsletters.slug")
             ->addSelect("newsletter_publication_statuses.name as status_name", "newsletter_publication_statuses.code as status_code")
             ->addSelect(  "morph_images.path as path")
+            ->addSelect(  "categories.slug as category_slug")
             ->join("morph_images", function ($join) use ($publication_status_on_the_air) {
                     $join->on("morph_images.imageable_id", "=", "newsletters.id")
                         ->where("morph_images.imageable_type", "=", Newsletter::class)

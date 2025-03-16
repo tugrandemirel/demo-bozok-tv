@@ -7,6 +7,8 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 "resources/css/home.css",
+                "resources/css/page.css",
+                "resources/css/page-detail.css",
                 'resources/css/custom.css',
                 "resources/css/full-screen-modal.css",
                 'resources/js/app.js',
@@ -101,6 +103,7 @@ export default defineConfig({
                 "resources/js/front/swiper/main-headline.js",
                 "resources/js/front/swiper/politic.js",
                 "resources/js/front/swiper/photo-gallery.js",
+                "resources/js/front/swiper/page.js",
             ],
 
             refresh: true,
