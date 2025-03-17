@@ -36,8 +36,8 @@
                                         <li><a href="{{ route("front.index") }}">Haberler</a></li>
                                         <li class="sep"></li>
                                         <li><a href="{{ route("front.category.show", ["category_slug" => $category?->slug]) }}">{{ $category?->name }}</a></li>
-                                        <li class="sep">{{ $newsletter?->title }}</li>
-                                        <li></li>
+                                        <li class="sep"></li>
+                                        <li>{{ $newsletter?->title }}</li>
                                     </ul>
 
 
@@ -51,7 +51,7 @@
                                     <h1>{{ $newsletter?->title }}</h1>
 
                                     <h2 class="desc" id="articledesc" data-mode="desktop">
-                                        {{ $newsletter?->spot }}
+                                        {!! $newsletter?->spot !!}
                                     </h2>
 
                                 </div>

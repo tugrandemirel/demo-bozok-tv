@@ -520,8 +520,8 @@ img {
 
 @font-face {
     font-family: "eshicons";
-    src: url("/assets/fonts/eshicons/fonts/eshicons.eot?ncw6hm");
-    src: url("/assets/fonts/eshicons/fonts/eshicons.eot?ncw6hm#iefix") format("embedded-opentype"), url("/assets/fonts/eshicons/fonts/eshicons.ttf?ncw6hm") format("truetype"), url("/assets/fonts/eshicons/fonts/eshicons.woff?ncw6hm") format("woff"), url("/assets/fonts/eshicons/fonts/eshicons.svg?ncw6hm#eshicons") format("svg");
+    src: url("../assets/fonts/eshicons/fonts/eshicons.eot");
+    src: url("../assets/fonts/eshicons/fonts/eshicons.eot") format("embedded-opentype"), url("../assets/fonts/eshicons/fonts/eshicons.ttf") format("truetype"), url("../assets/fonts/eshicons/fonts/eshicons.woff") format("woff"), url("../assets/fonts/eshicons/fonts/eshicons.svg") format("svg");
     font-weight: normal;
     font-style: normal;
     font-display: block
@@ -1973,8 +1973,8 @@ button.swiper-pagination-bullet {
     font-style: normal;
     font-weight: 300;
     font-display: swap;
-    src: url("/assets/fonts/inter/inter-v2-latin-ext_latin-300.eot");
-    src: local(""), url("/assets/fonts/inter/inter-v2-latin-ext_latin-300.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-300.woff2") format("woff2"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-300.woff") format("woff"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-300.ttf") format("truetype"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-300.svg#Inter") format("svg")
+    src: url("../assets/fonts/inter/inter-v2-latin-ext_latin-300.eot");
+    src: local(""), url("../assets/fonts/inter/inter-v2-latin-ext_latin-300.eot") format("embedded-opentype"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-300.woff2") format("woff2"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-300.woff") format("woff"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-300.ttf") format("truetype"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-300.svg") format("svg")
 }
 
 @font-face {
@@ -1982,8 +1982,8 @@ button.swiper-pagination-bullet {
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("/assets/fonts/inter/inter-v2-latin-ext_latin-regular.eot");
-    src: local(""), url("/assets/fonts/inter/inter-v2-latin-ext_latin-regular.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-regular.woff2") format("woff2"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-regular.woff") format("woff"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-regular.ttf") format("truetype"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-regular.svg#Inter") format("svg")
+    src: url("../assets/fonts/inter/inter-v2-latin-ext_latin-regular.eot");
+    src: local(""), url("../assets/fonts/inter/inter-v2-latin-ext_latin-regular.eot") format("embedded-opentype"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-regular.woff2") format("woff2"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-regular.woff") format("woff"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-regular.ttf") format("truetype"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-regular.svg") format("svg")
 }
 
 @font-face {
@@ -1991,8 +1991,8 @@ button.swiper-pagination-bullet {
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: url("/assets/fonts/inter/inter-v2-latin-ext_latin-500.eot");
-    src: local(""), url("/assets/fonts/inter/inter-v2-latin-ext_latin-500.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-500.woff2") format("woff2"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-500.woff") format("woff"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-500.ttf") format("truetype"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-500.svg#Inter") format("svg")
+    src: url("../assets/fonts/inter/inter-v2-latin-ext_latin-500.eot");
+    src: local(""), url("../assets/fonts/inter/inter-v2-latin-ext_latin-500.eot") format("embedded-opentype"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-500.woff2") format("woff2"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-500.woff") format("woff"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-500.ttf") format("truetype"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-500.svg") format("svg")
 }
 
 @font-face {
@@ -2000,8 +2000,8 @@ button.swiper-pagination-bullet {
     font-style: normal;
     font-weight: 600;
     font-display: swap;
-    src: url("/assets/fonts/inter/inter-v2-latin-ext_latin-600.eot");
-    src: local(""), url("/assets/fonts/inter/inter-v2-latin-ext_latin-600.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-600.woff2") format("woff2"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-600.woff") format("woff"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-600.ttf") format("truetype"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-600.svg#Inter") format("svg")
+    src: url("../assets/fonts/inter/inter-v2-latin-ext_latin-600.eot");
+    src: local(""), url("../assets/fonts/inter/inter-v2-latin-ext_latin-600.eot") format("embedded-opentype"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-600.woff2") format("woff2"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-600.woff") format("woff"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-600.ttf") format("truetype"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-600.svg") format("svg")
 }
 
 @font-face {
@@ -2009,8 +2009,8 @@ button.swiper-pagination-bullet {
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url("/assets/fonts/inter/inter-v2-latin-ext_latin-700.eot");
-    src: local(""), url("/assets/fonts/inter/inter-v2-latin-ext_latin-700.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-700.woff2") format("woff2"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-700.woff") format("woff"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-700.ttf") format("truetype"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-700.svg#Inter") format("svg")
+    src: url("../assets/fonts/inter/inter-v2-latin-ext_latin-700.eot");
+    src: local(""), url("../assets/fonts/inter/inter-v2-latin-ext_latin-700.eot") format("embedded-opentype"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-700.woff2") format("woff2"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-700.woff") format("woff"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-700.ttf") format("truetype"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-700.svg") format("svg")
 }
 
 @font-face {
@@ -2018,8 +2018,8 @@ button.swiper-pagination-bullet {
     font-style: normal;
     font-weight: 800;
     font-display: swap;
-    src: url("/assets/fonts/inter/inter-v2-latin-ext_latin-800.eot");
-    src: local(""), url("/assets/fonts/inter/inter-v2-latin-ext_latin-800.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-800.woff2") format("woff2"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-800.woff") format("woff"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-800.ttf") format("truetype"), url("/assets/fonts/inter/inter-v2-latin-ext_latin-800.svg#Inter") format("svg")
+    src: url("../assets/fonts/inter/inter-v2-latin-ext_latin-800.eot");
+    src: local(""), url("../assets/fonts/inter/inter-v2-latin-ext_latin-800.eot") format("embedded-opentype"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-800.woff2") format("woff2"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-800.woff") format("woff"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-800.ttf") format("truetype"), url("../assets/fonts/inter/inter-v2-latin-ext_latin-800.svg") format("svg")
 }
 
 html, body {
@@ -2055,7 +2055,6 @@ header .mainmenu .menu li a.hot:before {
 .article-body figure.image img, .article-body .ad img, .article-body img, .banner img, #article-slider .swiper .swiper-slide a img, .hotnews .item img, .avatars ul li a img, #searchbox .search-results ul li a img, header .topmenu ul li a.profile span img, header .mobile-account span img, .grid.spot a .img, .grid .item a .thumb, .grid .item a img, .sidebar .related a .crop img, .related a.item .cropper img, #userleave .inner .row .column a img, .container .ad a img {
     background-color: var(--color-bg-img);
     background-image: url(data:image/jpeg;base64,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);
-
     background-size: 20%;
     background-position: center center;
     background-repeat: no-repeat
@@ -2258,7 +2257,7 @@ header .mainmenu .menu li a.hot:before {
     letter-spacing: -0.5px;
     font-weight: 600;
     padding: 0 0 0 20px;
-    background: url("/assets/img/svg/disc.svg") 0 2px no-repeat;
+    background: url("../assets/img/svg/disc.svg") 0 2px no-repeat;
     background-size: 16px;
     margin-bottom: .5rem
 }
@@ -2379,7 +2378,7 @@ header .mainmenu .menu li a.hot:before {
     padding: 1rem;
     min-width: 300px;
     min-height: 140px;
-    background: var(--color-surface) url("/assets/img/svg/loading-red.svg") center center no-repeat;
+    background: var(--color-surface) url("../assets/img/svg/loading-red.svg") center center no-repeat;
     background-size: 50px
 }
 
@@ -2756,12 +2755,12 @@ html[data-theme=dark] .light, body[data-theme=dark] .light {
 }
 
 html[data-theme=dark] .modal #loginregister .logo, body[data-theme=dark] .modal #loginregister .logo {
-    background: url("/assets/img/nav/logo-white.svg") 0 0 no-repeat;
+    /*background: url("../assets/img/nav/logo-white.svg") 0 0 no-repeat;*/
     background-size: 100%
 }
 
 html[data-theme=dark] .logo-bg, body[data-theme=dark] .logo-bg {
-    background-image: url("/assets/img/nav/logo-white.svg")
+    /*background-image: url("../assets/img/nav/logo-white.svg")*/
 }
 
 html[data-theme=light], body[data-theme=light] {
@@ -2827,12 +2826,12 @@ html[data-theme=light] .dark, body[data-theme=light] .dark {
 }
 
 html[data-theme=light] .modal #loginregister .logo, body[data-theme=light] .modal #loginregister .logo {
-    background: url("/assets/img/nav/logo.svg") 0 0 no-repeat;
+    /*background: url("../assets/img/nav/logo.svg") 0 0 no-repeat;*/
     background-size: 100%
 }
 
 html[data-theme=light] .logo-bg, body[data-theme=light] .logo-bg {
-    background-image: url("/assets/img/nav/logo.svg")
+    /*background-image: url("../assets/img/nav/logo.svg")*/
 }
 
 html[data-theme=light] .userleave #userleave, html[data-theme=light] .userleave #overlay, body[data-theme=light] .userleave #userleave, body[data-theme=light] .userleave #overlay {
@@ -2890,7 +2889,7 @@ table th, table td {
         top: 8px;
         width: 26px;
         height: 26px;
-        background: var(--color-surface) url("/assets/img/svg/swipe.svg") center center no-repeat;
+        background: var(--color-surface) url("../assets/img/svg/swipe.svg") center center no-repeat;
         background-size: 100%;
         z-index: 99
     }
@@ -3079,7 +3078,7 @@ blockquote {
     padding: 1.5rem 1.5rem .5rem 1.5rem;
     margin: 30px 0;
     background-color: var(--color-surface);
-    background-image: url("/assets/img/svg/quote.svg");
+    background-image: url("../assets/img/svg/quote.svg");
     background-repeat: no-repeat;
     background-size: 30px;
     background-position: right -2px
@@ -3134,13 +3133,13 @@ blockquote small:before {
 }
 
 .page-top .widget input[type=search] {
-    background-image: url("/assets/img/svg/search.svg");
+    background-image: url("../assets/img/svg/search.svg");
     background-position: 10px 10px;
     background-size: 18px
 }
 
 .page-top .widget input#datepicker {
-    background-image: url("/assets/img/svg/calendar.svg");
+    background-image: url("../assets/img/svg/calendar.svg");
     background-position: 10px 10px;
     background-size: 18px
 }
@@ -5312,7 +5311,7 @@ h1.title:after {
 .grid .item a .details .category, .grid .item a .details .watchcount {
     float: right;
     padding-left: 20px;
-    background: url("/assets/img/svg/watch.svg") 0 2px no-repeat;
+    background: url("../assets/img/svg/watch.svg") 0 2px no-repeat;
     background-size: 17px;
     color: var(--color-text-secondary);
     letter-spacing: -0.6px
@@ -5331,7 +5330,7 @@ h1.title:after {
 
 .grid .item a .details .person, .grid .item a .details .viewcount, .grid .item a .details .published {
     padding-left: 17px;
-    background: url("/assets/img/svg/clock.svg") 0 2px no-repeat;
+    background: url("../assets/img/svg/clock.svg") 0 2px no-repeat;
     background-size: 13px;
     color: var(--color-text-secondary);
     letter-spacing: -0.6px
@@ -5339,13 +5338,13 @@ h1.title:after {
 
 .grid .item a .details .viewcount {
     padding-left: 20px;
-    background: url("/assets/img/svg/watch.svg") 0 0 no-repeat;
+    background: url("../assets/img/svg/watch.svg") 0 0 no-repeat;
     background-size: 17px
 }
 
 .grid .item a .details .person {
     padding-left: 20px;
-    background: url("/assets/img/svg/user.svg") 0 0 no-repeat;
+    background: url("../assets/img/svg/user.svg") 0 0 no-repeat;
     background-size: 17px
 }
 
@@ -5450,7 +5449,7 @@ h1.title:after {
     -moz-transition: .3s ease-in-out;
     -o-transition: .3s ease-in-out;
     transition: .3s ease-in-out;
-    background: url("/assets/img/svg/play3.svg") center center no-repeat;
+    background: url("../assets/img/svg/play3.svg") center center no-repeat;
     background-size: 100%
 }
 
@@ -6433,7 +6432,7 @@ h1.title:after {
 }
 
 .logo-v1 {
-    background-image: url("/assets/img/logo.png")
+    /*background-image: url("../assets/img/logo.png")*/
 }
 
 .logo-bg {
@@ -6737,14 +6736,14 @@ a.item svg, a.item img {
     font-size: 14px;
     font-size: .875rem;
     background-color: var(--color-surface);
-    background-image: url("/assets/img/svg/search.svg");
+    background-image: url("../assets/img/svg/search.svg");
     background-repeat: no-repeat;
     background-position: 16px 17px;
     background-size: 17px
 }
 
 .searchform .container .form:focus, .searchform .container form:focus {
-    background-image: url("/assets/img/svg/search-focus.svg")
+    background-image: url("../assets/img/svg/search-focus.svg")
 }
 
 @media (max-width: 768px) {
@@ -6908,39 +6907,39 @@ a.item svg, a.item img {
 }
 
 .social-links a.email {
-    background: url("/assets/img/social/svg/email.svg") 0 0 no-repeat
+    background: url("../assets/img/social-svg/email.svg") 0 0 no-repeat
 }
 
 .social-links a.telegram {
-    background: url("/assets/img/social/svg/telegram.svg") 0 0 no-repeat
+    background: url("../assets/img/social-svg/telegram.svg") 0 0 no-repeat
 }
 
 .social-links a.youtube {
-    background: url("/assets/img/social/svg/youtube.svg") 0 0 no-repeat
+    background: url("../assets/img/social/svg/youtube.svg") 0 0 no-repeat
 }
 
 .social-links a.instagram {
-    background: url("/assets/img/social/svg/instagram.svg") 0 0 no-repeat
+    background: url("../assets/img/social/svg/instagram.svg") 0 0 no-repeat
 }
 
 .social-links a.facebook {
-    background: url("/assets/img/social/svg/facebook.svg") 0 0 no-repeat
+    background: url("../assets/img/social/svg/facebook.svg") 0 0 no-repeat
 }
 
 .social-links a.twitter {
-    background: url("/assets/img/social/svg/twitter-new.svg") 0 0 no-repeat
+    background: url("../assets/img/social/svg/twitter-new.svg") 0 0 no-repeat
 }
 
 .social-links a.whatsapp {
-    background: url("/assets/img/social/svg/whatsapp.svg") 0 0 no-repeat
+    background: url("../assets/img/social/svg/whatsapp.svg") 0 0 no-repeat
 }
 
 .social-links a.linkedin {
-    background: url("/assets/img/social/svg/linkedin.svg") 0 0 no-repeat
+    background: url("../assets/img/social/svg/linkedin.svg") 0 0 no-repeat
 }
 
 .social-links a.web {
-    background: url("/assets/img/social/svg/link.svg") 0 0 no-repeat
+    background: url("../assets/img/social/svg/link.svg") 0 0 no-repeat
 }
 
 .social-links a span {
@@ -7139,27 +7138,27 @@ a.item svg, a.item img {
 }
 
 #loginregister .loginform .buttons a.mobile, #loginregister .registerform .buttons a.mobile {
-    background: #ffb300 url("/assets/img/svg/mobile-white.svg") center center no-repeat;
+    background: #ffb300 url("../assets/img/svg/mobile-white.svg") center center no-repeat;
     background-size: 20px
 }
 
 #loginregister .loginform .buttons a.facebook, #loginregister .registerform .buttons a.facebook {
-    background: #4563a0 url("/assets/img/svg/facebook-white.svg") center center no-repeat;
+    background: #4563a0 url("../assets/img/svg/facebook-white.svg") center center no-repeat;
     background-size: 20px
 }
 
 #loginregister .loginform .buttons a.twitter, #loginregister .registerform .buttons a.twitter {
-    background: #1da1f2 url("/assets/img/svg/twitter-white.svg") center center no-repeat;
+    background: #1da1f2 url("../assets/img/svg/twitter-white.svg") center center no-repeat;
     background-size: 20px
 }
 
 #loginregister .loginform .buttons a.google, #loginregister .registerform .buttons a.google {
-    background: #ea4335 url("/assets/img/svg/google-white.svg") center center no-repeat;
+    background: #ea4335 url("../assets/img/svg/google-white.svg") center center no-repeat;
     background-size: 25px
 }
 
 #loginregister .loginform .buttons a.apple, #loginregister .registerform .buttons a.apple {
-    background: #000 url("/assets/img/svg/apple-white.svg") center 7px no-repeat;
+    background: #000 url("../assets/img/svg/apple-white.svg") center 7px no-repeat;
     background-size: 19px
 }
 
@@ -7283,7 +7282,7 @@ a.item svg, a.item img {
 
 #loginregister.cover-register .cover {
     left: 0;
-    background: url("/assets/img/bg-register.jpg") no-repeat center center;
+    /*background: url("../assets/img/bg-register.jpg") no-repeat center center;*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -7305,7 +7304,7 @@ a.item svg, a.item img {
 
 #loginregister.cover-login .cover {
     left: 50%;
-    background: url("/assets/img/bg-login.jpg") no-repeat center center;
+    /*background: url("../assets/img/bg-login.jpg") no-repeat center center;*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -7494,7 +7493,7 @@ a.item svg, a.item img {
 }
 
 #creditcard .field input[name=ccnumber] {
-    background: url("/assets/img/svg/credit-card.svg") 10px 10px no-repeat;
+    background: url("../assets/img/svg/credit-card.svg") 10px 10px no-repeat;
     background-size: 28px;
     padding-left: 50px
 }
@@ -7585,7 +7584,7 @@ a.item svg, a.item img {
 
 #creditcard .payment-btn {
     color: var(--color-white);
-    background: #7dc855 url("/assets/img/svg/lock-white.svg") 88px 11px no-repeat;
+    background: #7dc855 url("../assets/img/svg/lock-white.svg") 88px 11px no-repeat;
     border: 0 none;
     margin: 0;
     width: 100%;
@@ -7771,7 +7770,7 @@ header .mobile-flag span {
 @media (max-width: 667px) {
     header .mobile-flag {
         display: block;
-        background: url("/assets/img/nav/flag.svg") 0 0 no-repeat;
+        background: url("../assets/img/nav/flag.svg") 0 0 no-repeat;
         background-size: 100%
     }
 }
@@ -7915,9 +7914,9 @@ header .search form input {
     line-height: 1em;
     box-shadow: inset 0 0 2px var(--color-shadow);
     border: 1px solid var(--color-border-y);
-    -webkit-border-radius: 2pxpx;
-    -moz-border-radius: 2pxpx;
-    border-radius: 2pxpx
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
 }
 
 header .search form input:hover, header .search form input:focus {
@@ -8179,7 +8178,7 @@ header .topmenu ul li.flag a {
     display: block;
     width: 30px;
     height: 20px;
-    background: url("/assets/img/nav/flag.svg") 0 0 no-repeat;
+    background: url("../assets/img/nav/flag.svg") 0 0 no-repeat;
     background-size: 100%
 }
 
@@ -8194,7 +8193,7 @@ header .topmenu ul li .flagtr {
     width: 30px;
     height: 20px;
     margin: 2px 5px 0 15px;
-    background: url("/assets/img/nav/flag.svg") 0 0 no-repeat;
+    background: url("../assets/img/nav/flag.svg") 0 0 no-repeat;
     background-size: 100%
 }
 
@@ -8301,7 +8300,7 @@ header .mainmenu .menu li a.hot:before {
 header .mainmenu .menu li a.all {
     position: relative;
     padding-right: 24px;
-    background: url("/assets/img/nav/hamburger.svg") right 7px no-repeat;
+    background: url("../assets/img/nav/hamburger.svg") right 7px no-repeat;
     background-size: 24px
 }
 
@@ -8313,7 +8312,7 @@ header .mainmenu .menu li a.all.loading:after {
     content: " ";
     width: 100%;
     height: 100%;
-    background: var(--color-surface) url("/assets/img/svg/loading-red.svg") center center no-repeat;
+    background: var(--color-surface) url("../assets/img/svg/loading-red.svg") center center no-repeat;
     background-size: 30px;
     opacity: .9
 }
@@ -8500,7 +8499,7 @@ header .mobile-menu-trigger {
     display: block;
     width: 30px;
     height: 30px;
-    background: url("/assets/img/nav/hamburger.svg") center center no-repeat;
+    background: url("../assets/img/nav/hamburger.svg") center center no-repeat;
     background-size: 100%
 }
 
@@ -8631,14 +8630,14 @@ header .mobile-menu-trigger span {
     font-size: 14px;
     font-size: .875rem;
     background-color: var(--color-surface);
-    background-image: url("/assets/img/svg/search.svg");
+    background-image: url("../assets/img/svg/search.svg");
     background-repeat: no-repeat;
     background-position: 11px 14px;
     background-size: 20px
 }
 
 #searchbox .container .form input:focus, #searchbox .container form input:focus {
-    background-image: url("/assets/img/svg/search-focus.svg")
+    background-image: url("../assets/img/svg/search-focus.svg")
 }
 
 #searchbox .container .form input::placeholder, #searchbox .container .form input:-ms-input-placeholder, #searchbox .container .form input::-ms-input-placeholder, #searchbox .container form input::placeholder, #searchbox .container form input:-ms-input-placeholder, #searchbox .container form input::-ms-input-placeholder {
@@ -8865,7 +8864,7 @@ header .mobile-menu-trigger span {
     text-align: center;
     line-height: 1.4em;
     padding-bottom: 20px;
-    background: url("/assets/img/svg/chevron-down-thin.svg") center 25px no-repeat;
+    background: url("../assets/img/svg/chevron-down-thin.svg") center 25px no-repeat;
     background-size: 50px
 }
 
@@ -9178,7 +9177,7 @@ header .mobile-menu-trigger span {
     top: 0;
     width: 100%;
     height: 100%;
-    background: var(--color-surface) url("/assets/img/svg/loading-red.svg") center center no-repeat;
+    background: var(--color-surface) url("../assets/img/svg/loading-red.svg") center center no-repeat;
     background-size: 50px;
     opacity: .8
 }
@@ -9240,7 +9239,7 @@ header .mobile-menu-trigger span {
 
 #fullmenu .menu-body .stats .weather.error {
     min-height: 72px;
-    background: url("/assets/img/svg/warning.svg") center center no-repeat;
+    background: url("../assets/img/svg/warning.svg") center center no-repeat;
     background-size: 30px
 }
 
@@ -9347,7 +9346,7 @@ header .mobile-menu-trigger span {
 }
 
 #fullmenu .menu-body .item a.title.nav {
-    background: url("/assets/img/svg/plus-red.svg") 0 center no-repeat;
+    background: url("../assets/img/svg/plus-red.svg") 0 center no-repeat;
     background-size: 24px
 }
 
@@ -9391,7 +9390,7 @@ header .mobile-menu-trigger span {
 }
 
 #fullmenu .menu-body .item.active a.title {
-    background: url("/assets/img/svg/minus-red.svg") 0 center no-repeat;
+    background: url("../assets/img/svg/minus-red.svg") 0 center no-repeat;
     background-size: 24px
 }
 
@@ -9427,22 +9426,22 @@ header .mobile-menu-trigger span {
 }
 
 #fullmenu .menu-body .stores .store.google {
-    background: var(--color-surface) url("/assets/img/stores/android.svg") 12px 6px no-repeat;
+    /*background: var(--color-surface) url("../assets/img/stores/android.svg") 12px 6px no-repeat;*/
     background-size: 26px
 }
 
 #fullmenu .menu-body .stores .store.apple {
-    background: var(--color-surface) url("/assets/img/stores/apple.svg") 14px 8px no-repeat;
+    /*background: var(--color-surface) url("../assets/img/stores/apple.svg") 14px 8px no-repeat;*/
     background-size: 21px
 }
 
 #fullmenu .menu-body .stores .store.windows {
-    background: var(--color-surface) url("/assets/img/stores/windows.svg") 13px 12px no-repeat;
+    /*background: var(--color-surface) url("../assets/img/stores/windows.svg") 13px 12px no-repeat;*/
     background-size: 22px
 }
 
 #fullmenu .menu-body .stores .store.huawei {
-    background: var(--color-surface) url("/assets/img/stores/huawei.svg") 12px 11px no-repeat;
+    /*background: var(--color-surface) url("../assets/img/stores/huawei.svg") 12px 11px no-repeat;*/
     background-size: 23px
 }
 
@@ -9496,7 +9495,7 @@ header .mobile-menu-trigger span {
     -moz-transition: .2s ease-in-out;
     -o-transition: .2s ease-in-out;
     transition: .2s ease-in-out;
-    background: var(--color-surface) url("/assets/img/svg/whatsapp.svg") 12px 8px no-repeat;
+    background: var(--color-surface) url("../assets/img/svg/whatsapp.svg") 12px 8px no-repeat;
     background-size: 27px
 }
 
@@ -9786,7 +9785,7 @@ header .mobile-menu-trigger span {
 }
 
 #borsaticker > .container .item.up .name:after {
-    background: url("/assets/img/svg/up-green.svg") center center no-repeat;
+    background: url("../assets/img/svg/up-green.svg") center center no-repeat;
     background-size: 100%
 }
 
@@ -9795,7 +9794,7 @@ header .mobile-menu-trigger span {
 }
 
 #borsaticker > .container .item.down .name:after {
-    background: url("/assets/img/svg/down-red.svg") center center no-repeat;
+    background: url("../assets/img/svg/down-red.svg") center center no-repeat;
     background-size: 100%
 }
 
@@ -9870,42 +9869,42 @@ html[data-theme=dark], body[data-theme=dark] {
 }
 
 html[data-theme=dark] header .mainmenu .menu a.all, body[data-theme=dark] header .mainmenu .menu a.all {
-    background: url("/assets/img/nav/hamburger-light.svg") right 7px no-repeat;
+    background: url("../assets/img/nav/hamburger-light.svg") right 7px no-repeat;
     background-size: 24px
 }
 
 html[data-theme=dark] header .topmenu ul li a.ara, body[data-theme=dark] header .topmenu ul li a.ara {
-    background: url("/assets/img/nav/search-light.svg") 0 0 no-repeat;
+    background: url("../assets/img/nav/search-light.svg") 0 0 no-repeat;
     background-size: 24px
 }
 
 html[data-theme=dark] header .topmenu ul li a.canli-tv, body[data-theme=dark] header .topmenu ul li a.canli-tv {
-    background: url("/assets/img/nav/tv-live-light.svg") 0 0 no-repeat;
+    background: url("../assets/img/nav/tv-live-light.svg") 0 0 no-repeat;
     background-size: 24px
 }
 
 html[data-theme=dark] header .topmenu ul li a.arsiv, body[data-theme=dark] header .topmenu ul li a.arsiv {
-    background: url("/assets/img/nav/archive-light.svg") 0 0 no-repeat;
+    background: url("../assets/img/nav/archive-light.svg") 0 0 no-repeat;
     background-size: 24px
 }
 
 html[data-theme=dark] header .topmenu ul li a.tema, body[data-theme=dark] header .topmenu ul li a.tema {
-    background: url("/assets/img/nav/theme-light.svg") 0 0 no-repeat;
+    background: url("../assets/img/nav/theme-light.svg") 0 0 no-repeat;
     background-size: 24px
 }
 
 html[data-theme=dark] header .topmenu ul li a.user, body[data-theme=dark] header .topmenu ul li a.user {
-    background: url("/assets/img/nav/user-light.svg") 0 0 no-repeat;
+    background: url("../assets/img/nav/user-light.svg") 0 0 no-repeat;
     background-size: 24px
 }
 
 html[data-theme=dark] header .topmenu ul li a.notifications, body[data-theme=dark] header .topmenu ul li a.notifications {
-    background: url("/assets/img/nav/notifications-on-light.svg") 0 0 no-repeat;
+    background: url("../assets/img/nav/notifications-on-light.svg") 0 0 no-repeat;
     background-size: 24px
 }
 
 html[data-theme=dark] header .topmenu ul li a.notifications[data-status=off], body[data-theme=dark] header .topmenu ul li a.notifications[data-status=off] {
-    background: url("/assets/img/nav/notifications-off-light.svg") 0 0 no-repeat;
+    background: url("../assets/img/nav/notifications-off-light.svg") 0 0 no-repeat;
     background-size: 24px
 }
 
@@ -9974,37 +9973,37 @@ html[data-theme=light], body[data-theme=light] {
 }
 
 html[data-theme=light] header .topmenu ul li a.ara, body[data-theme=light] header .topmenu ul li a.ara {
-    background: url("/assets/img/nav/search.svg") 0 0 no-repeat;
+    background: url("../assets/img/nav/search.svg") 0 0 no-repeat;
     background-size: 24px
 }
 
 html[data-theme=light] header .topmenu ul li a.canli-tv, body[data-theme=light] header .topmenu ul li a.canli-tv {
-    background: url("/assets/img/nav/tv-live.svg") 0 0 no-repeat;
+    background: url("../assets/img/nav/tv-live.svg") 0 0 no-repeat;
     background-size: 24px
 }
 
 html[data-theme=light] header .topmenu ul li a.arsiv, body[data-theme=light] header .topmenu ul li a.arsiv {
-    background: url("/assets/img/nav/archive.svg") 0 0 no-repeat;
+    background: url("../assets/img/nav/archive.svg") 0 0 no-repeat;
     background-size: 24px
 }
 
 html[data-theme=light] header .topmenu ul li a.tema, body[data-theme=light] header .topmenu ul li a.tema {
-    background: url("/assets/img/nav/theme-dark.svg") 0 0 no-repeat;
+    background: url("../assets/img/nav/theme-dark.svg") 0 0 no-repeat;
     background-size: 24px
 }
 
 html[data-theme=light] header .topmenu ul li a.user, body[data-theme=light] header .topmenu ul li a.user {
-    background: url("/assets/img/nav/user.svg") 0 0 no-repeat;
+    background: url("../assets/img/nav/user.svg") 0 0 no-repeat;
     background-size: 24px
 }
 
 html[data-theme=light] header .topmenu ul li a.notifications, body[data-theme=light] header .topmenu ul li a.notifications {
-    background: url("/assets/img/nav/notifications-on.svg") 0 0 no-repeat;
+    background: url("../assets/img/nav/notifications-on.svg") 0 0 no-repeat;
     background-size: 24px
 }
 
 html[data-theme=light] header .topmenu ul li a.notifications[data-status=off], body[data-theme=light] header .topmenu ul li a.notifications[data-status=off] {
-    background: url("/assets/img/nav/notifications-off.svg") 0 0 no-repeat;
+    background: url("../assets/img/nav/notifications-off.svg") 0 0 no-repeat;
     background-size: 24px
 }
 
@@ -10016,7 +10015,7 @@ html[data-theme=light] header .topmenu ul li a.notifications[data-status=off], b
     font-weight: 400;
     letter-spacing: -0.3px;
     color: var(--color-white);
-    background: var(--color-black) url("/assets/img/top/bg.jpg") center right no-repeat;
+    background: var(--color-black) url("../assets/img/top/bg.jpg") center right no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -10025,7 +10024,7 @@ html[data-theme=light] header .topmenu ul li a.notifications[data-status=off], b
 
 #top-msg .container {
     min-height: 60px;
-    background: url("/assets/img/top/msg.png") left 22px no-repeat;
+    /*background: url("../assets/img/top/msg.png") left 22px no-repeat;*/
     background-size: 690px;
     text-align: right
 }
@@ -10064,7 +10063,7 @@ html[data-theme=light] header .topmenu ul li a.notifications[data-status=off], b
 
 @media (max-width: 768px) {
     #top-msg .container {
-        background: url("/assets/img/top/msg-mobile.png") center 15px no-repeat;
+        /*background: url("../assets/img/top/msg-mobile.png") center 15px no-repeat;*/
         background-size: 330px;
         text-align: center
     }
@@ -10076,7 +10075,7 @@ html[data-theme=light] header .topmenu ul li a.notifications[data-status=off], b
 
 @media (max-width: 320px) {
     #top-msg .container {
-        background: url("/assets/img/top/msg-mobile.png") center 15px no-repeat;
+        /*background: url("../assets/img/top/msg-mobile.png") center 15px no-repeat;*/
         background-size: 300px
     }
 }
@@ -10383,7 +10382,7 @@ footer .bottom .bull {
 
 .breadcrumbs ul li:not(:first-child) {
     padding-left: 20px;
-    background: url("/assets/svg/chevron-right.svg") -3px 1px no-repeat;
+    background: url("../assets/img/svg/chevron-right.svg") -3px 1px no-repeat;
     background-size: 25px
 }
 
@@ -10733,7 +10732,7 @@ footer .bottom .bull {
     position: absolute;
     bottom: 0;
     left: 0;
-    background: url("/assets/img/svg/loading-red.svg") center center no-repeat;
+    background: url("../assets/img/svg/loading-red.svg") center center no-repeat;
     background-size: 55px;
     height: 50px;
     width: 100%
@@ -10810,7 +10809,7 @@ footer .bottom .bull {
     position: absolute;
     right: 0;
     top: 4px;
-    background: url("/assets/img/svg/chevron-down.svg") right center no-repeat;
+    background: url("../assets/img/svg/chevron-down.svg") right center no-repeat;
     background-size: 100%;
     width: 25px;
     height: 22px;
@@ -11038,7 +11037,7 @@ footer .bottom .bull {
     position: relative;
     top: 4px;
     margin-left: 1px;
-    background: url("/assets/img/svg/verified.svg") center center no-repeat;
+    background: url("../assets/img/svg/verified.svg") center center no-repeat;
     background-size: 90%
 }
 
@@ -11049,7 +11048,7 @@ footer .bottom .bull {
     position: relative;
     top: 4px;
     margin-left: 1px;
-    background: url("/assets/img/svg/gem.svg") center center no-repeat;
+    background: url("../assets/img/svg/gem.svg") center center no-repeat;
     background-size: 90%
 }
 
@@ -11118,11 +11117,11 @@ footer .bottom .bull {
 }
 
 .comments .comment .actions a.like {
-    background: url("/assets/img/svg/like.svg") 0 4px no-repeat
+    background: url("../assets/img/svg/like.svg") 0 4px no-repeat
 }
 
 .comments .comment .actions a.like:hover, .comments .comment .actions a.like.checked {
-    background-image: url("/assets/img/svg/like-filled.svg")
+    background-image: url("../assets/img/svg/like-filled.svg")
 }
 
 .comments .comment .actions a.like .count {
@@ -11131,19 +11130,19 @@ footer .bottom .bull {
 }
 
 .comments .comment .actions a.dislike {
-    background: url("/assets/img/svg/dislike.svg") 0 3px no-repeat
+    background: url("../assets/img/svg/dislike.svg") 0 3px no-repeat
 }
 
 .comments .comment .actions a.dislike:hover, .comments .comment .actions a.dislike.checked {
-    background-image: url("/assets/img/svg/dislike-filled.svg")
+    background-image: url("../assets/img/svg/dislike-filled.svg")
 }
 
 .comments .comment .actions a.reply {
-    background: url("/assets/img/svg/reply.svg") 0 2px no-repeat
+    background: url("../assets/img/svg/reply.svg") 0 2px no-repeat
 }
 
 .comments .comment .actions a.reply:hover {
-    background: url("/assets/img/svg/reply-filled.svg") 0 0 no-repeat
+    background: url("../assets/img/svg/reply-filled.svg") 0 0 no-repeat
 }
 
 .comments .comment .actions a.reply .cancel {
@@ -11286,7 +11285,7 @@ footer .bottom .bull {
     font-weight: 500;
     line-height: 1.2em;
     letter-spacing: -0.5px;
-    background: url("/assets/img/svg/chevron-down-thin.svg") center 70px no-repeat;
+    background: url("../assets/img/svg/chevron-down-thin.svg") center 70px no-repeat;
     background-size: 50px;
     border-top: 1px solid var(--color-border);
     -webkit-transition: .3s ease-in-out;
@@ -11509,7 +11508,7 @@ footer .bottom .bull {
     position: absolute;
     right: -7px;
     top: 20px;
-    background: var(--color-fill) url("/assets/img/svg/close-white.svg") center center no-repeat;
+    background: var(--color-fill) url("../assets/img/svg/close-white.svg") center center no-repeat;
     background-size: 12px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -11775,7 +11774,7 @@ footer .bottom .bull {
 }
 
 .hotnews .item .time-ago, .hotnews .item .watchcount, .hotnews .item .info {
-    background: url("/assets/img/svg/comments-default.svg") 0 2px no-repeat;
+    background: url("../assets/img/svg/comments-default.svg") 0 2px no-repeat;
     background-size: 17px;
     display: inline-block;
     font-weight: 400;
@@ -11788,7 +11787,7 @@ footer .bottom .bull {
 }
 
 .hotnews .item .time-ago {
-    background: url("/assets/img/svg/clock.svg") 0 3px no-repeat;
+    background: url("../assets/img/svg/clock.svg") 0 3px no-repeat;
     background-size: 13px;
     padding: 0 0 0 17px;
     margin-top: 0;
@@ -11796,7 +11795,7 @@ footer .bottom .bull {
 }
 
 .hotnews .item .watchcount {
-    background: url("/assets/img/svg/watch.svg") 0 2px no-repeat;
+    background: url("../assets/img/svg/watch.svg") 0 2px no-repeat;
     background-size: 16px
 }
 
@@ -11861,7 +11860,7 @@ footer .bottom .bull {
 }
 
 .hotnews .sidebar-hotnews .loading {
-    background: url("/assets/img/svg/loading-red.svg") center center no-repeat;
+    background: url("../assets/img/svg/loading-red.svg") center center no-repeat;
     background-size: 60px
 }
 
@@ -11872,7 +11871,7 @@ footer .bottom .bull {
 }
 
 html[data-theme=dark] .hotnews a.item .info, body[data-theme=dark] .hotnews a.item .info {
-    background: url(/assets/img/svg/comments-dark.svg) 0 2px no-repeat;
+    background: url(../assets/img/svg/comments-dark.svg) 0 2px no-repeat;
     background-size: 17px
 }
 
@@ -12368,7 +12367,7 @@ header {
 }
 
 #articles .post .social ul li a.icon.whatsapp {
-    background: url("/assets/img/social/svg/whatsapp.svg") center center no-repeat;
+    background: url("../assets/img/social-svg/whatsapp.svg") center center no-repeat;
     background-size: 100%
 }
 
@@ -12380,7 +12379,7 @@ header {
 }
 
 #articles .post .social ul li a.icon.facebook {
-    background: url("/assets/img/social/svg/facebook.svg") center center no-repeat;
+    background: url("../assets/img/social-svg/facebook.svg") center center no-repeat;
     background-size: 100%
 }
 
@@ -12392,7 +12391,7 @@ header {
 }
 
 #articles .post .social ul li a.icon.twitter {
-    background: url("/assets/img/social/svg/twitter-new.svg") center center no-repeat;
+    background: url("../assets/img/social-svg/twitter-new.svg") center center no-repeat;
     background-size: 100%
 }
 
@@ -12404,7 +12403,7 @@ header {
 }
 
 #articles .post .social ul li a.icon.copy {
-    background: url("/assets/img/svg/link.svg") center center no-repeat;
+    background: url("../assets/img/svg/link.svg") center center no-repeat;
     background-size: 100%
 }
 
@@ -12542,7 +12541,7 @@ header {
     display: block;
     width: 13px;
     min-width: 13px;
-    background: url("/assets/img/svg/chevron-right.svg") center center no-repeat;
+    background: url("../assets/img/svg/chevron-right.svg") center center no-repeat;
     background-size: 25px
 }
 
@@ -12761,7 +12760,7 @@ header {
 }
 
 .article-share .social-links a.copy {
-    background: #394f99 url("/assets/img/svg/copy.svg") center center no-repeat;
+    background: #394f99 url("../assets/img/svg/copy.svg") center center no-repeat;
     background-size: 16px
 }
 
@@ -12980,12 +12979,12 @@ header {
 }
 
 .article-body a.foto-galeri {
-    background: var(--color-background-dark) url(/assets/img/svg/camera-red.svg) 10px 15px no-repeat;
+    background: var(--color-background-dark) url(../assets/img/svg/camera-red.svg) 10px 15px no-repeat;
     background-size: 15px
 }
 
 .article-body a.video-galeri {
-    background: var(--color-background-dark) url(/assets/img/svg/play-red.svg) 10px 15px no-repeat;
+    background: var(--color-background-dark) url(../assets/img/svg/play-red.svg) 10px 15px no-repeat;
     background-size: 15px
 }
 
@@ -13307,7 +13306,7 @@ header {
 .article-body .attention a .desc .btn {
     margin-top: 15px;
     margin-left: auto;
-    background: rgba(0, 0, 0, .2) url("/assets/img/svg/right-arrow-white.svg") 94% center no-repeat;
+    background: rgba(0, 0, 0, .2) url("../assets/img/svg/right-arrow-white.svg") 94% center no-repeat;
     padding-right: 30px;
     background-size: 15px;
     font-size: 14px;
@@ -13770,7 +13769,7 @@ header {
     display: block;
     padding: 8px 5px 8px 25px;
     font-weight: 500;
-    background: url("/assets/img/svg/chevron-right.svg") left 9px no-repeat
+    background: url("../assets/img/svg/chevron-right.svg") left 9px no-repeat
 }
 
 @media (max-width: 768px) {
