@@ -104,6 +104,9 @@ export default defineConfig({
                 "resources/js/front/swiper/politic.js",
                 "resources/js/front/swiper/photo-gallery.js",
                 "resources/js/front/swiper/page.js",
+
+                "resources/js/front/newsletter/show/resize.js",
+                "resources/js/front/newsletter/show/comments.js",
             ],
 
             refresh: true,

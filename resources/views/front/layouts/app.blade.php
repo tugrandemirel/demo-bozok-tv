@@ -17,6 +17,7 @@
           type="font/woff2" crossorigin="anonymous">
     <link rel="preload" href="{{ asset("assets/fonts/inter/inter-v2-latin-ext_latin-600.woff2") }}" as="font"
           type="font/woff2" crossorigin="anonymous">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="preload" href="{{ asset("assets/fonts/inter/inter-v2-latin-ext_latin-700.woff2") }}" as="font"
           type="font/woff2" crossorigin="anonymous">
 

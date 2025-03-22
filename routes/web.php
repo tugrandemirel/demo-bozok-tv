@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Front\CategoryController;
+use App\Http\Controllers\Front\CommentController;
 use App\Http\Controllers\Front\NewsletterController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
@@ -58,6 +59,12 @@ Route::as("front.")->group(function () {
         Route::get('/', [CategoryController::class, 'show'])->name('show');
         Route::as("newsletter.")->group(function () {
             Route::get('/{newsletter_slug}', [NewsletterController::class, 'show'])->name('show');
+            Route::prefix("comment")->as("comment.")->group(function () {
+                Route::post('/fetch', [CommentController::class, 'index'])->name('index');
+                Route::post('/', [CommentController::class, 'store'])->name('store');
+//                Route::post('/{comment_id}/like', [\App\Http\Controllers\Front\CommentController::class, 'like'])->name('like');
+//                Route::post('/{comment_id}/dislike', [\App\Http\Controllers\Front\CommentController::class, 'dislike'])->name('dislike');
+            });
         });
     });
 });

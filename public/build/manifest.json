@@ -831,6 +831,16 @@
     "isEntry": true,
     "src": "resources/js/daterange.js"
   },
+  "resources/js/front/newsletter/show/comments.js": {
+    "file": "assets/comments-5fdd03b1.js",
+    "isEntry": true,
+    "src": "resources/js/front/newsletter/show/comments.js"
+  },
+  "resources/js/front/newsletter/show/resize.js": {
+    "file": "assets/resize-f26c198c.js",
+    "isEntry": true,
+    "src": "resources/js/front/newsletter/show/resize.js"
+  },
   "resources/js/front/swiper/five-cuff.js": {
     "file": "assets/five-cuff-01b26046.js",
     "isEntry": true,
