@@ -35,13 +35,6 @@
 {{--    <link rel="icon" type="image/png" sizes="16x16" href="../s.ensonhaber.com/assets/img/faviconv2/favicon-16x16.png">--}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @stack('css')
-    <script type="text/javascript">
-        var theme = localStorage.getItem("sitetheme");
-        if (theme !== null) {
-            document.documentElement.dataset.theme = theme;
-        }
-    </script>
-
 </head>
 
 <body>
@@ -77,7 +70,10 @@
 <script src="{{ asset("assets/js/scrollbooster.min.js") }}" defer></script>
 <script src="{{ asset("assets/js/home.min.js") }}" defer></script>
 <script src="{{ asset("/assets/plugins/global/lazysizes.min.js") }}" defer></script>
-
+@vite([
+    "resources/js/front/menu.js"
+])
+<div id="overlay" class="hidden"></div>
 </body>
 
 </html>

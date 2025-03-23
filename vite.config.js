@@ -98,6 +98,7 @@ export default defineConfig({
                 "resources/js/admin/ads/store.js",
 
                 // FRONT
+                "resources/js/front/menu.js",
 
                 "resources/js/front/swiper/five-cuff.js",
                 "resources/js/front/swiper/main-headline.js",

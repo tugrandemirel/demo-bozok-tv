@@ -205,31 +205,31 @@
   },
   "resources/assets/img/social-svg/email.svg": {
     "file": "assets/email-87efd574.svg",
-    "src": "resources/assets/img/social/svg/email.svg"
+    "src": "resources/assets/img/social-svg/email.svg"
   },
   "resources/assets/img/social-svg/facebook.svg": {
     "file": "assets/facebook-6c2d6ce4.svg",
-    "src": "resources/assets/img/social/svg/facebook.svg"
+    "src": "resources/assets/img/social-svg/facebook.svg"
   },
   "resources/assets/img/social-svg/telegram.svg": {
     "file": "assets/telegram-f0bdf831.svg",
-    "src": "resources/assets/img/social/svg/telegram.svg"
+    "src": "resources/assets/img/social-svg/telegram.svg"
   },
   "resources/assets/img/social-svg/twitter-new.svg": {
     "file": "assets/twitter-new-575822b2.svg",
-    "src": "resources/assets/img/social/svg/twitter-new.svg"
+    "src": "resources/assets/img/social-svg/twitter-new.svg"
   },
   "resources/assets/img/social-svg/whatsapp.svg": {
     "file": "assets/whatsapp-96ad4daa.svg",
-    "src": "resources/assets/img/social/svg/whatsapp.svg"
+    "src": "resources/assets/img/social-svg/whatsapp.svg"
   },
   "resources/assets/img/social/svg/email.svg": {
     "file": "assets/email-87efd574.svg",
-    "src": "resources/assets/img/social/svg/email.svg"
+    "src": "resources/assets/img/social-svg/email.svg"
   },
   "resources/assets/img/social/svg/facebook.svg": {
     "file": "assets/facebook-6c2d6ce4.svg",
-    "src": "resources/assets/img/social/svg/facebook.svg"
+    "src": "resources/assets/img/social-svg/facebook.svg"
   },
   "resources/assets/img/social/svg/instagram.svg": {
     "file": "assets/instagram-8b8da339.svg",
@@ -245,7 +245,7 @@
   },
   "resources/assets/img/social/svg/telegram.svg": {
     "file": "assets/telegram-f0bdf831.svg",
-    "src": "resources/assets/img/social/svg/telegram.svg"
+    "src": "resources/assets/img/social-svg/telegram.svg"
   },
   "resources/assets/img/social/svg/tiktok.svg": {
     "file": "assets/tiktok-0760b454.svg",
@@ -253,11 +253,11 @@
   },
   "resources/assets/img/social/svg/twitter-new.svg": {
     "file": "assets/twitter-new-575822b2.svg",
-    "src": "resources/assets/img/social/svg/twitter-new.svg"
+    "src": "resources/assets/img/social-svg/twitter-new.svg"
   },
   "resources/assets/img/social/svg/whatsapp.svg": {
     "file": "assets/whatsapp-96ad4daa.svg",
-    "src": "resources/assets/img/social/svg/whatsapp.svg"
+    "src": "resources/assets/img/social-svg/whatsapp.svg"
   },
   "resources/assets/img/social/svg/youtube.svg": {
     "file": "assets/youtube-416a4c85.svg",
@@ -542,7 +542,7 @@
     "src": "resources/css/page-detail.css"
   },
   "resources/css/page.css": {
-    "file": "assets/page-b12824b1.css",
+    "file": "assets/page-3ace7c1a.css",
     "isEntry": true,
     "src": "resources/css/page.css"
   },
@@ -831,8 +831,13 @@
     "isEntry": true,
     "src": "resources/js/daterange.js"
   },
+  "resources/js/front/menu.js": {
+    "file": "assets/menu-09204316.js",
+    "isEntry": true,
+    "src": "resources/js/front/menu.js"
+  },
   "resources/js/front/newsletter/show/comments.js": {
-    "file": "assets/comments-5fdd03b1.js",
+    "file": "assets/comments-fd56e9a4.js",
     "isEntry": true,
     "src": "resources/js/front/newsletter/show/comments.js"
   },
