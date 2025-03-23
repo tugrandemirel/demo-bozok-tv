@@ -19,4 +19,9 @@ class CommentStatus extends Model
     {
         return $query->where('code', 'active');
     }
+
+    public function scopePassive($query)
+    {
+        return $query->where('code', 'passive');
+    }
 }

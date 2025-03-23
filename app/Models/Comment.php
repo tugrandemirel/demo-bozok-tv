@@ -21,4 +21,10 @@ class Comment extends Model
         'is_accepted',
         'parent_id',
     ];
+
+
+    public function status()
+    {
+        return $this->belongsTo(CommentStatus::class, "comment_status_id");
+    }
 }

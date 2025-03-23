@@ -31,10 +31,17 @@ class CommentController extends Controller
                 ->where("uuid", $attributes->get("newsletter_uuid"))
                 ->first();
 
+            /** @var CommentStatus $comment_status_active */
+            $comment_status_active = CommentStatus::query()
+                ->select( "code")
+                ->active()
+                ->first();
+
             /** @var Comment $comments */
             $comments = Comment::query()
                 ->where("commentable_type", Newsletter::class)
                 ->where("commentable_id", $newsletter->id)
+                ->whereRelation("status", "code", "=", $comment_status_active?->code)
                 ->limit(5)
                 ->orderBy("created_at", "desc")
                 ->get();
@@ -56,9 +63,9 @@ class CommentController extends Controller
                 ->where("uuid", $newsletter_uuid)
                 ->first();
 
-            $comment_status_active = CommentStatus::query()
+            $comment_status_passive = CommentStatus::query()
                 ->select("id")
-                ->active()
+                ->passive()
                 ->first();
 
             Comment::query()
@@ -69,7 +76,7 @@ class CommentController extends Controller
                     "user_id" => auth()->id() ?? null,
                     "content" => $attributes->get("content"),
                     "guest_name" => $attributes->get("guest_name"),
-                    "comment_status_id" => $comment_status_active?->id,
+                    "comment_status_id" => $comment_status_passive?->id,
                 ]);
 
             DB::commit();

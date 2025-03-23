@@ -136,11 +136,11 @@
             <div class="row">
                 <div class="column">
                     <div class="sporslider v2">
-                        <div class="swiper-container" id="sporslider">
 
+                        <div class="swiper-container" id="sporslider">
                             <div class="swiper-wrapper mb-30">
                                 @foreach($politic_newsletters_main_headlines as $politic_newsletters_main_headline)
-                                <div class="swiper-slide">
+                                <div class="swiper-slide" style="width: 700px;">
                                     <a href="{{ route("front.category.newsletter.show", ["category_slug" =>$politic_newsletters_main_headline?->headlineable?->category?->slug, "newsletter_slug" =>$politic_newsletters_main_headline?->headlineable?->slug ]) }}" target="_blank" title="{{ $politic_newsletters_main_headline?->headlineable?->title }}">
                                         <img loading="lazy" class="lazyload" data-src="{{ $politic_newsletters_main_headline?->headlineable?->image?->path }}" width="700" height="400" alt="{{ $politic_newsletters_main_headline?->headlineable?->title }}">
                                     </a>
@@ -151,7 +151,6 @@
                             <div class="swiper-button-prev"></div>
                             <div class="swiper-button-next"></div>
                             <div class="swiper-pagination"></div>
-
                         </div>
                     </div>
                     <div class="grid grid-2 grid-mobile-2">

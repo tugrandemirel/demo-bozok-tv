@@ -41,7 +41,7 @@ class NewsletterOutstandingRepository
                         $sub_join->on("newsletter_sources.id", "=", "newsletters.newsletter_source_id");
                     });
             })
-            ->limit(4)
+            ->limit(3)
             ->orderByDesc("newsletter_outstandings.order")
             ->get();
 
