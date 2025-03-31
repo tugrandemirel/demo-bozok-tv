@@ -25,9 +25,15 @@ class NewsletterController extends Controller
                     "source",
                     "createdByUser",
                 ])
+                ->whereHas("status", function ($query) use ($newsletter_publication_on_the_air) {
+                    $query->where("code", $newsletter_publication_on_the_air?->code);
+                })
                 ->whereRelation("status", "code", "=", $newsletter_publication_on_the_air?->code)
                 ->first();
 
+            if (!$newsletter) {
+                abort(404);
+            }
 //            $newsletter->created_at = Carbon::parse($newsletter->created_at)->format('d.m.Y - H:i');
 //            $newsletter->updated_at = Carbon::parse($newsletter->updated_at)->format('d.m.Y - H:i');
 

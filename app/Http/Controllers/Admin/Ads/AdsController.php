@@ -97,6 +97,8 @@ class AdsController extends Controller
                 /** @var MainHeadline $main_headlines */
                 $main_headline = New MainHeadline();
                 $main_headline->headlineable()->associate($ads);
+                $main_headline->uuid = Str::uuid();
+                $main_headline->created_by_user_id = auth()->id();
                 $main_headline->save();
             }
 

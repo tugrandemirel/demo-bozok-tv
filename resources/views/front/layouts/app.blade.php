@@ -68,7 +68,6 @@
 @stack("js")
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{ asset("assets/js/scrollbooster.min.js") }}" defer></script>
-<script src="{{ asset("assets/js/home.min.js") }}" defer></script>
 <script src="{{ asset("/assets/plugins/global/lazysizes.min.js") }}" defer></script>
 @vite([
     "resources/js/front/menu.js"

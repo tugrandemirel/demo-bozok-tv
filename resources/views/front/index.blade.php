@@ -20,7 +20,7 @@
                 <div class="swiper-container" id="ls">
                     <div class="swiper-wrapper">
                         @foreach($main_headlines as $main_headline)
-                        <a class="swiper-slide item" href="{{ route("front.category.newsletter.show", ["category_slug" =>$main_headline?->headlineable?->category?->slug, "newsletter_slug" => $main_headline?->headlineable?->slug ]) }}"
+                        <a class="swiper-slide item" href="{{ isset($main_headline?->headlineable?->category) ? route("front.category.newsletter.show", ["category_slug" =>$main_headline?->headlineable?->category?->slug, "newsletter_slug" => $main_headline?->headlineable?->slug ]) : '#' }}"
                            title="{{ $main_headline?->headlineable?->title }}" data-order="2" target="_blank">
                             <div class="img">
                                 <img loading="lazy" class="lazyload"

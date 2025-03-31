@@ -11,36 +11,41 @@ use App\Models\MainHeadline;
 use App\Models\Newsletter;
 use App\Models\NewsletterPublicationStatus;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class MainHeadlineRepository implements MainHeadlineRepositoryInterface
 {
     public function getMainHeadlines()
     {
-        // 1. Yayın durumunu kontrol et
         $publicationStatus = NewsletterPublicationStatus::onTheAir()->first();
         if (!$publicationStatus) {
-            return collect(); // İsteğe bağlı hata fırlatılabilir
+            return collect();
         }
 
-        // 2. MainHeadline sorgusunu oluştur
         return MainHeadline::query()
-            ->select("headlineable_type", "headlineable_id", "order", "uuid", "created_at")
+            ->select(
+                "main_headlines.headlineable_type",
+                "main_headlines.headlineable_id",
+                "main_headlines.order",
+                "main_headlines.uuid",
+                "main_headlines.created_at"
+            )
+            // Newsletter tablosuna JOIN ekle
+            ->leftJoin('newsletters', function ($join) {
+                $join->on('main_headlines.headlineable_id', '=', 'newsletters.id')
+                    ->where('main_headlines.headlineable_type', Newsletter::class);
+            })
             ->whereHasMorph(
                 'headlineable',
                 [Newsletter::class, Ads::class],
                 function (Builder $query, $type) use ($publicationStatus) {
-                    // Newsletter Filtreleri
                     if ($type === Newsletter::class) {
                         $query->whereHas('status', function ($q) use ($publicationStatus) {
                             $q->where('code', $publicationStatus->code);
                         })->whereHas('category', function ($q) {
                             $q->where('is_active', CategoryIsActiveEnum::ACTIVE);
                         });
-                    }
-                    // Ads Filtresi
-                    elseif ($type === Ads::class) {
+                    } elseif ($type === Ads::class) {
                         $query->where('is_active', AdsIsActiveEnum::ACTIVE);
                     }
                 }
@@ -48,23 +53,24 @@ class MainHeadlineRepository implements MainHeadlineRepositoryInterface
             ->with(['headlineable' => function (MorphTo $morphTo) {
                 $morphTo->constrain([
                     Newsletter::class => function (Builder $query) {
-                        $query->select('id', 'title', 'slug', 'category_id', 'newsletter_publication_status_id')
-                            ->with([
-                                'image' => function ($q) {
-                                    $q->where('image_type', MorphImageImageTypeEnum::COVER);
-                                },
-                                'seoSetting',
-                                'category'
-                            ]);
+                        $query->select('id', 'title', 'slug', 'category_id', 'newsletter_publication_status_id', 'order')
+                        ->with([
+                            'image' => function ($q) {
+                                $q->where('image_type', MorphImageImageTypeEnum::COVER);
+                            },
+                            'seoSetting',
+                            'category'
+                        ]);
                     },
                     Ads::class => function (Builder $query) {
-                        $query->select('id', 'title', 'is_active')
+                        $query->select('id', 'is_active')
                             ->with('image');
                     }
                 ]);
             }])
+            // Newsletter order'a göre sırala, yoksa main_headlines.order kullan
+            ->orderByRaw('CASE WHEN main_headlines.headlineable_type = ? THEN newsletters.order ELSE main_headlines.order END DESC', [Newsletter::class])
             ->orderBy('order', 'desc')
-            ->orderBy('created_at', 'desc')
             ->limit(20)
             ->get();
     }
